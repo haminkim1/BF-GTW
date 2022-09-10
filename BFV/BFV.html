@@ -9,34 +9,41 @@
         crossorigin="anonymous"></script>
 
         <title>Battlefield V Guess the Weapon!</title>
+        <link rel="stylesheet" href="BFVFrontPage.css">
         <script src="./weaponsObject.js"></script>
         <script src="./BFV.js"></script>
     </head>
     
     <body>
-        <div id="main" class="text-bg-dark p-3">
-            <div id="title" class="text-center">
-                <h1>Battlefield V Guess the Weapon!</h1>
-                <h2>Can you guess all the weapons and prove you are the ultimate sweatlord?</h2>
-            </div>
+        <div id="main" class="text-white">
+            <div id="shadow">
+                <div id="title" class="text-center pb-5 pt-5">
+                    <h1>Battlefield V Guess the Weapon!</h1>
+                    <h2>Can you guess all the weapons and prove you are the ultimate sweatlord?</h2>
+                </div>
+        
+                <div id="howToPlay" class="text-center">
+                    <h2>How to Play</h2>
+                    <p>
+                        An image of a weapon in Battlefield V will be displayed. 
+                        <br>Your task is to guess the name of the weapon. 
+                        <br>Try guess all the weapons under 10 minutes!
+                    </p> 
+                </div>
+                <div id="scoring" class="text-center">
+                    <h3>Scoring</h3>
+                    <p>0-20 points: MMG prone camper</p>
+                    <p>21-40 points: Pussy assault player</p>
+                    <p>41-60 points: Streaky sniper</p>
+                    <p>61+ points: Sweaty medic slider</p>
+                </div>
     
-            <div id="howToPlay">
-                <h2>How to Play</h2>
-                <p>An image of a weapon in Battlefield V will be displayed. <br>Your task is to guess the name of the weapon. <br>Try guess all the weapons under 20 minutes!</p> 
-            </div>
-
-            <div id="scoring">
-                <h3>Scoring</h3>
-                <p>0-20 points: MMG prone camper</p>
-                <p>21-40 points: Pussy assault player</p>
-                <p>41-60 points: Streaky sniper</p>
-                <p>61+ points: Sweaty medic slider</p>
-            </div>
-
-            <div id="playButton">
-                <button id="button" type="button" class="btn btn-secondary">Play!</button>
+                <div class="text-center">
+                    <button id="playButton" type="button" class="btn btn-primary">Play!</button>
+                </div>
+    
+                <div id="gunImageDisplay"></div>
             </div>
         </div>
-
     </body>
 </html>
