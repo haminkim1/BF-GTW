@@ -1,6 +1,6 @@
 window.addEventListener("load", function () {
     document.getElementById("playButton").onclick = function () {
-        location.href = "./test.html";
+        location.href = "./GamePage.html";
     };
 
     let gunImageDisplay = document.querySelector("#gunImageDisplay");
