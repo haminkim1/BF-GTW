@@ -1,7 +1,6 @@
 body, html {
     height: 100%;
     margin: 0;
-    overflow-x: hidden;
   }
 
 #main {
@@ -10,7 +9,6 @@ body, html {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 #shadow {
@@ -22,7 +20,12 @@ body, html {
 #mainstopwatch {
     width: 400px;
     height: 20vh;
-    margin:100px auto;
+    position: absolute;
+    margin-right: auto;
+    margin-left: auto;
+    left: 0;
+    right: 0;
+    bottom: 75%;
     padding:60px 50px 10px;
     text-align:center;
     font-size: 40px;
@@ -31,7 +34,7 @@ body, html {
     border-radius:40px;
     background: #e0e0e0;
     box-shadow:6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
-    }
+}
 
 #mainstopwatch span {
     background: #c7e0f8;
@@ -42,7 +45,7 @@ body, html {
     display:inline-block;
     background:#e0e0e0;
     box-shadow:6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
-    }
+}
 
 #mainstopwatch button {
     font-size: 22px;
