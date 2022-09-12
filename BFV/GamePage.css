@@ -3,6 +3,22 @@ body, html {
     margin: 0;
   }
 
+  .timer {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #fe1736;
+    font-size: 60px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+}
+
+@font-face {
+  font-family: Orbitron;
+  src: url("Orbitron-VariableFont_wght.ttf")
+}
+
 #main {
     background-image: url("Devastation.webp");
     height: 100%; 
