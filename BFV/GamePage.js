@@ -2,20 +2,23 @@ window.addEventListener("load", function () {
 
     // Variables for timer functions
     let timer = null;
+    let timerMinutes = null;
     let seconds = 60;
     let minutes = 9;
  
     // Start countdown of 10 minutes when the start button is clicked. 
     document.querySelector("#btnStartTimer").addEventListener("click", startTimer);
-   // document.querySelector("#btnStopTimer").addEventListener("click", stopTimer);
+    document.querySelector("#btnStopTimer").addEventListener("click", stopTimer);
 
-   // Function executes when start button is clicked. 
+    stopGame();
+
+    // Function executes when start button is clicked. 
     function startTimer(){
-        if (timer == null) {
+        if (timer == null && timerMinutes == null) {
             document.querySelector("#timer_face").innerHTML = "10:00"; // removed timer = from the start of the line.
             
             timer = setInterval(updateSeconds, 1000); // Every second, the timer drops by 1 second. 
-            timer = setInterval(updateMinutes, 60000); // Every minute, the timer drops by 1 minute. 
+            timerMinutes = setInterval(updateMinutes, 60000); // Every minute, the timer drops by 1 minute. 
         }
     }
 
@@ -41,18 +44,24 @@ window.addEventListener("load", function () {
         minutes --;
     }
 
-
-    stopGame();
-
     function stopGame() {
         if (minutes == 0 && seconds == 0) {
             console.log(gameover);
             clearInterval(timer);
+            clearInterval(timerMinutes);
         }
     }
 
+    function stopTimer() {
+        clearInterval(timer);
+        clearInterval(timerMinutes);
+        minutes = 0;
+        seconds = 0;
+        document.querySelector("#timer_face").innerHTML = "0" + minutes + ":" + "0" + seconds;
+    }
 
 
+    
     let weaponImage = document.querySelector("#weaponImage");
 
     // Displaying weapon images on the front page in random order. 

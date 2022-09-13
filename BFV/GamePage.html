@@ -17,16 +17,21 @@
     <body>
         <div id="main">
             <div id="shadow">
-                <div id="MyClockDisplay" class="timer">
-                    <h1>Countdown Timer</h1>
-                    <span class="digital" id="timer_face">10:00</span>
-                    <div id="buttons">
-                        <button id="btnStartTimer">Start</button>
-                        <button id="btnStopTimer">Stop and quit</button>
+                <div id="contents">
+                    <div id="MyClockDisplay" class="timer">
+                        <h1>Countdown Timer</h1>
+                        <span class="digital" id="timer_face">10:00</span>
+                        <div id="buttons">
+                            <button id="btnStartTimer" class="timerButton">Start</button>
+                            <button id="btnStopTimer" class="timerButton">Stop and quit</button>
+                        </div>
                     </div>
-                </div>
-                <div id="weaponImage">
-                    
+                    <div id="weaponImage">
+                        
+                    </div>
+                    <div id="textBox">
+                        <input autocomplete="off" required autofocus id="weaponText" type="text" placeholder="Weapon">
+                    </div>
                 </div>
             </div>
         </div>
