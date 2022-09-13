@@ -3,7 +3,7 @@ window.addEventListener("load", function () {
     // Variables for timer functions
     let timer = null;
     let seconds = 60;
-    let minutes = "0" + 9;
+    let minutes = 9;
  
     // Start countdown of 10 minutes when the start button is clicked. 
     document.querySelector("#btnStartTimer").addEventListener("click", startTimer);
@@ -14,9 +14,8 @@ window.addEventListener("load", function () {
         if (timer == null) {
             document.querySelector("#timer_face").innerHTML = "10:00"; // removed timer = from the start of the line.
             
-
-            timer = setInterval(updateSeconds, 1000); // Every seconds, the timer drops by 1 second. 
-            timer = setInterval(updateMinutes, 60000); // Every minutes, the timer drops by 1 minute. 
+            timer = setInterval(updateSeconds, 1000); // Every second, the timer drops by 1 second. 
+            timer = setInterval(updateMinutes, 60000); // Every minute, the timer drops by 1 minute. 
         }
     }
 
@@ -26,10 +25,10 @@ window.addEventListener("load", function () {
         
         // if seconds or minutes have 1 significant figure, add a 0 at the beginning. so 1:1 would be 01:01.
         if (seconds < 10) {
-            document.querySelector("#timer_face").innerHTML = minutes + ":" + "0" + seconds;
+            document.querySelector("#timer_face").innerHTML = "0" + minutes + ":" + "0" + seconds;
         }
         else {
-            document.querySelector("#timer_face").innerHTML = minutes + ":" + seconds;
+            document.querySelector("#timer_face").innerHTML = "0" + minutes + ":" + seconds;
         }
         
         if (seconds == 0) {
@@ -51,11 +50,6 @@ window.addEventListener("load", function () {
             clearInterval(timer);
         }
     }
-
-
-
-
-
 
 
 
