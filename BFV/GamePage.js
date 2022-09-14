@@ -60,14 +60,13 @@ window.addEventListener("load", function () {
         document.querySelector("#timer_face").innerHTML = "0" + minutes + ":" + "0" + seconds;
     }
 
-
     
     let weaponImage = document.querySelector("#weaponImage");
 
     // Displaying weapon images on the front page in random order. 
     var shuffled_weapons = shuffle(weapons);
     for (i = 0; i < 1; i++) {
-        weaponImage.innerHTML = `<img src="./guns/${shuffled_weapons[i].name}.png">`;
+        weaponImage.innerHTML = `<img src="./guns/${shuffled_weapons[i].name}.png" id="weaponImageDisplay">`;
     }
 
     // Shuffling the order of the weapons object array. This way, when the order is shuffled and I'm animating the pictures going from left to right, 
