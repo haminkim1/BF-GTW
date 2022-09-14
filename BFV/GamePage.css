@@ -79,14 +79,13 @@ body, html {
 }
 
 #submitButton {
-  text-align: center;
+
 }
 
 #submit {
-  height: 400px;
+  height: 40px;
   margin-left: 10px;
   background-color: rgb(7, 7, 109);
   color:white;
-  font-size: 30px;
-  display: inline-block;
+  font-size: 20px;
 }

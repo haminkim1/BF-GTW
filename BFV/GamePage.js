@@ -9,9 +9,29 @@ window.addEventListener("load", function () {
     // Start countdown of 10 minutes when the start button is clicked. 
     document.querySelector("#btnStartTimer").addEventListener("click", startTimer);
     document.querySelector("#btnStopTimer").addEventListener("click", stopTimer);
+    document.querySelector("#submit").addEventListener("click", submitButton);
+
+    // Press the submit button by pressing the "Enter" button
+    const inputWeaponText = document.getElementById("weaponText");
+
+    inputWeaponText.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("submit").click();
+        }
+    });
 
     stopGame();
 
+    let weaponImage = document.querySelector("#weaponImage");
+
+    // Displaying weapon images on the front page in random order. 
+    var shuffled_weapons = shuffle(weapons);
+   
+        weaponImage.innerHTML = `<img src="./guns/${shuffled_weapons[0].name}.png" id="weaponImageDisplay">`;
+    
+
+    
     // Function executes when start button is clicked. 
     function startTimer(){
         if (timer == null && timerMinutes == null) {
@@ -60,15 +80,6 @@ window.addEventListener("load", function () {
         document.querySelector("#timer_face").innerHTML = "0" + minutes + ":" + "0" + seconds;
     }
 
-    
-    let weaponImage = document.querySelector("#weaponImage");
-
-    // Displaying weapon images on the front page in random order. 
-    var shuffled_weapons = shuffle(weapons);
-    for (i = 0; i < 1; i++) {
-        weaponImage.innerHTML = `<img src="./guns/${shuffled_weapons[i].name}.png" id="weaponImageDisplay">`;
-    }
-
     // Shuffling the order of the weapons object array. This way, when the order is shuffled and I'm animating the pictures going from left to right, 
     // the user will not use that to his advantage and guess the name of the gun, if they find out the pictures are in alphabetical order. 
     function shuffle(array) {
@@ -87,11 +98,18 @@ window.addEventListener("load", function () {
         return array;
     }
 
-
-
     // This function should randomly display an image and prompt the user to guess. 
     // Once a weapon is displayed, it shouldn't be displayed in future random cycles. 
-    function game() {
-        
+    function submitButton() {
+        const inputValue = document.getElementById("weaponText").value;
+        if (inputValue.toUpperCase() == shuffled_weapons[0].name.toUpperCase()) {
+            console.log("correct");
+            shuffled_weapons.shift();
+            console.log(shuffled_weapons);
+        }
+        else {
+            console.log("incorrect");
+        }
     }
+
 });
