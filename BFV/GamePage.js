@@ -3,42 +3,20 @@ window.addEventListener("load", function () {
     // Variables for timer functions
     let timer = null;
     let timerMinutes = null;
-    let seconds = 60;
-    let minutes = 9;
+    let seconds = 10;
+    let minutes = 1;
  
     // Start countdown of 10 minutes when the start button is clicked. 
     document.querySelector("#btnStartTimer").addEventListener("click", startTimer);
     document.querySelector("#btnStopTimer").addEventListener("click", stopTimer);
-    document.querySelector("#submit").addEventListener("click", submitButton);
 
-    // Press the submit button by pressing the "Enter" button
-    const inputWeaponText = document.getElementById("weaponText");
-
-    inputWeaponText.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            document.getElementById("submit").click();
-        }
-    });
-
-    stopGame();
-
-    let weaponImage = document.querySelector("#weaponImage");
-
-    // Displaying weapon images on the front page in random order. 
-    var shuffled_weapons = shuffle(weapons);
-   
-        weaponImage.innerHTML = `<img src="./guns/${shuffled_weapons[0].name}.png" id="weaponImageDisplay">`;
-    
-
-    
     // Function executes when start button is clicked. 
     function startTimer(){
         if (timer == null && timerMinutes == null) {
             document.querySelector("#timer_face").innerHTML = "10:00"; // removed timer = from the start of the line.
             
             timer = setInterval(updateSeconds, 1000); // Every second, the timer drops by 1 second. 
-            timerMinutes = setInterval(updateMinutes, 60000); // Every minute, the timer drops by 1 minute. 
+            timerMinutes = setInterval(updateMinutes, 2000); // Every minute, the timer drops by 1 minute. 
         }
     }
 
@@ -54,22 +32,17 @@ window.addEventListener("load", function () {
             document.querySelector("#timer_face").innerHTML = "0" + minutes + ":" + seconds;
         }
         
-        if (seconds == 0) {
+        if (minutes != 0 && seconds == 0) {
             seconds = 60;
         }
+
+        stopSecondsTimer();
     }
 
     // setInterval every minute within the startTimer function
     function updateMinutes() {
         minutes --;
-    }
-
-    function stopGame() {
-        if (minutes == 0 && seconds == 0) {
-            console.log(gameover);
-            clearInterval(timer);
-            clearInterval(timerMinutes);
-        }
+        stopMinutesTimer();
     }
 
     function stopTimer() {
@@ -78,6 +51,49 @@ window.addEventListener("load", function () {
         minutes = 0;
         seconds = 0;
         document.querySelector("#timer_face").innerHTML = "0" + minutes + ":" + "0" + seconds;
+    }
+
+    // Above are the timer related codes
+    // Below are the game related codes
+
+    document.querySelector("#submit").addEventListener("click", submitButton);
+    let score = 0;
+
+    // Press the submit button by pressing the "Enter" button
+    const inputWeaponText = document.getElementById("weaponText");
+
+    inputWeaponText.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("submit").click();
+        }
+    });
+
+    // Displaying weapon images on the front page in random order. 
+    var shuffled_weapons = shuffle(weapons);
+
+
+    displayGame();
+    
+    function displayGame() {
+        let weaponImage = document.querySelector("#weaponImage");  
+        weaponImage.innerHTML = `<img src="./guns/${shuffled_weapons[0].name}.png" id="weaponImageDisplay">`;
+        document.getElementById("weaponText").value = "";
+    }
+
+
+    function stopSecondsTimer() {
+        if (minutes == 0 && seconds == 0) {
+            clearInterval(timer);
+            console.log("seconds stopped");
+        }
+    }
+
+    function stopMinutesTimer() {
+        if (minutes == 0) {
+            clearInterval(timerMinutes);
+            console.log("Game Over");
+        }
     }
 
     // Shuffling the order of the weapons object array. This way, when the order is shuffled and I'm animating the pictures going from left to right, 
@@ -101,14 +117,35 @@ window.addEventListener("load", function () {
     // This function should randomly display an image and prompt the user to guess. 
     // Once a weapon is displayed, it shouldn't be displayed in future random cycles. 
     function submitButton() {
+
+        const health = document.querySelectorAll(".health");
         const inputValue = document.getElementById("weaponText").value;
         if (inputValue.toUpperCase() == shuffled_weapons[0].name.toUpperCase()) {
             console.log("correct");
             shuffled_weapons.shift();
             console.log(shuffled_weapons);
+            tallyScore(score+1);
+            score++;
+            displayGame();
         }
         else {
-            console.log("incorrect");
+            shuffled_weapons.shift();
+            displayGame();
+            health[0].remove();
+        }
+
+        stopGameAfterNoHealth(health);
+        
+    }
+
+    function tallyScore(score) {
+        let scoreHTML = document.querySelector("#score");
+        scoreHTML.innerHTML = `Score: ${score}`;
+    }
+
+    function stopGameAfterNoHealth(health) {
+        if (health.length == 1) {
+            console.log("Game over");
         }
     }
 
