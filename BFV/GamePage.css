@@ -52,7 +52,7 @@ body, html {
 #weaponText {
   text-align: center;
   font-size: 30px;
-  margin: 30px auto 30px auto;
+  margin: 30px auto 0px auto;
   height: 40px;
   background-color: rgb(187, 187, 187);
 }
@@ -67,10 +67,7 @@ body, html {
   margin-right: auto;
 }
 
-#weaponAutoCompleteList {
-  text-align: center;
-  color: white;
-}
+
 
 #textBoxAndButton {
   display: flex;
@@ -79,7 +76,7 @@ body, html {
 }
 
 #submitButton {
-
+  align-self: end;
 }
 
 #submit {
@@ -88,6 +85,10 @@ body, html {
   background-color: rgb(7, 7, 109);
   color:white;
   font-size: 20px;
+}
+
+#healthPacks {
+  margin-right: 70px;
 }
 
 .health {
@@ -100,3 +101,16 @@ body, html {
 #score {
   color: white;
 }
+
+#hiddenLists {
+  width: 351px;
+  height: 34px;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(8, 185, 67);
+  background-color:rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+}
+

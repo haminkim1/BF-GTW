@@ -3,8 +3,8 @@ window.addEventListener("load", function () {
     // Variables for timer functions
     let timer = null;
     let timerMinutes = null;
-    let seconds = 10;
-    let minutes = 1;
+    let seconds = 60;
+    let minutes = 9;
  
     // Start countdown of 10 minutes when the start button is clicked. 
     document.querySelector("#btnStartTimer").addEventListener("click", startTimer);
@@ -16,7 +16,7 @@ window.addEventListener("load", function () {
             document.querySelector("#timer_face").innerHTML = "10:00"; // removed timer = from the start of the line.
             
             timer = setInterval(updateSeconds, 1000); // Every second, the timer drops by 1 second. 
-            timerMinutes = setInterval(updateMinutes, 2000); // Every minute, the timer drops by 1 minute. 
+            timerMinutes = setInterval(updateMinutes, 60000); // Every minute, the timer drops by 1 minute. 
         }
     }
 
