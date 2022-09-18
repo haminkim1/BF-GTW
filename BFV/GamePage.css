@@ -102,7 +102,7 @@ body, html {
   color: white;
 }
 
-#hiddenLists {
+.hiddenLists {
   width: 351px;
   height: 34px;
   font-size: 25px;
@@ -111,6 +111,17 @@ body, html {
   align-items: center;
   color: rgb(8, 185, 67);
   background-color:rgba(0, 0, 0, 0.5);
+  border-style:solid;
+  border-width:1px;
+  border-color:black;
+}
+
+.hideAutoCompleteList {
   visibility: hidden;
 }
 
+#weaponAutoCompleteList {
+  height: 500px;
+  margin-top: 2px;
+  overflow-x: hidden;
+}
