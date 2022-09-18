@@ -33,6 +33,13 @@ window.addEventListener("load", function () {
         const valueOfInput = document.getElementById("weaponText").value;
         const arrayOfInput = Array.of(...valueOfInput)
 
+        const y = Object.values(unshuffledWeapons);
+        const x = unshuffledWeapons.every((unshuffledWeapons) => {
+            return unshuffledWeapons.name.charAt(arrayOfInput.length - 1).toUpperCase() == valueOfInput.toUpperCase()
+        });
+        console.log (x)
+        https://www.youtube.com/playlist?list=PLDlWc9AfQBfZGZXFb_1tcRKwtCavR7AfT
+
 
         console.log(valueOfInput)
         if (arrayOfInput.length == 0) {
@@ -40,19 +47,16 @@ window.addEventListener("load", function () {
         }
         else {
             for (let i in unshuffledWeapons) {
-                if (valueOfInput.toUpperCase() == unshuffledWeapons[i].name.charAt(arrayOfInput.length - 1).toUpperCase()) {
+                if (valueOfInput.toUpperCase() == unshuffledWeapons[i].name.charAt(arrayOfInput.length - 1).toUpperCase() && x === false) {
                     weaponAutoCompleteList.innerHTML += `
                     <div class="hiddenLists">
                         <span><strong id="hiddenWords">${unshuffledWeapons[i].name}</strong></span>
                     </div>`;
 
                 }
-     
             }
         }
-        const x = Object.values(unshuffledWeapons);
-
-
+ 
     })
 
 
