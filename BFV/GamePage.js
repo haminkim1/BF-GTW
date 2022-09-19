@@ -39,6 +39,22 @@ window.addEventListener("load", function () {
         });
         console.log (x)
         https://www.youtube.com/playlist?list=PLDlWc9AfQBfZGZXFb_1tcRKwtCavR7AfT
+        /*
+        
+        if input triggered, clear newWeaponsList array
+            if valueOfInput == unshuffledWeapons.name.charAt
+            create array (newWeaponsList) of all objects matching valueOfInput
+            display autocomplete list of that new array
+            
+            else if input triggered, if valueOfInput != unshuffledWeapons.name.charAt
+            clear autocomplete list
+                I prob don't need this else if statement, if input triggered and only IF valueOfInput == unshuffledWeapons.name.charAt
+                then a new array will be created. However, if only input is triggered and the IF statement is false, it'll clear the new array, hence
+                will not display the autocomplete list
+                
+
+
+        */
 
 
         console.log(valueOfInput)
