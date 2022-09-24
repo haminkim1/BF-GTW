@@ -3,10 +3,10 @@ window.addEventListener("load", function () {
     document.querySelector("#submit").addEventListener("click", submitButton);
 
 
-    // Press the submit button by pressing the "Enter" button
+
     const inputWeaponText = document.getElementById("weaponText");
   
-
+    // Press the submit button by pressing the "Enter" button
     inputWeaponText.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
@@ -14,7 +14,7 @@ window.addEventListener("load", function () {
         }
     });
 
-    // Require an unshuffled order of the weapons as a new array.
+    // Unshuffled order of the weapons as a new array.
     var unshuffledWeapons = [...weapons];
     // Displaying weapon images on the front page in random order. 
     var shuffled_weapons = shuffle(weapons);
@@ -48,6 +48,7 @@ window.addEventListener("load", function () {
 
     function autocompleteList() {
         // When input box is typed, it'll have autocomplete list of weapons starting with the letters typed in the input box. 
+        // eg if "12" is typed, it'll show 12g Automatic below the input box.
         inputWeaponText.addEventListener("input", function () {
             const weaponAutoCompleteList = document.querySelector("#weaponAutoCompleteList");
             const valueOfInput = document.getElementById("weaponText").value;
