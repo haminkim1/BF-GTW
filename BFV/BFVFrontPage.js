@@ -2,6 +2,12 @@ window.addEventListener("load", function () {
     document.getElementById("playButton").onclick = function () {
         location.href = "./GamePage.html";
     };
+    document.getElementById("login").onclick = function () {
+        location.href = "./login.html";
+    };
+    document.getElementById("register").onclick = function () {
+        location.href = "./register.html";
+    };
 
     let gunImageDisplay = document.querySelector("#gunImageDisplay");
 
