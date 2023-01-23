@@ -1,0 +1,127 @@
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+
+  .timer {
+    text-align:center;
+    padding-top: 50px;
+    color: #fe1736;
+    font-size: 60px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+}
+
+.timerButton {
+  font-size: 30px;
+  background-color: rgb(7, 7, 109);
+  color:white
+}
+
+@font-face {
+  font-family: Orbitron;
+  src: url("Orbitron-VariableFont_wght.ttf")
+}
+
+#main {
+    background-image: url("Devastation.webp");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#shadow {
+  background-color:rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+}
+
+#contents {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#weaponText {
+  text-align: center;
+  font-size: 30px;
+  margin: 30px auto 0px auto;
+  height: 40px;
+  background-color: rgb(187, 187, 187);
+}
+
+.weaponText {
+  display: flex;
+  flex-direction: column;
+}
+
+#textBox {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+#textBoxAndButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#submitButton {
+  align-self: end;
+}
+
+#submit {
+  height: 40px;
+  margin-left: 10px;
+  background-color: rgb(7, 7, 109);
+  color:white;
+  font-size: 20px;
+}
+
+#healthPacks {
+  margin-right: 70px;
+}
+
+.health {
+  position: relative;
+  margin-left: -50px;
+  margin-right: -50px;
+  margin-bottom: -20px;
+}
+
+#score {
+  color: white;
+}
+
+.hiddenLists {
+  width: 351px;
+  height: 34px;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(8, 185, 67);
+  background-color:rgba(0, 0, 0, 0.5);
+  border-style:solid;
+  border-width:1px;
+  border-color:black;
+}
+
+.hideAutoCompleteList {
+  visibility: hidden;
+}
+
+#weaponAutoCompleteList {
+  height: 500px;
+  margin-top: 2px;
+  overflow-x: hidden;
+}
