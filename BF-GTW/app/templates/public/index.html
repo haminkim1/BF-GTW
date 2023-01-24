@@ -6,11 +6,37 @@
 
 {% block main %}
 
-<h4>Login or register an account to play the game.</h4>
-<h4>Just want to play some rounds quickly? Press the "play without an account" button to quickly play.</h4>
+<div class="card mt-5 mx-auto w-50 bg-dark" style="border-radius: 1rem">
+    <div class="my-3 mx-3 ">
+        <h2>How to play</h2>
+        <div>
+            <h5><a href="/login">Login</a> or <a href="/register">register</a> an account to play the game.</h5>
+            <h5>Just want to play some rounds quickly? Press the "play without an account" button to quickly play.</h5>
+        </div>
+        <br>
+        <h2>Games available:</h2>
+        <div class="mx-auto">
+            <p><a href="/bf4">Battlefield 4</a></p>
+            <p><a href="/bf1">Battlefield 1</a></p>
+            <p><a href="/bfv">Battlefield V</a></p>
+            <p><a href="/bf2042">Battlefield 2042</a></p>
+        </div>
 
-<h1>Rules</h1>
+        <h2>Rules</h2>
+        <div class="mx-auto">
+            <p>You have three lives</p>
+            <p>Image of a weapon will be displayed</p>
+            <p>Users must guess the name of the weapon</p>
+            <p>Guess wrong, and your life will be taken away</p>
+            <p>Guess the weapons right 3 consecutive times, you get an extra life!</p>
+        </div>
+        <button class="btn btn-outline-light btn-md px-5" onclick="window.location.href='/games'" >Play without an account!</button>
+    </div>
+
+</div>   
 
 
-<button>Play without an account!</button>
+
+
+
 {% endblock %}
