@@ -8,6 +8,10 @@
     padding: 0px;
 }
 
+img {
+    image-rendering: optimizeQuality;
+}
+
 h1, h2, h3, h4, h5, p, li {
     color: white;
     text-align: left;
