@@ -1,0 +1,25 @@
+DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS post;
+
+CREATE TABLE IF NOT EXISTS accounts (
+    id integer NOT NULL PRIMARY KEY,
+    email_address varchar(32) UNIQUE, --NOT NULL
+    username varchar(20) NOT NULL UNIQUE,
+    hash TEXT NOT NULL
+)
+
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+
+CREATE TABLE post (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  author_id INTEGER NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  title TEXT NOT NULL,
+  body TEXT NOT NULL,
+  FOREIGN KEY (author_id) REFERENCES user (id)
+);
