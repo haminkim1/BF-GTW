@@ -6,6 +6,10 @@
 
 {% block main %}
 
+{% if 'toastMessage' in request.cookies %}
+    <p class="my-toast-message">{{request.cookies.get('toastMessage') }}</p>
+{% endif %}
+
 <div class="card mt-5 mx-auto w-50 bg-dark" style="border-radius: 1rem">
     <div class="my-3 mx-3 ">
         <h2>How to play</h2>

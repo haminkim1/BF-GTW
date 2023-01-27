@@ -1,6 +1,7 @@
 from app import app
-from flask import render_template, redirect, request, session
+from flask import render_template, redirect, request, session, jsonify, make_response
 from werkzeug.security import check_password_hash, generate_password_hash
+from datetime import datetime, timedelta
 
 from modules.auth_modules import login_required
 from modules.apology import apology
@@ -13,11 +14,11 @@ def register():
     if request.method == "POST":
         # If user didn't enter any username, return apology
         if not request.form.get("username"):
-            return apology("Enter username")
+            return apology("Enter username", 403)
 
         # Check if user's input for username already exists. If exist, return apology
         elif db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username")):
-            return apology("Username already exists")
+            return apology("Username already exists", 403)
 
         else:
             username = request.form.get("username")
@@ -26,7 +27,7 @@ def register():
 
             # If password and repeat password doesn't match, return apology allow user to re-type password again.
             if not password or password != confirmation:
-                return apology("Password must not be empty and match with repeat password")
+                return apology("Password must not be empty and match with repeat password", 403)
 
             # If all the checks pass, register username and hash password into users table. Redirect to home page logged in.
             else:
@@ -36,13 +37,18 @@ def register():
                 rows = db.execute("SELECT * FROM users WHERE username = ?", username)
                 session["user_id"] = rows[0]["id"]
 
-                return redirect("/")
+                # Redirect user to home page
+                username = request.form.get("username")
+                toastMessage = "Welcome, {}".format(username)
+                response = make_response(redirect("/"))
+                response.set_cookie('toastMessage', toastMessage, max_age=1)
+                return response
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("admin/register.html")
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
@@ -65,8 +71,12 @@ def login():
         session["user_id"] = rows[0]["id"]
 
         # Redirect user to home page
-        return redirect("/")
-
+        username = request.form.get("username")
+        toastMessage = "Welcome, {}".format(username)
+        response = make_response(redirect("/"))
+        response.set_cookie('toastMessage', toastMessage, max_age=1)
+        return response
+        
     else:
         return render_template("admin/login.html")
 
