@@ -82,6 +82,10 @@ footer {
     object-fit: cover;
 }
 
+.gamePageHeading {
+    text-align: center;
+}
+
 @media screen and (max-width: 1000px) {
     #container {
         width: 100%;

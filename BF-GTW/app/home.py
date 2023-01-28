@@ -1,6 +1,6 @@
-from app import app
 from flask import render_template
 
+from app import app
 from modules.apology import apology
 
 @app.route("/")

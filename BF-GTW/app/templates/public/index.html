@@ -10,11 +10,11 @@
     <p class="my-toast-message">{{request.cookies.get('toastMessage') }}</p>
 {% endif %}
 
-<div class="card mt-5 mx-auto w-50 bg-dark" style="border-radius: 1rem">
+<div class="card mt-5 mx-auto w-50 bg-dark white" style="border-radius: 1rem">
     <div class="my-3 mx-3 ">
         <h2>How to play</h2>
         <div>
-            <h5><a href="/login">Login</a> or <a href="/register">register</a> an account to play the game.</h5>
+            <h5>Login or register an account to play the game.</h5>
             <h5>Just want to play some rounds quickly? Press the "play without an account" button to quickly play.</h5>
         </div>
         <br>
@@ -34,7 +34,17 @@
             <p>Guess wrong, and your life will be taken away</p>
             <p>Guess the weapons right 3 consecutive times, you get an extra life!</p>
         </div>
-        <button class="btn btn-outline-light btn-md px-5" onclick="window.location.href='/games'" >Play without an account!</button>
+
+        {% if 'session' in request.cookies %}
+            <button class="btn btn-outline-light btn-md px-5" onclick="window.location.href='/games'" >Play!</button>
+        
+        {% else %}
+            <form action="/no_account_login" method="post">
+                <button class="btn btn-outline-light btn-md px-5" onclick="window.location.href='/games'" >Play without an account!</button>
+            </form>
+            
+        {% endif %}
+        
     </div>
 
 </div>   

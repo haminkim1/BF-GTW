@@ -1,6 +1,7 @@
 from flask import Flask
-from app.db.init_db import init_db
 from flask_session import Session
+
+from app.db.init_db import init_db
 
 app = Flask(__name__)
 
@@ -11,4 +12,4 @@ Session(app)
 
 init_db()
 
-from app import auth, home, games
+from app import auth, home, games, bf1, bf4, bf2042, bfv
