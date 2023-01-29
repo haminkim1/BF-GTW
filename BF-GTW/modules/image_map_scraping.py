@@ -8,22 +8,23 @@ from random import randrange
 
 
 def scrapeImages():
-    # link = getBFVLinks()
     bf4Link = "https://wallpapercave.com/battlefield-4-wallpapers"
     bf1Link = "https://www.ea.com/games/battlefield/battlefield-1/maps"
     bfvLink = "https://www.ea.com/games/battlefield/battlefield-5/about/maps"
     bf2042Link = "https://www.ea.com/games/battlefield/battlefield-2042/game-overview/maps"
 
     images = {}
-    images["bf4"] = getBF1Image(bf4Link)
+    images["bf4"] = getBF4Image(bf4Link)
     images["bf1"] = getBF1Image(bf1Link)
     images["bfv"] = getBFVImage(bfvLink)
     images["bf2042"] = getBF2042Image(bf2042Link)
-    # getBF2042Image()
+
     return images
 
 
-def getBF4Page(link):
+# Webpage that is being scraped blocks/forbids users when trying to soup without Mozilla/5.0 headers. 
+# Therefore, the BF4 page is scraped slightly differently than other games. 
+def soupBF4URL(link):
     req = Request(
         url=link, 
         headers={'User-Agent': 'Mozilla/5.0'}
@@ -33,8 +34,7 @@ def getBF4Page(link):
     return page_soup
 
 
-def soupURL(link):
-    page_url = link
+def soupURL(page_url):
     uClient = uReq(page_url)
     page_soup = soup(uClient.read(), "html.parser")
     uClient.close()
@@ -42,13 +42,14 @@ def soupURL(link):
 
 
 def getBF4Image(link):
-    page_soup = getBF4Page(link)
+    page_soup = soupBF4URL(link)
     div = page_soup.find("div", {"id": "albumwp"})
     images = div.findAll("img", {"class": "wimg"})
 
     randomNumber = randrange(len(images))
     image = "https://wallpapercave.com" + images[randomNumber]["src"]
-    print(image)
+    # print(image)
+    return image
 
 
 def getBF1Image(link):
@@ -57,7 +58,7 @@ def getBF1Image(link):
     randomNumber = randrange(len(images))
     image = images[randomNumber]["media"]
 
-    print(image)
+    # print(image)
     return image
 
 
@@ -67,7 +68,7 @@ def getBFVImage(link):
     randomNumber = randrange(len(images))
     image = images[randomNumber]["src"]
 
-    print(image)
+    # print(image)
     return image
 
 
@@ -78,7 +79,7 @@ def getBF2042Image(link):
     randomNumber = randrange(len(images))
     image = images[randomNumber]["src"]
 
-    print(image)
+    # print(image)
     return(image)
 
 
