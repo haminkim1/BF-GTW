@@ -7,13 +7,13 @@ from random import randrange
 
 def scrapeImages():
     # link = getBFVLinks()
-    bfvLink = "https://www.ea.com/games/battlefield/battlefield-5/about/maps"
     bf1Link = "https://www.ea.com/games/battlefield/battlefield-1/maps"
+    bfvLink = "https://www.ea.com/games/battlefield/battlefield-5/about/maps"
     bf2042Link = "https://www.ea.com/games/battlefield/battlefield-2042/game-overview/maps"
 
     images = {}
-    images["bfv"] = getBFVImage(bfvLink)
     images["bf1"] = getBF1Image(bf1Link)
+    images["bfv"] = getBFVImage(bfvLink)
     images["bf2042"] = getBF2042Image(bf2042Link)
     # getBF2042Image()
     return images
@@ -27,15 +27,9 @@ def soupURL(link):
 
     return page_soup
 
-
-def getBFVImage(link):
-    page_soup = soupURL(link)
-    images = page_soup.findAll("img", {"width": "100%"})
-    randomNumber = randrange(len(images))
-    image = images[randomNumber]["src"]
-
-    print(image)
-    return image
+# Scrape from: https://wallpapercave.com/battlefield-4-wallpapers
+def getBF4Image(link):
+    return link
 
 
 def getBF1Image(link):
@@ -43,6 +37,16 @@ def getBF1Image(link):
     images = page_soup.findAll("ea-tile", {"slot": "tile"}, {"style": "--ea-animation-index:5"})
     randomNumber = randrange(len(images))
     image = images[randomNumber]["media"]
+
+    print(image)
+    return image
+
+
+def getBFVImage(link):
+    page_soup = soupURL(link)
+    images = page_soup.findAll("img", {"width": "100%"})
+    randomNumber = randrange(len(images))
+    image = images[randomNumber]["src"]
 
     print(image)
     return image

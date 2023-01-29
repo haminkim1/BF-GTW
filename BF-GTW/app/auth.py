@@ -7,11 +7,12 @@ from datetime import datetime, timedelta
 
 from app import app
 from app.db.db_config import db
-from .games import display_games
 from modules.apology import apology
 from modules.auth_modules import login_required
 from modules.generate_random_username import random_username
+from modules.image_map_scraping import scrapeImages
 from modules.toast_message import send_toastMessage
+
 
 # DON'T DELETE THIS FOR NOW, related to no_account_login route
 # nltk.download('wordnet')
@@ -86,7 +87,7 @@ def login():
         return render_template("admin/login.html")
 
 
-@app.route("/no_account_login", methods=["POST"])
+@app.route("/play_without_account", methods=["POST"])
 def no_account_login():
 
     try:
@@ -99,8 +100,9 @@ def no_account_login():
         rows = db.execute("SELECT * FROM play_without_account_users WHERE username = ?", username)
         session["user_id"] = rows[0]["id"]
         
-        # Creates random username and redirects user to games.html page
-        return display_games()
+        # Creates random username and redirects user to games.html page. 
+        images = scrapeImages()
+        return render_template("/public/games/games.html", images=images)
     except:
         # Sending toastmessage to homepage indicating user they have successfully logged in. 
         return apology("Failed to play without account, please try again")
@@ -111,7 +113,6 @@ def logout():
     """Log user out"""
 
     # Forget any user_id
-    print(session)
     session.clear()
 
     # Redirect user to login form

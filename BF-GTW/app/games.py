@@ -5,6 +5,7 @@ from modules.auth_modules import *
 from modules.image_map_scraping import scrapeImages
 
 @app.route("/games")
+@login_required
 def display_games():
 
     images = scrapeImages()
