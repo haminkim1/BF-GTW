@@ -2,5 +2,5 @@ from flask import make_response, redirect, render_template
 
 def send_toastMessage(message, link):
     response = make_response(redirect(link))
-    response.set_cookie("toastMessage", message)
+    response.set_cookie("toastMessage", message, max_age=1)
     return response
