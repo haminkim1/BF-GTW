@@ -9,34 +9,30 @@
         <script src="/static/js/bfv.js"></script>
     </head>
 
-    <div class="">
-        <h1>hello</h1>
-        <p>Use grid and/or flexbox</p>
-        <p>At the top of the page:</p>
-        <ul>
-            <li>Start button</li>
-            <li>Stop button</li>
-        </ul>
-        <p>Around the middle of the page:</p>
-        <ul>
-            <li>Lives</li>
-            <li>image of weapon</li>
-            <li>input box</li>
-            <li>Submit button</li>
-        </ul>
-        <p>Somewhere on the page include:</p>
-        <ul>
-            <li>Score</li>
-            <li>Number of weapons left</li>
-        </ul>
-
-        <p>Optional features that might be a good idea</p>
-        <ul>
-            <li>Hint button? Have 3 hints at the start</li>
-            <li>Hint button will trigger a random helper such as:</li>
-            <li>What rifle type, start/end letter and how many letters (list more if I can think of any)</li>
-            <li>Every 3 guesses, replenish a health and hint</li>
-        </ul>
+    <div class="flex-column">
+        <div class="one">
+            <p id="text-align-center">Score:</p>
+            <p id="text-align-center">Number of weapons left: current #/ total #</p>
+        </div>
+    
+        <div class="two">
+            <button class="btn btn-secondary btn-sm border-dark">Start</button>
+            <button class="btn btn-secondary btn-sm border-dark">Quit</button>
+        </div>
+        <div class="three">
+            <p id="text-align-center">Lives:{{insert}}</p>
+        </div>
+        <div>
+            <img src="https://eaassets-a.akamaihd.net/battlelog/battlebinary/gamedata/Casablanca/28/90/MG42-1ca6b52d.png">
+        </div>
+        <div class="flex-row">
+            <input class="form-control form-control-md" placeholder="Type Weapon Name">
+            <button type="submit" class="btn btn-secondary btn-sm border-dark">Submit</button>
+        </div>
     </div>
 
+    <div>
+        <p>Optional</p>
+        <button>Hint</button>
+    </div>
 {% endblock %}

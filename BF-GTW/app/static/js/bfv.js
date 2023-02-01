@@ -11,6 +11,7 @@ window.addEventListener("load", function () {
     const changeToShadowClass = document.querySelector(".changeToShadowClass");
     changeToShadowClass.className = '';
     changeToShadowClass.classList.add("shadow")
+
 })
 
 

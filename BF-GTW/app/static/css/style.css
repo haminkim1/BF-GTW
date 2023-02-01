@@ -39,9 +39,14 @@ a:hover {
 
 footer {
     border: 3px solid green;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
+    height: 5rem;
+}
+
+.header {
+    flex:1;
 }
 
 .gray {
@@ -105,6 +110,8 @@ footer {
     }
 }
 /* games.html styling */
+
+/* bfv.html styling  */
 .bfv-main {
     background-image: url("/static/images/background/Devastation.webp");
     background-size: cover; /* cover will scale the image so that the smallest dimension = the widest dimension of the box */
@@ -121,4 +128,21 @@ footer {
     position: absolute;
 }
 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#text-align-center {
+    text-align: center;
+}
+
+
+/* bfv.html styling  */
