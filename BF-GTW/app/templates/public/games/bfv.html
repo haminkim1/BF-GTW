@@ -10,29 +10,28 @@
     </head>
 
     <div class="flex-column">
-        <div class="one">
-            <p id="text-align-center">Score:</p>
-            <p id="text-align-center">Number of weapons left: current #/ total #</p>
+        <div class="flex-column">
+            <span class="white" id="text-align-center">Score:</span>
+            <span class="white" id="text-align-center">Number of weapons left: current #/ total #</span>
         </div>
     
-        <div class="two">
+        <div>
             <button class="btn btn-secondary btn-sm border-dark">Start</button>
             <button class="btn btn-secondary btn-sm border-dark">Quit</button>
         </div>
-        <div class="three">
-            <p id="text-align-center">Lives:{{insert}}</p>
+        <div class="flex-column pt-3">
+            <button class="btn btn-secondary btn-sm border-dark mb-2">Hints: {{3}}</button>
+            <span class="white" id="text-align-center">Lives:{{3}}</span>
         </div>
         <div>
-            <img src="https://eaassets-a.akamaihd.net/battlelog/battlebinary/gamedata/Casablanca/28/90/MG42-1ca6b52d.png">
+            <!-- I'll need a fixed size with the weapons, depending on what gets shown, the padding/margin is different.  -->
+            <!-- 255x255 seems to be the largest. Majority of the guns are 255x85 -->
+            <img src="{{ weapons[0]['image'] }}">
         </div>
         <div class="flex-row">
             <input class="form-control form-control-md" placeholder="Type Weapon Name">
+            <ul class="test"></ul>
             <button type="submit" class="btn btn-secondary btn-sm border-dark">Submit</button>
         </div>
-    </div>
-
-    <div>
-        <p>Optional</p>
-        <button>Hint</button>
     </div>
 {% endblock %}

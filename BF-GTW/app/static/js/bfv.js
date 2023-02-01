@@ -12,6 +12,19 @@ window.addEventListener("load", function () {
     changeToShadowClass.className = '';
     changeToShadowClass.classList.add("shadow")
 
+    let input = document.querySelector('input');
+    input.addEventListener('input', async function() {
+        let response = await fetch('/bfv?name=' + input.value);
+        let weapons = await response.json();
+        // After fetching API data, display those names in a list below the input box 
+        // let html = '';
+        // for (let i in weapons) {
+        //     let name = weapons[i];
+        //     html += '<li>' + name + '</li>';
+        // }
+        // document.querySelector('.test').innerHTML += html;
+        console.log(weapons)
+    });
 })
 
 
