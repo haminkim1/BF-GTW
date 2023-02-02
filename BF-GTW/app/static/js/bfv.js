@@ -34,9 +34,10 @@ window.addEventListener("load", function () {
         let clickableName = document.getElementsByClassName("clickableName");
 
         for (let i = 0; i < clickableName.length; i++) {
-        clickableName[i].addEventListener("click", function() {
-            alert("I got a click");  
-            console.log(clickableName[i])     
+            clickableName[i].addEventListener("click", function() {
+                let text = this.innerText;
+                document.getElementById("bfvInput").value = text;
+                autoCompleteList.innerHTML = "";   
             })
         }
     }
