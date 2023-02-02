@@ -13,20 +13,23 @@ def bfv_route():
 
     weapons = getBFVWeapons()
 
-    # I need an alphabetically sorted weapons name list. 
+    # Get query parameter of key called "name"
     name = request.args.get("name")
-    weaponsName = []
+    weaponNames = []
+    # If value of name key exists, cycle through each weapon name. 
+    # If the weapon names start with name, append only the weapon name (not the entire object) to weaponNames list. 
+    # Return weaponNames as JSON data back as a response to the client. 
     if name:
         for i in range(len(weapons)):
             # I'll need an IF statement where if name == first letters of each list, then return jsonify those names only
             # Make sure to return alphabetically
             if weapons[i]['weaponName'].casefold().startswith(name.casefold()):
-                weaponsName.append(weapons[i]['weaponName'])
+                weaponNames.append(weapons[i]['weaponName'])
 
-        weaponsName = sorted(weaponsName)
-        return jsonify(weaponsName)
+        weaponNames = sorted(weaponNames)
+        return jsonify(weaponNames)
     else:
-        weaponsName = []
+        weaponNames = []
 
     random.shuffle(weapons)
 
