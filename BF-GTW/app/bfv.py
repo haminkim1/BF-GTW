@@ -20,9 +20,10 @@ def bfv_route():
         for i in range(len(weapons)):
             # I'll need an IF statement where if name == first letters of each list, then return jsonify those names only
             # Make sure to return alphabetically
-            weaponsName.append(weapons[i]['weaponName'])
-            # print(weaponsName)
-        print(name)
+            if weapons[i]['weaponName'].casefold().startswith(name.casefold()):
+                weaponsName.append(weapons[i]['weaponName'])
+
+        weaponsName = sorted(weaponsName)
         return jsonify(weaponsName)
     else:
         weaponsName = []
