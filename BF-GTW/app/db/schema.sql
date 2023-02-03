@@ -8,4 +8,12 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS play_without_account_users (
     id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
     username varchar(20) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE IF NOT EXISTS bfv_weapons (
+    weapon_id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+    weapon_name text NOT NULL,
+    weapon_type text NOT NULL,
+    weapon_image text NOT NULL -- /static/images/bfvImages/easy/1.png
 )

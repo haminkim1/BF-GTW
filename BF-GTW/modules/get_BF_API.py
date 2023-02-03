@@ -21,10 +21,15 @@ def getBFVWeapons():
     # Assigning only weapons data into weapon variable
     jsonDataWeapons = jsonData["weapons"]
     weapons = []
+    # Giving an id number for each weapons
+    counter = 0
 
     # Taking out melee, gadget and sidearm weapons. 
     for i in range(len(jsonDataWeapons)):
         if jsonDataWeapons[i]["type"] != "Melee" and jsonDataWeapons[i]["type"] != "Gadget" and jsonDataWeapons[i]["type"] != "Sidearm":
+            counter += 1
+            jsonDataWeapons[i]["id"] = counter
             weapons.append(jsonDataWeapons[i])
+
 
     return weapons

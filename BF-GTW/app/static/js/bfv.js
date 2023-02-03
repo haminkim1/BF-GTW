@@ -23,7 +23,7 @@ window.addEventListener("load", function () {
         let html = '';
         for (let i in weapons) {
             let name = weapons[i];
-            html += `<span class="clickableName">` + name + `</span>`;
+            html += `<span class="clickableName white">` + name + `</span>`;
         }
         autoCompleteList.innerHTML += html;
         
