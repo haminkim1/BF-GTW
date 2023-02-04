@@ -15,5 +15,6 @@ CREATE TABLE IF NOT EXISTS bfv_weapons (
     weapon_id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
     weapon_name text NOT NULL,
     weapon_type text NOT NULL,
-    weapon_image text NOT NULL -- /static/images/bfvImages/easy/1.png
+    weapon_image text NOT NULL,
+    encrypted_image_name text NOT NULL
 )
