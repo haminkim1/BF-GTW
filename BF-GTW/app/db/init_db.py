@@ -15,7 +15,6 @@ def init_db():
     init_bfv_weapons_db()
 
 
-
 def init_bfv_weapons_db():
     # Getting API data. 
     response_API = requests.get('https://api.gametools.network/bfv/weapons/?format_values=true&name=HAMINATOR1997&platform=pc&skip_battlelog=false&lang=en-us')
@@ -41,21 +40,12 @@ def init_bfv_weapons_db():
 
         random.shuffle(weapons)
         for i in range(len(weapons)):
-            encrypted_filename = download_image(weapons[i]["image"], folder)
+            encrypted_filename = download_image_encrypt_filename(weapons[i]["image"], folder)
             db.execute("INSERT INTO bfv_weapons (weapon_name, weapon_type, weapon_image, encrypted_image_name) VALUES(?, ?, ?, ?)",
             weapons[i]["weaponName"], weapons[i]["type"], weapons[i]["image"], encrypted_filename)
 
-    # Download images
-    # if num_rows < len(weapons)
-        # Delete image folder.
-    # Somehow get access to getImages.py under modules folder (or make a function here). 
-    # Make a function on code lines 26 and below and pass in weapons[i]["image"] to the function. 
-    # Use filename = url.split("/")[-1] to get the weapon name only instead of the entire url.
-    # Save the image name using the password hash function against the filename. 
-    # Would potentially need to make another column in the table called hashed_image
-    # Would not be necessary to save the images in 3 folders (easy, med, hard), we can filter it out using the db instead.
 
-
+# Select a folder directory to delete all the contents within it. 
 def delete_files_in_folder(folder):
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
@@ -68,10 +58,15 @@ def delete_files_in_folder(folder):
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-def download_image(url, folder):
+# Download the image from the URL and save it under the selected directory as an encrypted filename
+# Return the encrypted filename to potentially pass onto a variable. 
+def download_image_encrypt_filename(url, folder):
     response = requests.get(url)
 
     if response.status_code == 200:
+        # Copies the string within the URL after the last "/"
+        # e.g. for this URL: https://eaassets-a.akamaihd.net/battlelog/battlebinary/gamedata/Casablanca/12/71/MG34-f447ad5e.png
+        # the filename would be "MG34-f447ad5e.png"
         filename = url.split("/")[-1]
         hash = hashlib.sha256(filename.encode()).hexdigest()
         encrypted_filename = hash + ".png"

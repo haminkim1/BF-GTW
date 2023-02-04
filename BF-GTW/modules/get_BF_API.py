@@ -1,6 +1,8 @@
 import requests
 import json
 
+from app.db.db_config import db
+
 # Exclude types:
 # melee
 # gadget
@@ -11,25 +13,32 @@ import json
 # type
 # image
 
-def getBFVWeapons():
-    # Getting API data. 
-    response_API = requests.get('https://api.gametools.network/bfv/weapons/?format_values=true&name=HAMINATOR1997&platform=pc&skip_battlelog=false&lang=en-us')
-    data = response_API.text
-    # Converting API data into JSON. 
-    jsonData = json.loads(data)
 
-    # Assigning only weapons data into weapon variable
-    jsonDataWeapons = jsonData["weapons"]
-    weapons = []
-    # Giving an id number for each weapons
-    counter = 0
 
+
+def get_easy_mode_weapons(weapons):
+
+    easyWeapons = []
     # Taking out melee, gadget and sidearm weapons. 
-    for i in range(len(jsonDataWeapons)):
-        if jsonDataWeapons[i]["type"] != "Melee" and jsonDataWeapons[i]["type"] != "Gadget" and jsonDataWeapons[i]["type"] != "Sidearm":
-            counter += 1
-            jsonDataWeapons[i]["id"] = counter
-            weapons.append(jsonDataWeapons[i])
+    for i in range(len(weapons)):
+        if weapons[i]["weapon_type"] != "Melee" and weapons[i]["weapon_type"] != "Gadget" and weapons[i]["weapon_type"] != "Sidearm":
+            easyWeapons.append(weapons[i])
 
 
+    return easyWeapons
+
+
+def get_medium_mode_weapons(weapons):
+    mediumWeapons = []
+    # Taking out melee, gadget and sidearm weapons. 
+    for i in range(len(weapons)):
+        if weapons[i]["weapon_type"] != "Melee" and weapons[i]["weapon_type"] != "Sidearm":
+            mediumWeapons.append(weapons[i])
+
+
+    return mediumWeapons
+
+
+def get_hard_mode_weapons():
+    weapons = db.execute("SELECT * FROM bfv_weapons")
     return weapons
