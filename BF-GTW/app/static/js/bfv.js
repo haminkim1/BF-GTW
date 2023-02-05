@@ -30,6 +30,9 @@ window.addEventListener("load", function () {
         sendNameToInputBoxIfClicked()
     });
 
+    modalFunctionality()
+
+
     function sendNameToInputBoxIfClicked() {
         let clickableName = document.getElementsByClassName("clickableName");
 
@@ -40,6 +43,17 @@ window.addEventListener("load", function () {
                 autoCompleteList.innerHTML = "";   
             })
         }
+    }
+
+
+    function modalFunctionality() {
+        const modal = document.getElementById("myModal");
+        modal.style.display = "block";
+    
+        document.getElementById("submit-form").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("myModal").style.display = "none";
+        });
     }
 })
 

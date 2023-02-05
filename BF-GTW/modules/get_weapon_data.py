@@ -32,7 +32,7 @@ def get_medium_mode_weapons(weapons):
     mediumWeapons = []
     # Taking out melee, gadget and sidearm weapons. 
     for i in range(len(weapons)):
-        if weapons[i]["weapon_type"] != "Melee" and weapons[i]["weapon_type"] != "Sidearm":
+        if weapons[i]["weapon_type"] != "Gadget":
             mediumWeapons.append(weapons[i])
 
 

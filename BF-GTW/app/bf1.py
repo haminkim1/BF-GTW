@@ -3,7 +3,7 @@ from flask import render_template, request, jsonify
 from app import app
 from modules.apology import apology
 from modules.auth_modules import login_required
-from modules.get_BF_API import get_easy_mode_weapons
+from modules.get_weapon_data import get_easy_mode_weapons
 
 # @app.route("/bf1")
 # @login_required
