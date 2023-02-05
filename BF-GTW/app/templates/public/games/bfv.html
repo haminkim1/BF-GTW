@@ -9,10 +9,12 @@
         <script src="/static/js/bfv.js"></script>
     </head>
 
+
     <div class="flex-column">
+        {% if data %}
         <div class="flex-column">
-            <span class="white" id="text-align-center">Score:</span>
-            <span class="white" id="text-align-center">Number of weapons left: current #/ total #</span>
+            <span class="white" id="text-align-center">Score: {{ data["current_score"] }}</span>
+            <span class="white" id="text-align-center">Number of weapons left: {{ data["current_weapon"] }}/ {{ data["total_weapons"] }}</span>
         </div>
     
         <div>
@@ -20,28 +22,51 @@
             <button class="btn btn-secondary btn-sm border-dark">Quit</button>
         </div>
         <div class="flex-column pt-3">
-            <button class="btn btn-secondary btn-sm border-dark mb-2">Hints: {{3}}</button>
-            <span class="white" id="text-align-center">Lives:{{3}}</span>
+                <button class="btn btn-secondary btn-sm border-dark mb-2" value="{{ hints }}">Hints: {{ data["hints"] }}</button>
+                <input type="hidden" name="hints" value="{{ hints }}" id="hints">
+                <span class="white" id="text-align-center" value="{{ lives }}">Lives:{{ data["lives"] }}</span>
+                <input type="hidden" name="lives" value="{{ lives }}" id="lives">
         </div>
+        {% else %}
+        <div class="flex-column">
+            <span class="white" id="text-align-center">Score:</span>
+            <span class="white" id="text-align-center">Number of weapons left:</span>
+        </div>
+    
+        <div>
+            <button id="start-btn" class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#myModal">Start</button>
+            <button class="btn btn-secondary btn-sm border-dark">Quit</button>
+        </div>
+        <div class="flex-column pt-3">
+                <button class="btn btn-secondary btn-sm border-dark mb-2" value="{{ hints }}">Hints:</button>
+                <input type="hidden" name="hints" value="{{ hints }}" id="hints">
+                <span class="white" id="text-align-center" value="{{ lives }}">Lives:</span>
+                <input type="hidden" name="lives" value="{{ lives }}" id="lives">
+        </div>
+        {% endif %}
+
         <div>
             <!-- I'll need a fixed size with the weapons, depending on what gets shown, the padding/margin is different.  -->
             <!-- 255x255 seems to be the largest. Majority of the guns are 255x85 -->
             {% if weapons %}
-                <img src="/static/images/bfvImages/{{ weapons[0]['encrypted_image_name'] }}">
+                <img src="/static/images/bfvImages/{{ weapons[0]['encrypted_image_name'] }}" id="weaponImage">
             {% else %}
-                <img src="/static/images/bfvImages/{{ weapon['encrypted_image_name'] }}">
+                <img src="/static/images/bfvImages/{{ weapon['encrypted_image_name'] }}" id="weaponImage">
             {% endif %}
         </div>
-        <div class="flex-row">
-            <input id="bfvInput" class="form-control form-control-md" placeholder="Type Weapon Name">
-            <button type="submit" class="btn btn-secondary btn-sm border-dark">Submit</button>
-        </div>
+        <form>
+            <div class="flex-row">
+                <input id="bfvInput" class="form-control form-control-md" name="weaponNameInput" placeholder="Type Weapon Name">
+                <button type="submit" id="submitWeaponNameBtn" class="btn btn-secondary btn-sm border-dark">Submit</button>
+            </div>
+        </form>
         <div id="autoCompleteList" class="flex-column">
         </div>
     </div>
+
+
   
   <!-- Modal -->
-
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">

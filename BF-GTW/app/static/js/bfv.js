@@ -14,7 +14,7 @@ window.addEventListener("load", function () {
 
     const autoCompleteList = document.querySelector("#autoCompleteList");
 
-    let input = document.querySelector('input');
+    let input = document.querySelector('#bfvInput');
     input.addEventListener('input', async function() {
         autoCompleteList.innerHTML = "";
         let response = await fetch('/bfv?name=' + input.value);
@@ -31,6 +31,8 @@ window.addEventListener("load", function () {
     });
 
     modalFunctionality()
+
+    submitWeaponName()
 
 
     function sendNameToInputBoxIfClicked() {
@@ -58,25 +60,37 @@ window.addEventListener("load", function () {
         });
     }
 
+    // Submits name from input textbox and changes to next weapon image. 
+    async function submitWeaponName() {
+        document.getElementById("submitWeaponNameBtn").addEventListener("click", async function(event) {
+            event.preventDefault();
+            let formData = new FormData(event.target.form);
+            try {
+                const response = await fetch("/bfv/check_results", {
+                    method: "POST",
+                    body: formData
+                    });
+                const data = await response.json();
+                console.log(data)
 
-    async function hideStartBtn() {
-
-            autoCompleteList.innerHTML = "";
-            let mode = ["easy", "medium", "high"]
-            let response = await fetch('/bfv?mode=' + input.value);
-            let weapons = await response.json();
-            // After fetching API data, display those names in a list below the input box 
-            let html = '';
-            for (let i in weapons) {
-                let name = weapons[i];
-                html += `<span class="clickableName white">` + name + `</span>`;
+                imageURL = data[0].encrypted_image_name
+                weaponImage = document.querySelector("#weaponImage");
+                weaponImage.src = `static/images/bfvImages/${imageURL}`;
+                document.querySelector('#bfvInput').value = "";
+            } catch (error) {
+                console.error(error);
             }
-            autoCompleteList.innerHTML += html;
-            
-            sendNameToInputBoxIfClicked()
-
-    
+          });
     }
+
+
+    function updatePageAfterSubmission(URL) {
+        // Update image to the next weapon image.
+        weaponImage = document.querySelector("#weaponImage");
+        weaponImage.src = `static/images/bfvImages/${URL}`;
+        document.querySelector('#bfvInput').value = "";
+    }
+
 })
 
 
