@@ -16,7 +16,7 @@
         </div>
     
         <div>
-            <button class="btn btn-secondary btn-sm border-dark">Start</button>
+            <button id="start-btn" class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#myModal">Start</button>
             <button class="btn btn-secondary btn-sm border-dark">Quit</button>
         </div>
         <div class="flex-column pt-3">
@@ -26,7 +26,11 @@
         <div>
             <!-- I'll need a fixed size with the weapons, depending on what gets shown, the padding/margin is different.  -->
             <!-- 255x255 seems to be the largest. Majority of the guns are 255x85 -->
-            <img src="/static/images/bfvImages/0a241665e818dd1214e380b99bc6f6d2f73cebff2aff13daaf2e9bb72b240d87.png">
+            {% if weapons %}
+                <img src="/static/images/bfvImages/{{ weapons[0]['encrypted_image_name'] }}">
+            {% else %}
+                <img src="/static/images/bfvImages/{{ weapon['encrypted_image_name'] }}">
+            {% endif %}
         </div>
         <div class="flex-row">
             <input id="bfvInput" class="form-control form-control-md" placeholder="Type Weapon Name">
@@ -47,7 +51,7 @@
             <button type="button" class="close" onclick="document.getElementById('myModal').style.display = 'none'">&times;</button>
         </div>
         <!-- Modal body -->
-        <form action="/bfv" method="POST" id="bfv_mode_form">
+        <form id="bfv_mode_form" method="post">
             <div class="modal-body">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="mode" id="easy" value="easy" checked>
@@ -68,7 +72,7 @@
                     </label>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="submit-form" class="btn btn-secondary btn-sm border-dark" onclick="document.getElementById('myModal').style.display = 'none'">Submit</button>
+                    <button type="submit" id="submit-form" class="btn btn-secondary btn-sm border-dark">Submit</button>
                 </div>  
             </div>
         </form>

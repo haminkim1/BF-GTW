@@ -46,14 +46,36 @@ window.addEventListener("load", function () {
     }
 
 
-    function modalFunctionality() {
-        const modal = document.getElementById("myModal");
-        modal.style.display = "block";
-    
-        document.getElementById("submit-form").addEventListener("click", function(event) {
+    function modalFunctionality() {   
+        document.getElementById("submit-form").addEventListener("submit", function(event) {
             event.preventDefault();
+            startBtn = document.querySelector("#start-btn");
+            startBtn.style.visibility = "hidden";
+            startBtn.disabled = true;
+
+
             document.getElementById("myModal").style.display = "none";
         });
+    }
+
+
+    async function hideStartBtn() {
+
+            autoCompleteList.innerHTML = "";
+            let mode = ["easy", "medium", "high"]
+            let response = await fetch('/bfv?mode=' + input.value);
+            let weapons = await response.json();
+            // After fetching API data, display those names in a list below the input box 
+            let html = '';
+            for (let i in weapons) {
+                let name = weapons[i];
+                html += `<span class="clickableName white">` + name + `</span>`;
+            }
+            autoCompleteList.innerHTML += html;
+            
+            sendNameToInputBoxIfClicked()
+
+    
     }
 })
 
