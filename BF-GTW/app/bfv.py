@@ -21,17 +21,18 @@ def bfv_route():
 
         # Get query parameter of key called "name"
         name = request.args.get("name")
-        weaponNames = []
+
         # If value of name key exists, cycle through each weapon name. 
         # If the weapon names start with name, append only the weapon name (not the entire object) to weaponNames list. 
         # Return weaponNames as JSON data back as a response to the client. 
         if name:
+            weaponNames = []
             for i in range(len(weapons)):
-                # I'll need an IF statement where if name == first letters of each list, then return jsonify those names only
-                # Make sure to return alphabetically
+                # If name == first letters of each list, return names as JSON object alphabetically
                 if weapons[i]['weapon_name'].casefold().startswith(name.casefold()):
                     weaponNames.append(weapons[i]['weapon_name'])
-
+            
+            # Sorting the list alphabetically
             weaponNames = sorted(weaponNames)
             return jsonify(weaponNames)
         else:
@@ -39,14 +40,7 @@ def bfv_route():
 
         return render_template("public/games/bfv.html", weapons=weapons, lives=lives, hints=hints, weapon=weapon)
 
-    else:
-        # If post requested, restart the game. 
-        # If post request made, clears the weapons session first to reset the game. 
-        # session.pop("weapons", None)
-        # session.pop("lives", None)
-        # session.pop("hints", None)
-        # Not sure if I need to add these pop sessions when the codes below would do that anyway upon post request. 
-        
+    else:       
         mode = request.form.get("mode")
         if mode == "easy":
             weapons = get_easy_mode_weapons(allWeapons)
@@ -57,74 +51,75 @@ def bfv_route():
         else:
             return apology("Please select difficulty")
         
-
         data = {
+            "weapon": weapons[0],
             "lives": 3,
             "hints": 3,
-            "total_weapons": len(weapons),
             "current_weapon": 0,
-            "current_score": 0
+            "current_score": 0,
+            "total_weapons": len(weapons)
         }
 
-        session["weapons"] = weapons
+        # If post requested, restart the game by setting back to default for the sessions:
+            # weapons 
+            # lives to 3
+            # hints to 3
+            # total weapons according to the difficulty mode the user selected
+            # current weapons back to 0
+            # current score back to 0
+
         session["lives"] = data["lives"]
         session["hints"] = data["hints"]
-        session["total_weapons"] = data["total_weapons"]
         session["current_weapon"] = data["current_weapon"]
         session["current_score"] = data["current_score"]
+        session["total_weapons"] = data["total_weapons"]
+
+        session["weapons"] = weapons
+        session["consecutive_wins"] = 0
 
         print(session["weapons"][0])
         
-        return render_template("public/games/bfv.html", weapons=weapons, data=data)
+        return render_template("public/games/bfv.html", data=data)
 
-
-        # Create a form that sends a post request to a different URL (eg /bfv/check_results)
-        # If submit button clicked,
-            # send request input value to server
-            # send request value of lives and hints to server
-        
-        # If session["lives"] and "hints" != value of lives and hints, return apology "Stop cheating"
-        # Actually no need to send lives and hints, when those values are stored under the session anyway.
-        # I will just have to subtract or add the values depending on the results and return it back to the client. 
-
-        # If input.value != weapons[0]["weapon_name"]
-            # session["lives"] - 1
-        
-        # Remove first index of weapons
-        
-        # Render template with weapons, lives and hints back to client. 
-
-        # Main problem: How do I compare input.value and weapon[0]["weapon_name"]. 
-            # if session["weapons"][0]["weapon_name"] != input.value?
 
 @app.route("/bfv/check_results", methods=["POST"])
 @login_required
 def check_result():
-    print(request.form.get("weaponNameInput"))
-
+    # Assigning the name of weaon from the input box on the client. 
     weaponNameInput = request.form.get("weaponNameInput").casefold()
     correctWeaponName = session["weapons"][0]["weapon_name"].casefold()
 
+    # Removing the first element within the list (the weapon displayed as an image) 
+    # to display the next image within the weapons list
     session["weapons"].pop(0)
-
-    weapon = session["weapons"][0]
-    lives = session["lives"]
+    session["current_weapon"] += 1
 
     if weaponNameInput == correctWeaponName:
-        # if session["current_score"] % 3: add 1 more life. 
-        print("placeholder")
+        session["current_score"] += 1
+        session["consecutive_wins"] += 1
+        if session["consecutive_wins"] == 3: 
+            # Add 1 more life and hint. Reset sesion consecutive wins back to 0
+            session["lives"] += 1
+            session["hints"] += 1
+            session["consecutive_wins"] = 0
+
     else:
-        lives = lives - 1
-    
-    return jsonify(weapon, lives)
+        session["lives"] -= 1
+
+    print(session["weapons"][0])
+
+    data = {
+    "weapon": session["weapons"][0]["encrypted_image_name"],
+    "lives": session["lives"],
+    "hints": session["hints"],
+    "current_weapon": session["current_weapon"],
+    "current_score": session["current_score"],
+    "total_weapons": session["total_weapons"]
+    }
+
+    return jsonify(data)
 
 
-@app.route("/test", methods=["GET", "POST"])
-@login_required
-def testing():
-
-    if request.method == "POST":
-        return redirect("/bfv")
 
 
 
@@ -146,9 +141,3 @@ def testing():
         # maybe image
     # If I can save the type of weapon in the database, I should be able to easily filter out easy, medium and hard weapons. 
     # Also if the BF2042 API gets updated, I can avoid bugs if they updated new weapons, but I haven't saved that image in my webpage. 
-
-@app.route("/bfv/submit")
-@login_required
-def bfv_submit():
-
-    return redirect("/bfv")

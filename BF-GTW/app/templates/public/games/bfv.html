@@ -13,8 +13,8 @@
     <div class="flex-column">
         {% if data %}
         <div class="flex-column">
-            <span class="white" id="text-align-center">Score: {{ data["current_score"] }}</span>
-            <span class="white" id="text-align-center">Number of weapons left: {{ data["current_weapon"] }}/ {{ data["total_weapons"] }}</span>
+            <span class="white score" id="text-align-center">Score: {{ data["current_score"] }}</span>
+            <span class="white current-weapon" id="text-align-center">Number of weapons left: {{ data["current_weapon"] }}/{{ data["total_weapons"] }}</span>
         </div>
     
         <div>
@@ -22,10 +22,13 @@
             <button class="btn btn-secondary btn-sm border-dark">Quit</button>
         </div>
         <div class="flex-column pt-3">
-                <button class="btn btn-secondary btn-sm border-dark mb-2" value="{{ hints }}">Hints: {{ data["hints"] }}</button>
+                <button class="btn btn-secondary btn-sm border-dark mb-2 hints" value="{{ hints }}">Hints: {{ data["hints"] }}</button>
                 <input type="hidden" name="hints" value="{{ hints }}" id="hints">
-                <span class="white" id="text-align-center" value="{{ lives }}">Lives:{{ data["lives"] }}</span>
+                <span class="white lives" id="text-align-center" value="{{ lives }}">Lives: {{ data["lives"] }}</span>
                 <input type="hidden" name="lives" value="{{ lives }}" id="lives">
+        </div>
+        <div>
+            <img src="/static/images/bfvImages/{{ data['weapon']['encrypted_image_name'] }}" id="weaponImage">
         </div>
         {% else %}
         <div class="flex-column">
@@ -43,17 +46,12 @@
                 <span class="white" id="text-align-center" value="{{ lives }}">Lives:</span>
                 <input type="hidden" name="lives" value="{{ lives }}" id="lives">
         </div>
+        <div>
+            <img src="/static/images/bfvImages/{{ weapon['encrypted_image_name'] }}" id="weaponImage">
+        </div>
         {% endif %}
 
-        <div>
-            <!-- I'll need a fixed size with the weapons, depending on what gets shown, the padding/margin is different.  -->
-            <!-- 255x255 seems to be the largest. Majority of the guns are 255x85 -->
-            {% if weapons %}
-                <img src="/static/images/bfvImages/{{ weapons[0]['encrypted_image_name'] }}" id="weaponImage">
-            {% else %}
-                <img src="/static/images/bfvImages/{{ weapon['encrypted_image_name'] }}" id="weaponImage">
-            {% endif %}
-        </div>
+
         <form>
             <div class="flex-row">
                 <input id="bfvInput" class="form-control form-control-md" name="weaponNameInput" placeholder="Type Weapon Name">

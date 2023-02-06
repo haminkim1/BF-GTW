@@ -31,7 +31,6 @@ window.addEventListener("load", function () {
     });
 
     modalFunctionality()
-
     submitWeaponName()
 
 
@@ -60,6 +59,7 @@ window.addEventListener("load", function () {
         });
     }
 
+
     // Submits name from input textbox and changes to next weapon image. 
     async function submitWeaponName() {
         document.getElementById("submitWeaponNameBtn").addEventListener("click", async function(event) {
@@ -73,10 +73,7 @@ window.addEventListener("load", function () {
                 const data = await response.json();
                 console.log(data)
 
-                imageURL = data[0].encrypted_image_name
-                weaponImage = document.querySelector("#weaponImage");
-                weaponImage.src = `static/images/bfvImages/${imageURL}`;
-                document.querySelector('#bfvInput').value = "";
+                updatePageAfterSubmission(data)
             } catch (error) {
                 console.error(error);
             }
@@ -84,13 +81,22 @@ window.addEventListener("load", function () {
     }
 
 
-    function updatePageAfterSubmission(URL) {
-        // Update image to the next weapon image.
+    // After user clicks submit on the this.clientInformation, the function is executed to:
+        // Display next weapon image
+        // Clear the input textbox
+        // Update the score
+        // Update number of weapons left
+        // Update number of hints and lives
+    function updatePageAfterSubmission(data) {
         weaponImage = document.querySelector("#weaponImage");
-        weaponImage.src = `static/images/bfvImages/${URL}`;
-        document.querySelector('#bfvInput').value = "";
-    }
+        weaponImage.src = `static/images/bfvImages/${data.weapon}`;
 
+        document.querySelector('#bfvInput').value = "";
+        document.querySelector(".score").innerHTML = `Score: ${data.current_score}`;
+        document.querySelector(".current-weapon").innerHTML = `Number of weapons left: ${data.current_weapon}/${data.total_weapons}`;
+        document.querySelector(".lives").innerHTML = `Lives: ${data.lives}`;
+        document.querySelector(".hints").innerHTML = `Hints: ${data.hints}`;
+    }
 })
 
 
