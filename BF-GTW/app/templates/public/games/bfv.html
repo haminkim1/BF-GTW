@@ -1,15 +1,14 @@
 {% extends "layout.html" %}
 
+{% block custom_scripts %}
+    <script src="/static/js/bfv.js"></script>
+{% endblock %}
+
 {% block title %}
     BFV
 {% endblock %}
 
 {% block main %}
-    <head>
-        <script src="/static/js/bfv.js"></script>
-    </head>
-
-
     <div class="flex-column">
         {% if data %}
         <div class="flex-column">
