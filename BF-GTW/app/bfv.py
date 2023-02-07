@@ -27,10 +27,24 @@ def bfv_route():
         # Return weaponNames as JSON data back as a response to the client. 
         if name:
             weaponNames = []
-            for i in range(len(weapons)):
-                # If name == first letters of each list, return names as JSON object alphabetically
+            alphabeticallySortedName = sorted(weapons) #This is not sorting because I need to sort weapons[i]["weapon_name"], not the weapons object itself. 
+            alphabeticallySortedName = weapons
+
+            for i in range(len(alphabeticallySortedName)):
                 if weapons[i]['weapon_name'].casefold().startswith(name.casefold()):
-                    weaponNames.append(weapons[i]['weapon_name'])
+                    startingPoint = alphabeticallySortedName[i:]
+                    break
+            # Sort list alphabetically
+            # If weapon name starts with name:
+                # Start from that index. 
+                # If no weapons found afterwards
+                    # break
+            for i in range(len(startingPoint)):
+                # If name == first letters of each list, return names as JSON object alphabetically
+                if startingPoint[i]['weapon_name'].casefold().startswith(name.casefold()):
+                    weaponNames.append(startingPoint[i]['weapon_name'])
+                else:
+                    break
             
             # Sorting the list alphabetically
             weaponNames = sorted(weaponNames)
@@ -38,10 +52,13 @@ def bfv_route():
         else:
             weaponNames = []
 
+        session["play_state"] = False
+
         return render_template("public/games/bfv.html", weapons=weapons, lives=lives, hints=hints, weapon=weapon)
 
     else:       
         mode = request.form.get("mode")
+        print(mode)
         if mode == "easy":
             weapons = get_easy_mode_weapons(allWeapons)
         elif mode == "medium":
@@ -50,6 +67,10 @@ def bfv_route():
             weapons = allWeapons
         else:
             return apology("Please select difficulty")
+        
+        if mode == "easy" or mode == "medium" or mode == "hard":
+            session["play_state"] = True
+            play_state = session["play_state"]
         
         data = {
             "weapon": weapons[0],
@@ -79,7 +100,7 @@ def bfv_route():
 
         print(session["weapons"][0])
         
-        return render_template("public/games/bfv.html", data=data)
+        return render_template("public/games/bfv.html", data=data, play_state=play_state)
 
 
 @app.route("/bfv/check_results", methods=["POST"])
@@ -120,24 +141,8 @@ def check_result():
     return jsonify(data)
 
 
-
-
-
-
-
-    # return render_template("public/games/bfv.html", weapons=weapons)
-
-    # Problems:
-    # Need to hide name of weapon within img URL
-    # Name of weapon in input needs to match with name displayed in the image. 
-    # name of weapon should not be visible from client side. 
-
-    # Solutions:
-    # Save image as codes (or without name within the name of the image)
-    # Instead of getting API through the website, get the API through my database. 
-    # Save only the required data from the BF API into the database. 
-        # weaponName
-        # type
-        # maybe image
-    # If I can save the type of weapon in the database, I should be able to easily filter out easy, medium and hard weapons. 
-    # Also if the BF2042 API gets updated, I can avoid bugs if they updated new weapons, but I haven't saved that image in my webpage. 
+# Make user press start button before playing the game
+# Create session["play_state"] = false when get requested on /bfv
+# If one of the modes clicked and submitted, set sesion["play_state"] to true
+# If false, set submit button to start
+# If true, set submit button to true

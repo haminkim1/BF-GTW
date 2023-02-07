@@ -17,7 +17,13 @@ window.addEventListener("load", function () {
     // Fetching weapon names via API as user types the input box and display the names 
     // matching with the text typed in the input box as a list below the input box 
     // e.g. typing 12 will show 12g automatic as a list. 
+    const timeoutId = null;
     input.addEventListener('input', async function() {
+        clearTimeout(timeoutId);
+
+
+
+        
         autoCompleteList.innerHTML = "";
         let response = await fetch('/bfv?name=' + input.value);
         let weapons = await response.json();
@@ -79,6 +85,17 @@ window.addEventListener("load", function () {
                 console.error(error);
             }
           });
+        
+        // If user presses enter instead of clicking submit, the function makes it as if the user 
+        // has clicked submit instead. 
+        document.getElementById("bfvInput").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                console.log("test");
+                event.preventDefault();
+                document.getElementById("submitWeaponNameBtn").click();
+                autoCompleteList.innerHTML = ""; 
+            }
+        })
     }
 
 

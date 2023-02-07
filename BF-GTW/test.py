@@ -6,12 +6,14 @@ url = "https://eaassets-a.akamaihd.net/battlelog/battlebinary/gamedata/Casablanc
 
 filename = url.split("/")[-1]
 
-hash = hashlib.sha256(filename.encode()).hexdigest()
+# def remove_elements_before_index(lst, index):
+#     return lst[index:]
 
-print(hash)
 
 
-x = 1
 
-x -= 1
-print(x)
+my_list = [1, 2, 3, 4, 5, 6, 7]
+# new_list = remove_elements_before_index(my_list, 4)
+new_list = my_list[0:]
+print(new_list)
+# Output: [5, 6, 7]
