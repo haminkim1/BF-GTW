@@ -13,13 +13,14 @@ window.addEventListener("load", function () {
     changeToShadowClass.classList.add("shadow")
 
     const autoCompleteList = document.querySelector("#autoCompleteList");
-
-    let input = document.querySelector('#bfvInput');
+    const input = document.querySelector('#bfvInput');
+    // Fetching weapon names via API as user types the input box and display the names 
+    // matching with the text typed in the input box as a list below the input box 
+    // e.g. typing 12 will show 12g automatic as a list. 
     input.addEventListener('input', async function() {
         autoCompleteList.innerHTML = "";
         let response = await fetch('/bfv?name=' + input.value);
         let weapons = await response.json();
-        // After fetching API data, display those names in a list below the input box 
         let html = '';
         for (let i in weapons) {
             let name = weapons[i];
