@@ -10,48 +10,18 @@ import random
 @app.route("/bfv", methods=["GET", "POST"])
 @login_required
 def bfv_route():   
-    # Getting hard mode weapons is pretty much retrieving every single weapon in the db. 
-    allWeapons = get_hard_mode_weapons()
+
     if request.method == "GET":
-        print("hi")
-        weapons = session.get("weapon_list_display", [])
-
-        # Get query parameter of key called "name"
-        name = request.args.get("name")
-
-        # If value of name key exists, cycle through each weapon name. 
-        # If the weapon names start with name, append only the weapon name (not the entire object) to weaponNames list. 
-        # Return weaponNames as JSON data back as a response to the client. 
-        print("weapon is {}".format(allWeapons[0]))
-        if name:
-            weaponNames = []
-            # Think about using while loops instead. 
-            # Still need an alphabetically sorted list. 
-            # While weapons[i]["weapon_name"] != name or i < len(list)
-                # i++
-            # if == name, then [i:] to a new list. 
-            for i in range(len(weapons)):
-                if weapons[i]['weapon_name'].casefold().startswith(name.casefold()):
-                    weaponNames.append(weapons[i]['weapon_name'])
-
-            # While new_list[i:] == name
-                # append. 
-                # i++
-            # If != name, then exit while loop. 
-
-
-            # Sorting the list alphabetically
-            weaponNames = sorted(weaponNames)
-            return jsonify(weaponNames)
-        else:
-            weaponNames = []
 
         weapon = get_first_easy_weapon()
         session["play_state"] = False
 
-        return render_template("public/games/bfv.html", weapons=weapons, weapon=weapon[0])
+        return render_template("public/games/bfv.html", weapon=weapon[0])
 
     else:       
+        # Getting hard mode weapons is pretty much retrieving every single weapon in the db. 
+        allWeapons = get_hard_mode_weapons()
+
         mode = request.form.get("mode")
         if mode == "easy":
             weapons = get_easy_mode_weapons(allWeapons)
@@ -102,6 +72,32 @@ def bfv_route():
         return render_template("public/games/bfv.html", data=data, play_state=play_state)
 
 
+@app.route("/bfv/name")
+@login_required
+def list_bfv_weapons():
+    weapons = session.get("weapon_list_display", [])
+    # Get query parameter of key called "name"
+    name = request.args.get("name")
+
+    if name:
+        weaponNames = []
+        # Think about using while loops instead. 
+        # Still need an alphabetically sorted list. 
+        # While weapons[i]["weapon_name"] != name or i < len(list)
+            # i++
+        # if == name, then [i:] to a new list. 
+        for i in range(len(weapons)):
+            if weapons[i]['weapon_name'].casefold().startswith(name.casefold()):
+                weaponNames.append(weapons[i]['weapon_name'])
+                
+        # Sorting the list alphabetically
+        weaponNames = sorted(weaponNames)
+
+    else:
+        weaponNames = []
+    return jsonify(weaponNames)
+
+
 @app.route("/bfv/check_results", methods=["POST"])
 @login_required
 def check_result():
@@ -109,10 +105,7 @@ def check_result():
     weaponNameInput = request.form.get("weaponNameInput").casefold()
     correctWeaponName = session["weapons"][0]["weapon_name"].casefold()
 
-    # Removing the first element within the list (the weapon displayed as an image) 
-    # to display the next image within the weapons list
-    session["weapons"].pop(0)
-    session["current_weapon"] += 1
+
 
     if weaponNameInput == correctWeaponName:
         session["current_score"] += 1
@@ -126,10 +119,14 @@ def check_result():
     else:
         session["lives"] -= 1
 
-    print(session["weapons"][0])
+    # Setting index number to the current weapon number.
+    # This will send the next element in session["weapons"] and proceed with the next guessing round.
+    session["current_weapon"] += 1
+    index_no = session["current_weapon"]
+    print(session["weapons"][index_no])
 
     data = {
-    "weapon": session["weapons"][0]["encrypted_image_name"],
+    "weapon": session["weapons"][index_no]["encrypted_image_name"],
     "lives": session["lives"],
     "hints": session["hints"],
     "current_weapon": session["current_weapon"],

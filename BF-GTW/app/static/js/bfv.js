@@ -25,7 +25,7 @@ window.addEventListener("load", function () {
 
         
         autoCompleteList.innerHTML = "";
-        let response = await fetch('/bfv?name=' + input.value);
+        let response = await fetch('/bfv/name?name=' + input.value);
         let weapons = await response.json();
         let html = '';
         for (let i in weapons) {
