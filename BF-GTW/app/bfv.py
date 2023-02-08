@@ -3,14 +3,13 @@ from flask import jsonify, redirect, render_template, request, session
 from app import app
 from modules.apology import apology
 from modules.auth_modules import login_required
-from modules.get_weapon_data import get_easy_mode_weapons, get_first_easy_weapon, get_hard_mode_weapons, get_medium_mode_weapons
+from modules.get_weapon_data import get_all_weapons, get_easy_mode_weapons, get_first_easy_weapon, get_hard_mode_weapons, get_medium_mode_weapons
 
-import random
+import random 
 
 @app.route("/bfv", methods=["GET", "POST"])
 @login_required
 def bfv_route():   
-
     if request.method == "GET":
 
         weapon = get_first_easy_weapon()
@@ -20,7 +19,7 @@ def bfv_route():
 
     else:       
         # Getting hard mode weapons is pretty much retrieving every single weapon in the db. 
-        allWeapons = get_hard_mode_weapons()
+        allWeapons = get_all_weapons()
 
         mode = request.form.get("mode")
         if mode == "easy":
@@ -28,19 +27,17 @@ def bfv_route():
         elif mode == "medium":
             weapons = get_medium_mode_weapons(allWeapons)
         elif mode == "hard":
-            weapons = allWeapons
+            weapons = get_hard_mode_weapons(allWeapons)
         else:
             return apology("Please select difficulty")
+        
+        random.shuffle(weapons)
+        session["weapons"] = weapons
 
         if mode == "easy" or mode == "medium" or mode == "hard":
             session["play_state"] = True
             play_state = session["play_state"]
 
-        # This session will be used on the /bfv get request where user searches for names
-        # of the weapons. 
-        session["weapon_list_display"] = weapons
-        
-        print("length of easy weapons is {}".format(len(weapons)))
         data = {
             "weapon": weapons[0],
             "lives": 3,
@@ -63,8 +60,6 @@ def bfv_route():
         session["current_weapon"] = data["current_weapon"]
         session["current_score"] = data["current_score"]
         session["total_weapons"] = data["total_weapons"]
-
-        session["weapons"] = weapons
         session["consecutive_wins"] = 0
 
         print(session["weapons"][0])
@@ -75,7 +70,7 @@ def bfv_route():
 @app.route("/bfv/name")
 @login_required
 def list_bfv_weapons():
-    weapons = session.get("weapon_list_display", [])
+    weapons = session["weapons"]
     # Get query parameter of key called "name"
     name = request.args.get("name")
 
@@ -86,9 +81,15 @@ def list_bfv_weapons():
         # While weapons[i]["weapon_name"] != name or i < len(list)
             # i++
         # if == name, then [i:] to a new list. 
+        print("Weapon in /bfv/name is {}".format(weapons[0]))
         for i in range(len(weapons)):
             if weapons[i]['weapon_name'].casefold().startswith(name.casefold()):
                 weaponNames.append(weapons[i]['weapon_name'])
+        
+        # While new_list[i:] == name
+            # append. 
+            # i++
+        # If != name, then exit while loop. 
                 
         # Sorting the list alphabetically
         weaponNames = sorted(weaponNames)
@@ -105,17 +106,15 @@ def check_result():
     weaponNameInput = request.form.get("weaponNameInput").casefold()
     correctWeaponName = session["weapons"][0]["weapon_name"].casefold()
 
-
-
     if weaponNameInput == correctWeaponName:
         session["current_score"] += 1
         session["consecutive_wins"] += 1
         if session["consecutive_wins"] == 3: 
-            # Add 1 more life and hint. Reset sesion consecutive wins back to 0
+            # Add 1 more life and hint. Reset session consecutive wins back to 0
+            session["consecutive_wins"] = 0
             session["lives"] += 1
             session["hints"] += 1
-            session["consecutive_wins"] = 0
-
+            
     else:
         session["lives"] -= 1
 

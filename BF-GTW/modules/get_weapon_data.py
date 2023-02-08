@@ -2,13 +2,16 @@ from app.db.db_config import db
 
 import random
 
+def get_all_weapons():
+    weapons = db.execute("SELECT * FROM bfv_weapons ORDER BY weapon_name")
+    return weapons
+
 def get_easy_mode_weapons(weapons):
     easyWeapons = []
     # Taking out melee, gadget and sidearm weapons. 
     for i in range(len(weapons)):
         if weapons[i]["weapon_type"] != "Melee" and weapons[i]["weapon_type"] != "Gadget" and weapons[i]["weapon_type"] != "Sidearm":
             easyWeapons.append(weapons[i])
-    random.shuffle(easyWeapons)
     return easyWeapons
 
 
@@ -21,9 +24,9 @@ def get_medium_mode_weapons(weapons):
     return mediumWeapons
 
 
-def get_hard_mode_weapons():
-    weapons = db.execute("SELECT * FROM bfv_weapons ORDER BY weapon_name")
-    return weapons
+def get_hard_mode_weapons(weapons):
+    hardWeapons = weapons
+    return hardWeapons
 
 
 def get_first_easy_weapon():
