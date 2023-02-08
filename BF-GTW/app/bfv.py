@@ -9,15 +9,12 @@ import random
 
 @app.route("/bfv", methods=["GET", "POST"])
 @login_required
-def bfv_route():
+def bfv_route():   
     # Getting hard mode weapons is pretty much retrieving every single weapon in the db. 
     allWeapons = get_hard_mode_weapons()
-    weapon = get_first_easy_weapon(allWeapons)
-
     if request.method == "GET":
-        weapons = session.get("weapons", [])
-        lives = session.get("lives", [])
-        hints = session.get("hints", [])
+        print("hi")
+        weapons = session.get("weapon_list_display", [])
 
         # Get query parameter of key called "name"
         name = request.args.get("name")
@@ -25,40 +22,37 @@ def bfv_route():
         # If value of name key exists, cycle through each weapon name. 
         # If the weapon names start with name, append only the weapon name (not the entire object) to weaponNames list. 
         # Return weaponNames as JSON data back as a response to the client. 
+        print("weapon is {}".format(allWeapons[0]))
         if name:
             weaponNames = []
-            alphabeticallySortedName = sorted(weapons) #This is not sorting because I need to sort weapons[i]["weapon_name"], not the weapons object itself. 
-            alphabeticallySortedName = weapons
-
-            for i in range(len(alphabeticallySortedName)):
+            # Think about using while loops instead. 
+            # Still need an alphabetically sorted list. 
+            # While weapons[i]["weapon_name"] != name or i < len(list)
+                # i++
+            # if == name, then [i:] to a new list. 
+            for i in range(len(weapons)):
                 if weapons[i]['weapon_name'].casefold().startswith(name.casefold()):
-                    startingPoint = alphabeticallySortedName[i:]
-                    break
-            # Sort list alphabetically
-            # If weapon name starts with name:
-                # Start from that index. 
-                # If no weapons found afterwards
-                    # break
-            for i in range(len(startingPoint)):
-                # If name == first letters of each list, return names as JSON object alphabetically
-                if startingPoint[i]['weapon_name'].casefold().startswith(name.casefold()):
-                    weaponNames.append(startingPoint[i]['weapon_name'])
-                else:
-                    break
-            
+                    weaponNames.append(weapons[i]['weapon_name'])
+
+            # While new_list[i:] == name
+                # append. 
+                # i++
+            # If != name, then exit while loop. 
+
+
             # Sorting the list alphabetically
             weaponNames = sorted(weaponNames)
             return jsonify(weaponNames)
         else:
             weaponNames = []
 
+        weapon = get_first_easy_weapon()
         session["play_state"] = False
 
-        return render_template("public/games/bfv.html", weapons=weapons, lives=lives, hints=hints, weapon=weapon)
+        return render_template("public/games/bfv.html", weapons=weapons, weapon=weapon[0])
 
     else:       
         mode = request.form.get("mode")
-        print(mode)
         if mode == "easy":
             weapons = get_easy_mode_weapons(allWeapons)
         elif mode == "medium":
@@ -67,11 +61,16 @@ def bfv_route():
             weapons = allWeapons
         else:
             return apology("Please select difficulty")
-        
+
         if mode == "easy" or mode == "medium" or mode == "hard":
             session["play_state"] = True
             play_state = session["play_state"]
+
+        # This session will be used on the /bfv get request where user searches for names
+        # of the weapons. 
+        session["weapon_list_display"] = weapons
         
+        print("length of easy weapons is {}".format(len(weapons)))
         data = {
             "weapon": weapons[0],
             "lives": 3,
