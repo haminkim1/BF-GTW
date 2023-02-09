@@ -115,6 +115,11 @@ window.addEventListener("load", function () {
         document.querySelector(".lives").innerHTML = `Lives: ${data.lives}`;
         document.querySelector(".hints").innerHTML = `Hints: ${data.hints}`;
     }
+
+    
+    function activateHintFeature() {
+        // TODO
+    }
 })
 
 

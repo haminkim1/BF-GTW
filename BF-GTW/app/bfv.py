@@ -137,3 +137,23 @@ def check_result():
     }
 
     return jsonify(data)
+
+
+@app.route("/bfv/hint", methods=["POST"])
+@login_required
+def hint():
+    if session["hints"] == 0:
+        return render_template("public/games/bfv.html")
+    else:
+        session["hints"] -= 1
+    # If hint button clicked, make post request to bfv/hint
+    # if session["hints"] == 0, do nothing
+    # session["hints"] -= 1
+    # Reveal weapon type and first letter of the weapon name
+    # Prevent user from deleting first letter of the weapon name after clicking hint. 
+    # Disable hint button either by disabling or prevent subtracting number of hints available. 
+    # Display weapon type in between input box and weapon image. 
+    # Need a placeholder div in that position so the page doesn't shift down when the weapon type pops up
+
+
+        return render_template("public/games/bfv.html")
