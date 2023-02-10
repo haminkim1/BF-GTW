@@ -17,13 +17,7 @@ window.addEventListener("load", function () {
     // Fetching weapon names via API as user types the input box and display the names 
     // matching with the text typed in the input box as a list below the input box 
     // e.g. typing 12 will show 12g automatic as a list. 
-    const timeoutId = null;
     input.addEventListener('input', async function() {
-        clearTimeout(timeoutId);
-
-
-
-        
         autoCompleteList.innerHTML = "";
         let response = await fetch('/bfv/name?name=' + input.value);
         let weapons = await response.json();
@@ -129,15 +123,14 @@ window.addEventListener("load", function () {
                     method: "POST"
                 })
                 const data = await response.json();
-                hintBtn.innerHTML = `Hints: ${data.hints}`;
-
-                // data.weapon_type and first_letter will only be undefined if user attempt to click hint button when there are 0 hints left. 
-                if (typeof data.weapon_type !== 'undefined') {
+                // data.hints, weapon_type and first_letter will only be undefined if user attempt to click hint button when there are 0 hints left. 
+                if (Object.keys(data).length !== 0) {
+                    hintBtn.innerHTML = `Hints: ${data.hints}`;
                     document.getElementById("hint_display").innerHTML = `<span id="hint_weapon_name">${data.weapon_type}.</span>`;
                     document.getElementById("hint_display").innerHTML += `
                     <span id="">First letter starts with ${data.first_letter}</span>`;
                 }
-
+                
                 // Prevents user from clicking hint button more than once in the same round. 
                 hintBtn.disabled = true;
             } catch (error) {

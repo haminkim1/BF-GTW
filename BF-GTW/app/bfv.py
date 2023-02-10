@@ -144,21 +144,16 @@ def check_result():
 @login_required
 def hint():
     data = {}
-    index_no = session["current_weapon"]
-    # Do nothing if user clicks hints button but there are no hints left. 
-    if session["hints"] == 0:
-        data["hints"] = session["hints"]
-        return jsonify(data)
-    else:
+    
+    if session["hints"] > 0:
         session["hints"] -= 1
         # Getting first letter of weapon name. 
+        index_no = session["current_weapon"]
         first_letter = session["weapons"][index_no]["weapon_name"][0]
+
         data = {
             "hints": session["hints"],
             "weapon_type": session["weapons"][index_no]["weapon_type"],
             "first_letter": first_letter
         }
-        return jsonify(data)
-
-
-
+    return jsonify(data)
