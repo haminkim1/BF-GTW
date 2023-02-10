@@ -3,7 +3,7 @@ from flask import jsonify, redirect, render_template, request, session
 from app import app
 from modules.apology import apology
 from modules.auth_modules import login_required
-from modules.get_weapon_data import get_all_weapons, get_easy_mode_weapons, get_first_easy_weapon, get_hard_mode_weapons, get_medium_mode_weapons
+from modules.get_weapon_data import get_all_weapons, get_easy_mode_weapons, get_first_easy_weapon, get_hard_mode_weapons, get_medium_mode_weapons, get_test_weapon
 
 import random 
 
@@ -28,13 +28,15 @@ def bfv_route():
             weapons = get_medium_mode_weapons(allWeapons)
         elif mode == "hard":
             weapons = get_hard_mode_weapons(allWeapons)
+        elif mode == "test":
+            weapons = get_test_weapon()
         else:
             return apology("Please select difficulty")
         
         random.shuffle(weapons)
         session["weapons"] = weapons
 
-        if mode == "easy" or mode == "medium" or mode == "hard":
+        if mode == "easy" or mode == "medium" or mode == "hard" or mode == "test":
             session["play_state"] = True
             play_state = session["play_state"]
 
@@ -125,7 +127,12 @@ def check_result():
     # Setting index number to the current weapon number.
     # This will send the next element in session["weapons"] and proceed with the next guessing round.
     session["current_weapon"] += 1
-    index_no = session["current_weapon"]
+
+    # If total weapon and current weapon are the same, user has won the game
+    # Else, keep going
+    if session["current_weapon"] < session["total_weapons"]:
+        index_no = session["current_weapon"]
+
     print(session["weapons"][index_no])
 
     data = {
@@ -157,3 +164,8 @@ def hint():
             "first_letter": first_letter
         }
     return jsonify(data)
+
+
+# Game over/winner feature
+# Create a test function that gets a small amount of weapon for quick tests
+# of game over/winner features

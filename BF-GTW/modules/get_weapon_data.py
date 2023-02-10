@@ -36,3 +36,7 @@ def get_first_easy_weapon():
             break
     return weapon
 
+
+def get_test_weapon():
+    weapons = db.execute("SELECT * FROM bfv_weapons ORDER BY weapon_name DESC LIMIT 4")
+    return weapons

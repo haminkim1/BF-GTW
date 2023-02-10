@@ -13,7 +13,7 @@
         {% if data %}
         <div class="flex-column">
             <span class="white score" id="text-align-center">Score: {{ data["current_score"] }}</span>
-            <span class="white current-weapon" id="text-align-center">Number of weapons left: {{ data["current_weapon"] }}/{{ data["total_weapons"] }}</span>
+            <span class="white current-weapon" id="text-align-center">Current weapon: {{ data["current_weapon"] }}/{{ data["total_weapons"] }}</span>
         </div>
     
         <div>
@@ -94,6 +94,12 @@
                     <input class="form-check-input" type="radio" name="mode" id="hard" value="hard">
                     <label class="form-check-label" for="hard">
                         Hard (Rifles, melee, sidearms and gadgets)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="mode" id="test" value="test">
+                    <label class="form-check-label" for="test">
+                        Test (Delete this, get_test_weapon on get_weapon_data.py, elif mode == "test" and if mode == "test" on bfv.py later)
                     </label>
                 </div>
                 <div class="modal-footer">
