@@ -120,7 +120,6 @@ def check_result():
             session["consecutive_wins"] = 0
             session["lives"] += 1
             session["hints"] += 1
-            
     else:
         session["lives"] -= 1
 
