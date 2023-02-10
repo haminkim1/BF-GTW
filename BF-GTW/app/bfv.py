@@ -106,8 +106,9 @@ def list_bfv_weapons():
 @login_required
 def check_result():
     # Assigning the name of weaon from the input box on the client. 
+    index_no = session["current_weapon"]
     weaponNameInput = request.form.get("weaponNameInput").casefold()
-    correctWeaponName = session["weapons"][0]["weapon_name"].casefold()
+    correctWeaponName = session["weapons"][index_no]["weapon_name"].casefold()
 
     if weaponNameInput == correctWeaponName:
         session["current_score"] += 1
@@ -142,18 +143,22 @@ def check_result():
 @app.route("/bfv/hint", methods=["POST"])
 @login_required
 def hint():
+    data = {}
+    index_no = session["current_weapon"]
+    # Do nothing if user clicks hints button but there are no hints left. 
     if session["hints"] == 0:
-        return render_template("public/games/bfv.html")
+        data["hints"] = session["hints"]
+        return jsonify(data)
     else:
         session["hints"] -= 1
-    # If hint button clicked, make post request to bfv/hint
-    # if session["hints"] == 0, do nothing
-    # session["hints"] -= 1
-    # Reveal weapon type and first letter of the weapon name
-    # Prevent user from deleting first letter of the weapon name after clicking hint. 
-    # Disable hint button either by disabling or prevent subtracting number of hints available. 
-    # Display weapon type in between input box and weapon image. 
-    # Need a placeholder div in that position so the page doesn't shift down when the weapon type pops up
+        # Getting first letter of weapon name. 
+        first_letter = session["weapons"][index_no]["weapon_name"][0]
+        data = {
+            "hints": session["hints"],
+            "weapon_type": session["weapons"][index_no]["weapon_type"],
+            "first_letter": first_letter
+        }
+        return jsonify(data)
 
 
-        return render_template("public/games/bfv.html")
+

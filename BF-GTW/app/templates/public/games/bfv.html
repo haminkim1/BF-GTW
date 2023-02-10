@@ -21,10 +21,8 @@
             <button class="btn btn-secondary btn-sm border-dark">Quit</button>
         </div>
         <div class="flex-column pt-3">
-                <button class="btn btn-secondary btn-sm border-dark mb-2 hints" value="{{ hints }}">Hints: {{ data["hints"] }}</button>
-                <input type="hidden" name="hints" value="{{ hints }}" id="hints">
+                <button type="submit" id="hintBtn" class="btn btn-secondary btn-sm border-dark mb-2 hints" value="{{ hints }}">Hints: {{ data["hints"] }}</button>
                 <span class="white lives" id="text-align-center" value="{{ lives }}">Lives: {{ data["lives"] }}</span>
-                <input type="hidden" name="lives" value="{{ lives }}" id="lives">
         </div>
         <div>
             <img src="/static/images/bfvImages/{{ data['weapon']['encrypted_image_name'] }}" id="weaponImage">
@@ -40,10 +38,8 @@
             <button class="btn btn-secondary btn-sm border-dark">Quit</button>
         </div>
         <div class="flex-column pt-3">
-                <button class="btn btn-secondary btn-sm border-dark mb-2" value="{{ hints }}">Hints:</button>
-                <input type="hidden" name="hints" value="{{ hints }}" id="hints">
+                <button type="submit" id="hintBtn" class="btn btn-secondary btn-sm border-dark mb-2" value="{{ hints }}">Hints:</button>
                 <span class="white" id="text-align-center" value="{{ lives }}">Lives:</span>
-                <input type="hidden" name="lives" value="{{ lives }}" id="lives">
         </div>
         <div>
             <img src="/static/images/bfvImages/{{ weapon['encrypted_image_name'] }}" id="weaponImage">

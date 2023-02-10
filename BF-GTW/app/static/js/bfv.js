@@ -37,8 +37,9 @@ window.addEventListener("load", function () {
         sendNameToInputBoxIfClicked()
     });
 
-    modalFunctionality()
-    submitWeaponName()
+    modalFunctionality();
+    submitWeaponName();
+    activateHintFeature();
 
 
     function sendNameToInputBoxIfClicked() {
@@ -76,7 +77,7 @@ window.addEventListener("load", function () {
                 const response = await fetch("/bfv/check_results", {
                     method: "POST",
                     body: formData
-                    });
+                });
                 const data = await response.json();
                 console.log(data)
 
@@ -114,11 +115,35 @@ window.addEventListener("load", function () {
         document.querySelector(".current-weapon").innerHTML = `Number of weapons left: ${data.current_weapon}/${data.total_weapons}`;
         document.querySelector(".lives").innerHTML = `Lives: ${data.lives}`;
         document.querySelector(".hints").innerHTML = `Hints: ${data.hints}`;
+        document.querySelector("#hint_display").innerHTML = ``;
+        document.querySelector("#hintBtn").disabled = false;
     }
 
     
-    function activateHintFeature() {
-        // TODO
+    async function activateHintFeature() {
+        const hintBtn = document.getElementById("hintBtn");
+        hintBtn.addEventListener("click", async function(event) {
+            event.preventDefault();
+            try {
+                const response = await fetch("/bfv/hint", {
+                    method: "POST"
+                })
+                const data = await response.json();
+                hintBtn.innerHTML = `Hints: ${data.hints}`;
+
+                // data.weapon_type and first_letter will only be undefined if user attempt to click hint button when there are 0 hints left. 
+                if (typeof data.weapon_type !== 'undefined') {
+                    document.getElementById("hint_display").innerHTML = `<span id="hint_weapon_name">${data.weapon_type}.</span>`;
+                    document.getElementById("hint_display").innerHTML += `
+                    <span id="">First letter starts with ${data.first_letter}</span>`;
+                }
+
+                // Prevents user from clicking hint button more than once in the same round. 
+                hintBtn.disabled = true;
+            } catch (error) {
+                console.error(error);
+            }
+        })
     }
 })
 
