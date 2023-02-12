@@ -142,7 +142,7 @@ def check_result():
     "current_score": session["current_score"],
     "total_weapons": session["total_weapons"]
     }
-
+    
     return jsonify(data)
 
 
@@ -166,5 +166,16 @@ def hint():
 
 
 # Game over/winner feature
-# Create a test function that gets a small amount of weapon for quick tests
-# of game over/winner features
+# Redirect user to game_over.html if they either win or lose the game
+# The page should have:
+    # Message statement for winner/loser
+    # Show what mode was played
+        # Might need to create a session["mode"] if it's easier to code with it
+    # Show which BF game was played 
+        # Might need to create a session["BF_game"] or a similar name
+    # Show score over total weapon for either win/lose case. 
+        # User session["current_score"] and session["total_weapons"]
+    # Play again button
+        # redirect to games.html
+    # Quit button
+        # redirect to index.html

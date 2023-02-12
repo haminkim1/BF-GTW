@@ -75,14 +75,14 @@ window.addEventListener("load", function () {
                 const data = await response.json();
                 console.log(data)
 
-                // If user won the game, redirect to gameover page
-                if (data.current_weapon == data.total_weapons) {
-                    window.location.replace("/");
-                }
-
-                // If user has 0 lives, redirect to gameover page
-                if (data.lives == 0) {
-                    window.location.replace("/");
+                // If user won or lost the game, redirect to gameover page
+                if (data.current_weapon == data.total_weapons || data.lives == 0) {
+                    console.log("works");
+                    window.location.replace("/game_over");
+                    // const gameOverResponse = await fetch("/game_over");
+                    // const gameOverHTML = await gameOverResponse.text();
+                    // document.body.innerHTML = gameOverHTML;
+                    return;
                 }
 
                 updatePageAfterSubmission(data)
