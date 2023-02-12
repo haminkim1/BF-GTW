@@ -3,6 +3,7 @@ from flask import jsonify, redirect, render_template, request, session
 from app import app
 from modules.apology import apology
 from modules.auth_modules import login_required
+from modules.games_modules import data_for_next_round, game_over, initialize_games_data, reset_games_sessions, return_hint_data
 from modules.get_weapon_data import get_all_weapons, get_easy_mode_weapons, get_first_easy_weapon, get_hard_mode_weapons, get_medium_mode_weapons, get_test_weapon
 
 import random 
@@ -40,14 +41,8 @@ def bfv_route():
             session["play_state"] = True
             play_state = session["play_state"]
 
-        data = {
-            "weapon": weapons[0],
-            "lives": 3,
-            "hints": 3,
-            "current_weapon": 0,
-            "current_score": 0,
-            "total_weapons": len(weapons)
-        }
+
+        data = initialize_games_data(weapons)
 
         # If post requested, restart the game by setting back to default for the sessions:
             # weapons 
@@ -56,13 +51,9 @@ def bfv_route():
             # total weapons according to the difficulty mode the user selected
             # current weapons back to 0
             # current score back to 0
+            # consecutive wins back to 0
 
-        session["lives"] = data["lives"]
-        session["hints"] = data["hints"]
-        session["current_weapon"] = data["current_weapon"]
-        session["current_score"] = data["current_score"]
-        session["total_weapons"] = data["total_weapons"]
-        session["consecutive_wins"] = 0
+        reset_games_sessions(data, mode, "bfv")
 
         print(session["weapons"][0])
         
@@ -123,26 +114,23 @@ def check_result():
     else:
         session["lives"] -= 1
 
-    # Setting index number to the current weapon number.
-    # This will send the next element in session["weapons"] and proceed with the next guessing round.
+
     session["current_weapon"] += 1
 
-    # If total weapon and current weapon are the same, user has won the game
-    # Else, keep going
+    # If current weapon is less than total weapons, game is not over
+    # Else, all the weapon has been cycled through and user has won the game
     if session["current_weapon"] < session["total_weapons"]:
+        # Setting index number to the current weapon number.
+        # This will send the next element in session["weapons"] and proceed with the next guessing round.
         index_no = session["current_weapon"]
 
     print(session["weapons"][index_no])
 
-    data = {
-    "weapon": session["weapons"][index_no]["encrypted_image_name"],
-    "lives": session["lives"],
-    "hints": session["hints"],
-    "current_weapon": session["current_weapon"],
-    "current_score": session["current_score"],
-    "total_weapons": session["total_weapons"]
-    }
+    data = data_for_next_round(index_no)
     
+    # If game over, set play state to false. 
+    if data["current_weapon"] == data["total_weapons"] or data["lives"] == 0:
+        game_over()
     return jsonify(data)
 
 
@@ -153,29 +141,9 @@ def hint():
     
     if session["hints"] > 0:
         session["hints"] -= 1
-        # Getting first letter of weapon name. 
-        index_no = session["current_weapon"]
-        first_letter = session["weapons"][index_no]["weapon_name"][0]
+         
+        data = return_hint_data()
 
-        data = {
-            "hints": session["hints"],
-            "weapon_type": session["weapons"][index_no]["weapon_type"],
-            "first_letter": first_letter
-        }
     return jsonify(data)
 
 
-# Game over/winner feature
-# Redirect user to game_over.html if they either win or lose the game
-# The page should have:
-    # Message statement for winner/loser
-    # Show what mode was played
-        # Might need to create a session["mode"] if it's easier to code with it
-    # Show which BF game was played 
-        # Might need to create a session["BF_game"] or a similar name
-    # Show score over total weapon for either win/lose case. 
-        # User session["current_score"] and session["total_weapons"]
-    # Play again button
-        # redirect to games.html
-    # Quit button
-        # redirect to index.html

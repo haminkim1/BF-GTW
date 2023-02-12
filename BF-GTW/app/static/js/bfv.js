@@ -79,9 +79,6 @@ window.addEventListener("load", function () {
                 if (data.current_weapon == data.total_weapons || data.lives == 0) {
                     console.log("works");
                     window.location.replace("/game_over");
-                    // const gameOverResponse = await fetch("/game_over");
-                    // const gameOverHTML = await gameOverResponse.text();
-                    // document.body.innerHTML = gameOverHTML;
                     return;
                 }
 

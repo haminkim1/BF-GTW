@@ -5,4 +5,32 @@
 {% endblock %}
 
 {% block main %}
+<!--
+Game over/winner feature
+Redirect user to game_over.html if they either win or lose the game
+The page should have:
+    Message statement for winner/loser
+    Show what mode was played
+        Might need to create a session["mode"] if it's easier to code with it
+    Show which BF game was played 
+        Might need to create a session["BF_game"] or a similar name
+    Show score over total weapon for either win/lose case. 
+        User session["current_score"] and session["total_weapons"]
+    Play again button
+        redirect to games.html
+    Quit button
+        redirect to index.html -->
+
+    {% if data["current_score"] == data["total_weapons"] %}
+        <h1>WINNER</h1>
+    {% else %}
+        <h1>LOSER</h1>
+    {% endif %} 
+    <p>Username: {{ data["username"] }}</p>
+    <p>Mode: {{ data["mode"] }}</p>
+    <p>Game: {{ data["BF_game"] }}</p>
+    <p>Score: {{ data["current_score"] }}/{{ data["total_weapons"] }}</p>
+    <button onclick="window.location.href='/games'">Play Again</button>
+    <button onclick="window.location.href='/'">Quit</button>
+
 {% endblock %}
