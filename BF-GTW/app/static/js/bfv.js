@@ -14,6 +14,12 @@ window.addEventListener("load", function () {
 
     const autoCompleteList = document.querySelector("#autoCompleteList");
     const input = document.querySelector('#bfvInput');
+
+    const modalCloseBtn = document.querySelector("#modal_close_btn");
+    modalCloseBtn.addEventListener("click", function() {
+        closeModal();
+    });
+
     // Fetching weapon names via API as user types the input box and display the names 
     // matching with the text typed in the input box as a list below the input box 
     // e.g. typing 12 will show 12g automatic as a list. 
@@ -31,7 +37,6 @@ window.addEventListener("load", function () {
         sendNameToInputBoxIfClicked()
     });
 
-    modalFunctionality();
     submitWeaponName();
     activateHintFeature();
 
@@ -49,17 +54,13 @@ window.addEventListener("load", function () {
     }
 
 
-    function modalFunctionality() {   
-        document.getElementById("submit-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            startBtn = document.querySelector("#start-btn");
-            startBtn.style.visibility = "hidden";
-            startBtn.disabled = true;
-
-
-            document.getElementById("myModal").style.display = "none";
-        });
-    }
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+        let backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+          backdrop.parentNode.removeChild(backdrop);
+        }
+      }
 
 
     // Submits name from input textbox and changes to next weapon image. 
@@ -112,6 +113,7 @@ window.addEventListener("load", function () {
         weaponImage.src = `static/images/bfvImages/${data.weapon}`;
 
         document.querySelector('#bfvInput').value = "";
+        document.querySelector("#autoCompleteList").innerHTML = "";
         document.querySelector(".score").innerHTML = `Score: ${data.current_score}`;
         document.querySelector(".current-weapon").innerHTML = `Current weapon: ${data.current_weapon}/${data.total_weapons}`;
         document.querySelector(".lives").innerHTML = `Lives: ${data.lives}`;
