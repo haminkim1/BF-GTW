@@ -12,4 +12,4 @@ Session(app)
 
 init_db()
 
-from app import auth, home, games, bf1, bf4, bf2042, bfv
+from app import auth, bf1, bf4, bf2042, bfv, games, home, profile

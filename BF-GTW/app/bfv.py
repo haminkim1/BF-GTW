@@ -1,4 +1,4 @@
-from flask import jsonify, redirect, render_template, request, session
+from flask import jsonify, render_template, request, session
 
 from app import app
 from modules.apology import apology
