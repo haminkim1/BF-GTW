@@ -6,72 +6,87 @@
 
 {% block main %}
 <!-- Copying template from account.handlebars from COMPSCI719 final project -->
-<h1>My Details</h1>  
-<div>
-  <table id="profile-table">
-    <tr>
-      <th>Email:</th>
-      <td>Enter Email here</td>
-    </tr>
-    <tr>
-      <th>Username:</th>
-      <td>Enter username here</td>
-    </tr>
-    <tr>
-      <th>Name:</th>
-      <td>Enter name here</td>
-    </tr>
-  </table>
-</div>
-<div>
-  <a href="/"><button type="button">Cancel</button></a>
-
-  <form action method>
-    <button>Edit Details</button>
-  </form>
+<div class="white">
+  <h1>My Details</h1>  
+  <div>
+    <table id="profile-table">
+      <tr>
+        <th>Email:</th>
+        <td>{{ usersData["email_address"] }}</td>
+      </tr>
+      <tr>
+        <th>Username:</th>
+        <td>{{ usersData["username"] }}</td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <a href="/"><button type="button">Cancel</button></a>
   
-  <form action method>
-    <button>Change Password</button>
-  </form>
-  
-  <button id="delete-account-button">Delete Account</button>
-</div>
+    <form action method>
+      <button>Edit Details</button>
+    </form>
+    
+    <form action method>
+      <button>Change Password</button>
+    </form>
+    
+    <button id="delete-account-button">Delete Account</button>
+  </div>
+    
+  <div>
+    <h1>High score</h1>
+    <table id="high-score-table">
+      <tr>
+        <th></th>
+        <th>Easy</th>
+        <th>Medium</th>
+        <th>Hard</th>
+      </tr>
+    {% for highScore in highScores %}
+      <tr>
+        <th>BF4</th>
+      </tr>
+    {% endfor %}
+      <tr>
+        <th>BF1</th>
+      </tr>
+      <tr>
+        <th>BFV</th>
+      </tr>
+      <tr>
+        <th>BF2042</th>
+      </tr>
+      if highScore["BF_game"] == 'bf4'
+      <tr>
+        <th>BF4</th>
+        if highScore["mode"] == 'easy'
+          <td>highScore["highest_score"]</td>
+      </tr>
+    </table>
+  </div>
 
-<div>
-  <h1>Games History</h1>
-  <table id="games-history-table">
-    <tr>
-      <th>Date</th>
-      <th>Mode</th>
-      <th>BF Game</th>
-      <th>Score</th>
-      <th>Total Weapon</th>
-    </tr>
-  </table>
-</div>
-
-<div>
-  <h1>High score</h1>
-  <table id="high-score-table">
-    <tr>
-      <th></th>
-      <th>Easy</th>
-      <th>Medium</th>
-      <th>Hard</th>
-    </tr>
-    <tr>
-      <th>BF4</th>
-    </tr>
-    <tr>
-      <th>BF1</th>
-    </tr>
-    <tr>
-      <th>BFV</th>
-    </tr>
-    <tr>
-      <th>BF2042</th>
-    </tr>
-  </table>
+  <div>
+    <h1>Games History</h1>
+    <table id="games-history-table">
+      <tr>
+        <th>Date</th>
+        <th>Mode</th>
+        <th>BF Game</th>
+        <th>Score</th>
+        <th>Total Weapon</th>
+      </tr>
+    {% for game in games %}
+      <tr>
+        <td>{{ game["game_date"] }}</td>
+        <td>{{ game["mode"] }}</td>
+        <td>{{ game["BF_game"] }}</td>
+        <td>{{ game["score"] }}</td>
+        <td>{{ game["total_weapons"] }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+  </div>
 </div>
 
 {% endblock %}

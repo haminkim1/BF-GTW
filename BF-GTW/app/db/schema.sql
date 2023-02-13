@@ -17,4 +17,16 @@ CREATE TABLE IF NOT EXISTS bfv_weapons (
     weapon_type text NOT NULL,
     weapon_image text NOT NULL,
     encrypted_image_name text NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS game_log (
+    game_id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+    user_id integer NOT NULL,
+    mode varchar(10),
+    BF_game varchar(10),
+    score integer,
+    total_weapons integer,
+    game_date DATETIME DEFAULT (DATETIME('now')),
+    FOREIGN KEY (user_id) REFERENCES users (id)
 )

@@ -3,7 +3,7 @@ from flask import jsonify, render_template, request, session
 from app import app
 from modules.apology import apology
 from modules.auth_modules import login_required
-from modules.games_modules import data_for_next_round, game_over, initialize_games_data, reset_games_sessions, return_hint_data
+from modules.games_modules import data_for_next_round, game_over, initialize_games_data, reset_games_sessions, return_hint_data, save_game_data
 from modules.get_weapon_data import get_all_weapons, get_easy_mode_weapons, get_first_easy_weapon, get_hard_mode_weapons, get_medium_mode_weapons, get_test_weapon
 
 import random 
@@ -130,6 +130,7 @@ def check_result():
     
     # If game over, set play state to false. 
     if data["current_weapon"] == data["total_weapons"] or data["lives"] == 0:
+        save_game_data()
         game_over()
     return jsonify(data)
 
@@ -141,7 +142,6 @@ def hint():
     
     if session["hints"] > 0:
         session["hints"] -= 1
-         
         data = return_hint_data()
 
     return jsonify(data)

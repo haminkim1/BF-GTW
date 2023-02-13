@@ -89,3 +89,7 @@ def return_hint_data():
         "first_letter": first_letter
     }
     return data
+
+
+def save_game_data():
+    db.execute("INSERT INTO game_log (user_id, mode, BF_game, score, total_weapons) VALUES (?, ?, ?, ?, ?)", session["user_id"], session["mode"], session["BF_game"], session["current_score"], session["total_weapons"])
