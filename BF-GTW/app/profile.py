@@ -93,6 +93,20 @@ def view_profile():
     print(highScores)
     print(bfvHighScores)
 
+    # get list of BF_games from table
+    # get list of modes from table
+    # Use a loop for each combination of BF_games and modes
+    # Create empty highScores list
+    # Starting at BF4, BF1, BFV, BF2042:
+        # if BF_games & modes have score, leave as is
+        # else somehow put an empty data 
+        # Append to highScores list
+        # Repeat for other combinations
+    # Send highScores list to client
+    BF_games = ["bf4", "bf1", "bfv", "bf2042"]
+    modes = ["easy", "medium", "hard"]
+    
+
 
     return render_template("admin/profile.html", usersData=usersData, games=games, highScores=highScores)
 
