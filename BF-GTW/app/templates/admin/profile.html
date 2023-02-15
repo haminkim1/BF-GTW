@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 
+{% block custom_scripts %}
+    <script src="/static/js/profile.js"></script>
+{% endblock %}
+
 {% block title %}
   Profile
 {% endblock %}
@@ -43,11 +47,14 @@
         <th>Medium</th>
         <th>Hard</th>
       </tr>
-    {% for highScore in highScores %}
+
       <tr>
         <th>BF4</th>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
-    {% endfor %}
+
       <tr>
         <th>BF1</th>
       </tr>
@@ -56,12 +63,6 @@
       </tr>
       <tr>
         <th>BF2042</th>
-      </tr>
-      if highScore["BF_game"] == 'bf4'
-      <tr>
-        <th>BF4</th>
-        if highScore["mode"] == 'easy'
-          <td>highScore["highest_score"]</td>
       </tr>
     </table>
   </div>
