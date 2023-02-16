@@ -7,37 +7,44 @@ window.addEventListener("load", function () {
             const response = await fetch("/profile/highscore");
             let data = await response.json();
             const highScores = data.highScores;
-            const BFGame = data.BF_games;
             const modes = data.modes;
-            console.log(highScores)
-            console.log(BFGame);
-            console.log(modes);
-            populateHighScoreTable(highScores);
+
+            populateHighScoreTable(highScores, modes);
         } catch (error) {
             console.error(error);
         }
     }
 
 
-    function populateHighScoreTable (data) {
+    function populateHighScoreTable (data, modes) {
         let table = document.getElementById("high-score-table");
+        // Adding difficulty mode row headings. 
         table.innerHTML = `
-        <tr>
+        <tr id="high-score-table-columns">
             <th></th>
-            <th>Easy</th>
-            <th>Medium</th>
-            <th>Hard</th>
         </th>
         `
+        columnHeadings = document.getElementById("high-score-table-columns");
+        for (let i in modes) {
+            columnHeadings.innerHTML += `
+            <th>${modes[i].first_letter_cap}</th>
+            `
+        }
+
+        // Adding row of user's highscore in each difficulty mode for each BF game. 
         for (let i in data) {
             table.innerHTML += `
-            <tr>
-                <th id="BF-game-heading">${data[i].BF_game}</th>
-                <td id="${data[i].BF_game}-easy"></td>
-                <td id="${data[i].BF_game}-medium"></td>
-                <td id="${data[i].BF_game}-hard"></td>
+            <tr id="${data[i].BF_game}-rows">
+                <th id="${data[i].BF_game}-heading">${data[i].BF_game}</th>
             </tr>
             `
+            rows = document.getElementById(`${data[i].BF_game}-rows`);
+            for (let j in modes) {
+                rows.innerHTML += `
+                <td id="${data[i].BF_game}-${modes[j].mode}"></td>
+                `
+            }
+
             if (data[i].modes.easy !== null) {
                 document.getElementById(`${data[i].BF_game}-easy`).innerText = `${data[i].modes.easy}`;
             }

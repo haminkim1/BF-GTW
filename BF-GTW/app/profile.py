@@ -49,4 +49,4 @@ def load_highscore():
 
         highScores.append(scores)   
 
-    return jsonify(highScores=highScores, BF_games=BF_games, modes=modes)
+    return jsonify(highScores=highScores, modes=modes)
