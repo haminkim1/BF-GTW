@@ -2,7 +2,6 @@ from flask import jsonify, render_template, session
 
 from app import app
 from app.db.db_config import db
-from modules.apology import apology
 from modules.auth_modules import login_required
 
 
@@ -25,15 +24,7 @@ def load_highscore():
     modes = db.execute("SELECT * FROM modes")
     highScores = []
 
-    # highScore data structure = {
-    #     "BF_game": "BF_game (eg BF4)",
-    #     "mode": {
-    #         "easy": highest_score,
-    #         "medium": highest_score,
-    #         "hard": highest_score
-    #         }
-        
-    # }
+
     for BF_game in BF_games:
         scores = {
             "BF_game": BF_game["short_name"],
@@ -47,6 +38,16 @@ def load_highscore():
             difficulty = mode["mode"]
             scores["modes"][difficulty] = score[0]["highest_score"]
 
-        highScores.append(scores)   
+        highScores.append(scores)  
+        # highScore data structure:
+        # {
+        #     "BF_game": "BF_game (eg BF4)",
+        #     "mode": {
+        #         "easy": highest_score,
+        #         "medium": highest_score,
+        #         "hard": highest_score
+        #         }
+            
+        # }
 
     return jsonify(highScores=highScores, modes=modes)

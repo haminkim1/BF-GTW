@@ -5,10 +5,9 @@ window.addEventListener("load", function () {
     async function getHighScoreData() {
         try {
             const response = await fetch("/profile/highscore");
-            let data = await response.json();
+            const data = await response.json();
             const highScores = data.highScores;
             const modes = data.modes;
-
             populateHighScoreTable(highScores, modes);
         } catch (error) {
             console.error(error);
@@ -26,8 +25,9 @@ window.addEventListener("load", function () {
         `
         columnHeadings = document.getElementById("high-score-table-columns");
         for (let i in modes) {
+            let difficulty = modes[i].first_letter_cap
             columnHeadings.innerHTML += `
-            <th>${modes[i].first_letter_cap}</th>
+            <th>${difficulty}</th>
             `
         }
 
@@ -40,20 +40,14 @@ window.addEventListener("load", function () {
             `
             rows = document.getElementById(`${data[i].BF_game}-rows`);
             for (let j in modes) {
+                let difficulty = modes[j].mode
                 rows.innerHTML += `
-                <td id="${data[i].BF_game}-${modes[j].mode}"></td>
+                <td id="${data[i].BF_game}-${difficulty}"></td>
                 `
-            }
-
-            if (data[i].modes.easy !== null) {
-                document.getElementById(`${data[i].BF_game}-easy`).innerText = `${data[i].modes.easy}`;
-            }
-            if (data[i].modes.medium !== null) {
-                document.getElementById(`${data[i].BF_game}-medium`).innerText = `${data[i].modes.medium}`;
-            }
-            if (data[i].modes.hard !== null) {
-                document.getElementById(`${data[i].BF_game}-hard`).innerText = `${data[i].modes.hard}`;
-            }
+                if (data[i].modes[difficulty] !== null) {
+                    document.getElementById(`${data[i].BF_game}-${difficulty}`).innerText = `${data[i].modes[difficulty]}`;
+                }
+            }            
         };
     }
 })
