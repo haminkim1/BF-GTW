@@ -2,17 +2,22 @@ window.addEventListener("load", function () {
     getHighScoreData()
 
 
-
     async function getHighScoreData() {
         try {
             const response = await fetch("/profile/highscore");
-            let highScores = await response.json();
-
+            let data = await response.json();
+            const highScores = data.highScores;
+            const BFGame = data.BF_games;
+            const modes = data.modes;
+            console.log(highScores)
+            console.log(BFGame);
+            console.log(modes);
             populateHighScoreTable(highScores);
         } catch (error) {
             console.error(error);
         }
     }
+
 
     function populateHighScoreTable (data) {
         let table = document.getElementById("high-score-table");

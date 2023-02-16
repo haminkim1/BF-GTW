@@ -29,4 +29,44 @@ CREATE TABLE IF NOT EXISTS game_log (
     total_weapons integer,
     game_date DATETIME DEFAULT (DATETIME('now')),
     FOREIGN KEY (user_id) REFERENCES users (id)
-)
+);
+
+CREATE TABLE IF NOT EXISTS BF_games (
+    BF_id integer NOT NULL PRIMARY KEY,
+    full_name varchar(32),
+    short_name varchar(10)
+);
+
+CREATE TABLE IF NOT EXISTS modes (
+    mode_id integer NOT NULL PRIMARY KEY,
+    mode varchar(32),
+    first_letter_cap varchar(32)
+);
+
+INSERT INTO BF_games (BF_id, full_name, short_name) 
+SELECT 1, "Battlefield 4", "bf4"
+WHERE NOT EXISTS (SELECT 1 FROM BF_games WHERE BF_id = 1);
+
+INSERT INTO BF_games (BF_id, full_name, short_name) 
+SELECT 2, "Battlefield 1", "bf1"
+WHERE NOT EXISTS (SELECT 1 FROM BF_games WHERE BF_id = 2);
+
+INSERT INTO BF_games (BF_id, full_name, short_name) 
+SELECT 3, "Battlefield V", "bfv"
+WHERE NOT EXISTS (SELECT 1 FROM BF_games WHERE BF_id = 3);
+
+INSERT INTO BF_games (BF_id, full_name, short_name) 
+SELECT 4, "Battlefield 2042", "bf2042"
+WHERE NOT EXISTS (SELECT 1 FROM BF_games WHERE BF_id = 4);
+
+INSERT INTO modes (mode_id, mode, first_letter_cap) 
+SELECT 1, "easy", "Easy"
+WHERE NOT EXISTS (SELECT 1 FROM modes WHERE mode_id = 1);
+
+INSERT INTO modes (mode_id, mode, first_letter_cap) 
+SELECT 2, "medium", "Medium"
+WHERE NOT EXISTS (SELECT 1 FROM modes WHERE mode_id = 2);
+
+INSERT INTO modes (mode_id, mode, first_letter_cap) 
+SELECT 3, "hard", "Hard"
+WHERE NOT EXISTS (SELECT 1 FROM modes WHERE mode_id = 3)

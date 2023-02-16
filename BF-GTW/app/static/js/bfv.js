@@ -74,7 +74,6 @@ window.addEventListener("load", function () {
                     body: formData
                 });
                 const data = await response.json();
-                console.log(data)
 
                 // If user won or lost the game, redirect to gameover page
                 if (data.current_weapon == data.total_weapons || data.lives == 0) {

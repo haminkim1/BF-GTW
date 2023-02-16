@@ -21,8 +21,8 @@ def view_profile():
 @app.route("/profile/highscore")
 @login_required
 def load_highscore():
-    BF_games = ["bf4", "bf1", "bfv", "bf2042"]
-    modes = ["easy", "medium", "hard"]
+    BF_games = db.execute("SELECT * FROM BF_games") 
+    modes = db.execute("SELECT * FROM modes")
     highScores = []
 
     # highScore data structure = {
@@ -36,17 +36,17 @@ def load_highscore():
     # }
     for BF_game in BF_games:
         scores = {
-            "BF_game": BF_game,
+            "BF_game": BF_game["short_name"],
             "modes":{}
         }
         for mode in modes:
             score = db.execute("""SELECT MAX(score) AS highest_score 
                 FROM game_log 
                 WHERE user_id = ? AND BF_game = ? AND mode = ?"""
-                , session["user_id"], BF_game, mode)  
-            
-            scores["modes"][mode] = score[0]["highest_score"]
+                , session["user_id"], BF_game["short_name"], mode["mode"])  
+            difficulty = mode["mode"]
+            scores["modes"][difficulty] = score[0]["highest_score"]
 
         highScores.append(scores)   
 
-    return jsonify(highScores)
+    return jsonify(highScores=highScores, BF_games=BF_games, modes=modes)
