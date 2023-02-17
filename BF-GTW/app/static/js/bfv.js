@@ -23,22 +23,36 @@ window.addEventListener("load", function () {
     // Fetching weapon names via API as user types the input box and display the names 
     // matching with the text typed in the input box as a list below the input box 
     // e.g. typing 12 will show 12g automatic as a list. 
-    input.addEventListener('input', async function() {
-        autoCompleteList.innerHTML = "";
-        let response = await fetch('/bfv/name?name=' + input.value);
-        let weapons = await response.json();
-        let html = '';
-        for (let i in weapons) {
-            let name = weapons[i];
-            html += `<span class="clickableName white">` + name + `</span>`;
-        }
-        autoCompleteList.innerHTML += html;
-        
-        sendNameToInputBoxIfClicked()
-    });
+    displayWeaponNames();
 
     submitWeaponName();
     activateHintFeature();
+
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+        let backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+          backdrop.parentNode.removeChild(backdrop);
+        }
+    }
+
+
+    function displayWeaponNames() {
+        input.addEventListener('input', async function() {
+            autoCompleteList.innerHTML = "";
+            let response = await fetch('/bfv/name?name=' + input.value);
+            let weapons = await response.json();
+            let html = '';
+            for (let i in weapons) {
+                let name = weapons[i];
+                html += `<span class="clickableName white">` + name + `</span>`;
+            }
+            autoCompleteList.innerHTML += html;
+            
+            sendNameToInputBoxIfClicked()
+        });
+    }
 
 
     function sendNameToInputBoxIfClicked() {
@@ -52,15 +66,6 @@ window.addEventListener("load", function () {
             })
         }
     }
-
-
-    function closeModal() {
-        document.getElementById('myModal').style.display = 'none';
-        let backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-          backdrop.parentNode.removeChild(backdrop);
-        }
-      }
 
 
     // Submits name from input textbox and changes to next weapon image. 

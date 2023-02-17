@@ -46,22 +46,28 @@
         </div>
         {% endif %}
 
-        <div id="hint_display" style="height:100px">
+        <div id="hint_display" style="height:40px">
             <!-- When hint button clicked, display weapon type of the image. -->
         </div>
 
         <form>
             <div class="flex-row">
-                <input id="bfvInput" class="form-control form-control-md" name="weaponNameInput" placeholder="Type Weapon Name">
+                <div>
+                    <input id="bfvInput" class="form-control form-control-md" name="weaponNameInput" placeholder="Type Weapon Name">
+                    <div id="autoCompleteList" class="flex-column"></div>
+                </div>
                 {% if play_state == True %}
+                <div id="submit-btn-container">
                     <button type="submit" id="submitWeaponNameBtn" class="btn btn-secondary btn-sm border-dark" autofocus>Submit</button>
+                </div>
                 {% else %}
+                <div>
                     <button type="submit" id="submitWeaponNameBtn" class="btn btn-secondary btn-sm border-dark" hidden disabled>Submit</button>
+                </div>
                 {% endif %}
             </div>
         </form>
-        <div id="autoCompleteList" class="flex-column">
-        </div>
+
     </div>
 
 

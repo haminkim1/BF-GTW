@@ -144,5 +144,8 @@ footer {
     text-align: center;
 }
 
+#submit-btn-container {
+    height: 50px;
+}
 
 /* bfv.html styling  */
