@@ -12,7 +12,7 @@ window.addEventListener("load", function () {
     changeToShadowClass.className = '';
     changeToShadowClass.classList.add("shadow")
 
-    const autoCompleteList = document.querySelector("#autoCompleteList");
+    const autoCompleteList = document.querySelector(".auto-complete-list");
     const input = document.querySelector('#bfvInput');
 
     const modalCloseBtn = document.querySelector("#modal_close_btn");
@@ -41,14 +41,17 @@ window.addEventListener("load", function () {
     function displayWeaponNames() {
         input.addEventListener('input', async function() {
             autoCompleteList.innerHTML = "";
+
             let response = await fetch('/bfv/name?name=' + input.value);
             let weapons = await response.json();
-            let html = '';
             for (let i in weapons) {
                 let name = weapons[i];
-                html += `<span class="clickableName white">` + name + `</span>`;
+                autoCompleteList.innerHTML += `
+                <div class="weapon-names">
+                    <span class="clickableName green">${name}</span>
+                </div>
+                `;
             }
-            autoCompleteList.innerHTML += html;
             
             sendNameToInputBoxIfClicked()
         });
