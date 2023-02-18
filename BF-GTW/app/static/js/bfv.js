@@ -125,7 +125,7 @@ window.addEventListener("load", function () {
         document.querySelector(".current-weapon").innerHTML = `Current weapon: ${data.current_weapon}/${data.total_weapons}`;
         document.querySelector(".lives").innerHTML = `Lives: ${data.lives}`;
         document.querySelector(".hints").innerHTML = `Hints: ${data.hints}`;
-        document.querySelector("#hint_display").innerHTML = ``;
+        document.querySelector("#notification-display").innerHTML = ``;
         document.querySelector("#hintBtn").disabled = false;
     }
 
@@ -142,8 +142,8 @@ window.addEventListener("load", function () {
                 // data.hints, weapon_type and first_letter will only be undefined if user attempt to click hint button when there are 0 hints left. 
                 if (Object.keys(data).length !== 0) {
                     hintBtn.innerHTML = `Hints: ${data.hints}`;
-                    document.getElementById("hint_display").innerHTML = `<span id="hint_weapon_name">${data.weapon_type}.</span>`;
-                    document.getElementById("hint_display").innerHTML += `
+                    document.getElementById("notification-display").innerHTML = `<span id="hint_weapon_name">${data.weapon_type}.</span>`;
+                    document.getElementById("notification-display").innerHTML += `
                     <span id="">First letter starts with ${data.first_letter}</span>`;
                 }
                 
