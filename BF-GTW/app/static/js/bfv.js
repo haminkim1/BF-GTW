@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
     const background = document.querySelector(".background");
     background.classList.remove("background");
     
-    const parentDiv = document.querySelector(".parentDiv");
+    const parentDiv = document.querySelector("body");
     parentDiv.classList.add("bfv-main")
 
     const changeToShadowClass = document.querySelector(".changeToShadowClass");
