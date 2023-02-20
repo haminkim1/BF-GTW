@@ -104,6 +104,7 @@ def check_result():
     correctWeaponName = session["weapons"][index_no]["weapon_name"].casefold()
 
     if weaponNameInput == correctWeaponName:
+        round = "win"
         session["current_score"] += 1
         session["consecutive_wins"] += 1
         if session["consecutive_wins"] == 3: 
@@ -112,9 +113,10 @@ def check_result():
             session["lives"] += 1
             session["hints"] += 1
     else:
+        round = "lose"
         session["lives"] -= 1
 
-
+    previousWeaponName = session["weapons"][index_no]["weapon_name"]
     session["current_weapon"] += 1
 
     # If current weapon is less than total weapons, game is not over
@@ -126,7 +128,7 @@ def check_result():
 
     print(session["weapons"][index_no])
 
-    data = data_for_next_round(index_no)
+    data = data_for_next_round(index_no, round, previousWeaponName)
     
     # If game over, set play state to false. 
     if data["current_weapon"] == data["total_weapons"] or data["lives"] == 0:

@@ -24,7 +24,6 @@ window.addEventListener("load", function () {
     // matching with the text typed in the input box as a list below the input box 
     // e.g. typing 12 will show 12g automatic as a list. 
     displayWeaponNames();
-
     submitWeaponName();
     activateHintFeature();
 
@@ -85,12 +84,11 @@ window.addEventListener("load", function () {
 
                 // If user won or lost the game, redirect to gameover page
                 if (data.current_weapon == data.total_weapons || data.lives == 0) {
-                    console.log("works");
                     window.location.replace("/game_over");
                     return;
                 }
 
-                updatePageAfterSubmission(data)
+                updatePage(data)
             } catch (error) {
                 console.error(error);
             }
@@ -100,7 +98,6 @@ window.addEventListener("load", function () {
         // has clicked submit instead. 
         document.getElementById("bfvInput").addEventListener("keypress", function (event) {
             if (event.key === "Enter") {
-                console.log("test");
                 event.preventDefault();
                 document.getElementById("submitWeaponNameBtn").click();
                 autoCompleteList.innerHTML = ""; 
@@ -115,7 +112,7 @@ window.addEventListener("load", function () {
         // Update the score
         // Update number of weapons left
         // Update number of hints and lives
-    function updatePageAfterSubmission(data) {
+    function updatePage(data) {
         weaponImage = document.querySelector("#weaponImage");
         weaponImage.src = `static/images/bfvImages/${data.weapon}`;
 
@@ -127,6 +124,26 @@ window.addEventListener("load", function () {
         document.querySelector(".hints").innerHTML = `Hints: ${data.hints}`;
         document.querySelector("#notification-display").innerHTML = ``;
         document.querySelector("#hintBtn").disabled = false;
+
+        NotifyIfRoundWinOrLose(data.round, data.previousWeaponName);
+    }
+
+
+    function NotifyIfRoundWinOrLose(round, weapon) {
+        const notificationDisplay = document.querySelector("#notification-display");
+        if (round == "win") {
+            notificationDisplay.innerHTML = "<span id='roundCorrectionMsg'>Correct!</span>";
+        }
+        else {
+            notificationDisplay.innerHTML = `<span id='roundCorrectionMsg'>Incorrect! Answer is ${weapon}</span>`;
+        }
+
+        const roundCorrectionMsg = document.querySelector("#roundCorrectionMsg");
+        roundCorrectionMsg = setTimeout(function() {
+            roundCorrectionMsg.innerHTML = "";
+        }, 3000);
+
+        
     }
 
     

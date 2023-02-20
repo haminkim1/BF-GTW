@@ -22,14 +22,16 @@ def check_game_over(f):
     return decorated_function
 
 
-def data_for_next_round(i):
+def data_for_next_round(i, round, previousWeaponName):
     data = {
     "weapon": session["weapons"][i]["encrypted_image_name"],
     "lives": session["lives"],
     "hints": session["hints"],
     "current_weapon": session["current_weapon"],
     "current_score": session["current_score"],
-    "total_weapons": session["total_weapons"]
+    "total_weapons": session["total_weapons"],
+    "round": round,
+    "previousWeaponName": previousWeaponName
     }
     return data
 
