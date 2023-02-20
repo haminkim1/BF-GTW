@@ -24,7 +24,7 @@
                 <button type="submit" id="hintBtn" class="btn btn-secondary btn-sm border-dark mb-2 hints" value="{{ hints }}">Hints: {{ data["hints"] }}</button>
                 <span class="white lives" id="text-align-center" value="{{ lives }}">Lives: {{ data["lives"] }}</span>
         </div>
-        <div>
+        <div id="imageContainer">
             <img src="/static/images/bfvImages/{{ data['weapon']['encrypted_image_name'] }}" id="weaponImage">
         </div>
         {% else %}
@@ -41,7 +41,7 @@
                 <button type="submit" id="hintBtn" class="btn btn-secondary btn-sm border-dark mb-2" value="{{ hints }}">Hints:</button>
                 <span class="white" id="text-align-center" value="{{ lives }}">Lives:</span>
         </div>
-        <div>
+        <div id="imageContainer">
             <img src="/static/images/bfvImages/{{ weapon['encrypted_image_name'] }}" id="weaponImage">
         </div>
         {% endif %}
