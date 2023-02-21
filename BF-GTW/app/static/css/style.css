@@ -77,6 +77,14 @@ footer {
     color: rgb(8, 185, 67);
 }
 
+.lightgreen {
+    color: lightgreen;
+}
+
+.red {
+    color: red;
+}
+
 .changeToShadowClass {
     width: 100%;
     min-height: 100vh;
@@ -220,10 +228,10 @@ footer {
 
 .green-animate {
     color: white;
-    animation: highlight 3s;
+    animation: green-animate 3s;
 }
 
-@keyframes highlight {
+@keyframes green-animate {
     0% {
       color: lightgreen;
     }
@@ -235,12 +243,12 @@ footer {
     }
   }
 
-  .red-animate {
+.red-animate {
     color: white;
-    animation: highlight 3s;
+    animation: red-animate 3s;
 }
 
-@keyframes highlight {
+@keyframes red-animate {
     0% {
       color: red;
     }

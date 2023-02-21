@@ -127,7 +127,6 @@ def check_result():
         index_no = session["current_weapon"]
 
     print(session["weapons"][index_no])
-
     data = data_for_next_round(index_no, round, previousWeaponName)
     
     # If game over, set play state to false. 

@@ -121,23 +121,23 @@ window.addEventListener("load", function () {
         document.querySelector(".score").innerHTML = `Score: <span id="score-value">${data.current_score}</span>`;
         document.querySelector(".current-weapon").innerHTML = `Current weapon: ${data.current_weapon}/${data.total_weapons}`;
         document.querySelector(".lives").innerHTML = `Lives: <span id="lives-value">${data.lives}</span>`;
-        document.querySelector(".hints").innerHTML = `Hints: ${data.hints}`;
+        document.querySelector("#hintBtn").innerHTML = `Hints: <span id="hint-value">${data.hints}</span>`;
         document.querySelector("#notification-display").innerHTML = ``;
         document.querySelector("#hintBtn").disabled = false;
 
-        NotifyIfRoundWinOrLose(data.round, data.previousWeaponName);
+        NotifyIfRoundWinOrLose(data.round, data.previousWeaponName, data.consecutive_wins);
     }
 
 
-    function NotifyIfRoundWinOrLose(round, weapon) {
+    function NotifyIfRoundWinOrLose(round, weapon, value) {
         const notificationDisplay = document.querySelector("#notification-display");
         if (round == "win") {
-            notificationDisplay.innerHTML = "<span id='roundCorrectionMsg'>Correct!</span>";
+            notificationDisplay.innerHTML = "<span id='roundCorrectionMsg' class='lightgreen'>Correct!</span>";
             // put function that changes text to green for a brief second.
-            animateTextToGreen(); 
+            animateTextToGreen(value); 
         }
         else {
-            notificationDisplay.innerHTML = `<span id='roundCorrectionMsg'>Incorrect! Answer is ${weapon}</span>`;
+            notificationDisplay.innerHTML = `<span id='roundCorrectionMsg' class='red'>Incorrect! Answer is ${weapon}</span>`;
             // put function that changes text to red for a brief second. 
             animateTextToRed();
         }
@@ -159,12 +159,17 @@ window.addEventListener("load", function () {
     // Instead of creating an animation next to the numbers, it can also 
     // briefly animate red or green of the number itself depending on round condition 
     // for a brief second then reset back to white. 
-    function animateTextToGreen() {
-       const scoreValue = document.querySelector("#score-value");
-       scoreValue.classList.add("green-animate");
+    function animateTextToGreen(value) {
+        const scoreValue = document.querySelector("#score-value");
+        scoreValue.classList.add("green-animate");
 
-       const livesValue = document.querySelector("#lives-value");
-       livesValue.classList.add("green-animate");
+        if (value == 0) {
+            const livesValue = document.querySelector("#lives-value");
+            const hintValue = document.querySelector("#hint-value");
+
+            livesValue.classList.add("green-animate");
+            hintValue.classList.add("green-animate");
+        }
     }
 
 
@@ -185,12 +190,12 @@ window.addEventListener("load", function () {
                 const data = await response.json();
                 // data.hints, weapon_type and first_letter will only be undefined if user attempt to click hint button when there are 0 hints left. 
                 if (Object.keys(data).length !== 0) {
-                    hintBtn.innerHTML = `Hints: ${data.hints}`;
+                    hintBtn.innerHTML = `Hints: <span id="hint-value">${data.hints}</span>`;
                     document.getElementById("notification-display").innerHTML = `<span id="hint_weapon_name">${data.weapon_type}.</span>`;
                     document.getElementById("notification-display").innerHTML += `
                     <span id="">First letter starts with ${data.first_letter}</span>`;
+                    animateHintValueToRed();
                 }
-                animateTextToRed();
                 
                 // Prevents user from clicking hint button more than once in the same round. 
                 hintBtn.disabled = true;
@@ -198,6 +203,12 @@ window.addEventListener("load", function () {
                 console.error(error);
             }
         })
+    }
+
+
+    function animateHintValueToRed() {
+        const hintValue = document.querySelector("#hint-value");
+        hintValue.classList.add("red-animate");
     }
 })
 

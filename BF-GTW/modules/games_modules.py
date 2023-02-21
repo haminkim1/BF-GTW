@@ -31,6 +31,7 @@ def data_for_next_round(i, round, previousWeaponName):
     "current_score": session["current_score"],
     "total_weapons": session["total_weapons"],
     "round": round,
+    "consecutive_wins": session["consecutive_wins"],
     "previousWeaponName": previousWeaponName
     }
     return data
