@@ -217,4 +217,38 @@ footer {
     /* Prevent the image from being stretched */
     object-fit: contain;
 }
+
+.green-animate {
+    color: white;
+    animation: highlight 3s;
+}
+
+@keyframes highlight {
+    0% {
+      color: lightgreen;
+    }
+    90% {
+      color: lightgreen;
+    }
+    100% {
+      color: white;
+    }
+  }
+
+  .red-animate {
+    color: white;
+    animation: highlight 3s;
+}
+
+@keyframes highlight {
+    0% {
+      color: red;
+    }
+    90% {
+      color: red;
+    }
+    100% {
+      color: white;
+    }
+  }
 /* bfv.html styling  */

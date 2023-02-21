@@ -12,7 +12,7 @@
     <div class="flex-column">
         {% if data %}
         <div class="flex-column">
-            <span class="white score" id="text-align-center">Score: {{ data["current_score"] }}</span>
+            <span class="white score" id="text-align-center">Score: <span id="score-value">{{ data["current_score"] }}</span></span>
             <span class="white current-weapon" id="text-align-center">Current weapon: {{ data["current_weapon"] }}/{{ data["total_weapons"] }}</span>
         </div>
     
@@ -22,15 +22,15 @@
         </div>
         <div class="flex-column pt-3">
                 <button type="submit" id="hintBtn" class="btn btn-secondary btn-sm border-dark mb-2 hints" value="{{ hints }}">Hints: {{ data["hints"] }}</button>
-                <span class="white lives" id="text-align-center" value="{{ lives }}">Lives: {{ data["lives"] }}</span>
+                <span class="white lives" id="text-align-center" value="{{ lives }}">Lives: <span id="lives-value">{{ data["lives"] }}</span></span>
         </div>
         <div id="imageContainer">
             <img src="/static/images/bfvImages/{{ data['weapon']['encrypted_image_name'] }}" id="weaponImage">
         </div>
         {% else %}
         <div class="flex-column">
-            <span class="white" id="text-align-center">Score:</span>
-            <span class="white" id="text-align-center">Number of weapons left:</span>
+            <span class="white" id="text-align-center">Score:</span>           
+            <span class="white" id="text-align-center">Current Weapon:</span>
         </div>
     
         <div>

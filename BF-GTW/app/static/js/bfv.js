@@ -118,9 +118,9 @@ window.addEventListener("load", function () {
 
         document.querySelector('#bfvInput').value = "";
         document.querySelector("#autoCompleteList").innerHTML = "";
-        document.querySelector(".score").innerHTML = `Score: ${data.current_score}`;
+        document.querySelector(".score").innerHTML = `Score: <span id="score-value">${data.current_score}</span>`;
         document.querySelector(".current-weapon").innerHTML = `Current weapon: ${data.current_weapon}/${data.total_weapons}`;
-        document.querySelector(".lives").innerHTML = `Lives: ${data.lives}`;
+        document.querySelector(".lives").innerHTML = `Lives: <span id="lives-value">${data.lives}</span>`;
         document.querySelector(".hints").innerHTML = `Hints: ${data.hints}`;
         document.querySelector("#notification-display").innerHTML = ``;
         document.querySelector("#hintBtn").disabled = false;
@@ -133,17 +133,44 @@ window.addEventListener("load", function () {
         const notificationDisplay = document.querySelector("#notification-display");
         if (round == "win") {
             notificationDisplay.innerHTML = "<span id='roundCorrectionMsg'>Correct!</span>";
+            // put function that changes text to green for a brief second.
+            animateTextToGreen(); 
         }
         else {
             notificationDisplay.innerHTML = `<span id='roundCorrectionMsg'>Incorrect! Answer is ${weapon}</span>`;
+            // put function that changes text to red for a brief second. 
+            animateTextToRed();
         }
 
         const roundCorrectionMsg = document.querySelector("#roundCorrectionMsg");
         roundCorrectionMsg = setTimeout(function() {
             roundCorrectionMsg.innerHTML = "";
         }, 3000);
+    }
 
-        
+
+    // If user wins a round:
+        // animate green +1 next to score
+        // animate green +1 next to lives and hint if increased
+    // Else if user loses a round:
+        // animate red -1 next to lives
+    // If user clicks hint button:
+        // animate red -1 next to hint
+    // Instead of creating an animation next to the numbers, it can also 
+    // briefly animate red or green of the number itself depending on round condition 
+    // for a brief second then reset back to white. 
+    function animateTextToGreen() {
+       const scoreValue = document.querySelector("#score-value");
+       scoreValue.classList.add("green-animate");
+
+       const livesValue = document.querySelector("#lives-value");
+       livesValue.classList.add("green-animate");
+    }
+
+
+    function animateTextToRed() {
+        const livesValue = document.querySelector("#lives-value");
+        livesValue.classList.add("red-animate");
     }
 
     
@@ -163,6 +190,7 @@ window.addEventListener("load", function () {
                     document.getElementById("notification-display").innerHTML += `
                     <span id="">First letter starts with ${data.first_letter}</span>`;
                 }
+                animateTextToRed();
                 
                 // Prevents user from clicking hint button more than once in the same round. 
                 hintBtn.disabled = true;
