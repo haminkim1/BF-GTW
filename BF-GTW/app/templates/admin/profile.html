@@ -10,41 +10,8 @@
 
 {% block main %}
 <!-- Copying template from account.handlebars from COMPSCI719 final project -->
-<div class="white">
-  <h1>My Details</h1>  
-  <div>
-    <table id="profile-table">
-      <tr>
-        <th>Email:</th>
-        <td>{{ usersData["email_address"] }}</td>
-      </tr>
-      <tr>
-        <th>Username:</th>
-        <td>{{ usersData["username"] }}</td>
-      </tr>
-    </table>
-  </div>
-  <div>
-    <a href="/"><button type="button">Cancel</button></a>
-  
-    <form action method>
-      <button>Edit Details</button>
-    </form>
-    
-    <form action method>
-      <button>Change Password</button>
-    </form>
-    
-    <button id="delete-account-button">Delete Account</button>
-  </div>
-    
-  <div>
-    <h1>High score</h1>
-    <table id="high-score-table">
-    </table>
-  </div>
-
-  <div>
+<div class="white flex-container">
+  <div id="games-history-div flex-child">
     <h1>Games History</h1>
     <table id="games-history-table">
       <tr>
@@ -65,6 +32,45 @@
     {% endfor %}
     </table>
   </div>
+
+  <div class="flex-column flex-child flex-start">
+    <div>
+      <h1>My Details</h1>  
+      <div>
+        <table id="profile-table">
+          <tr>
+            <th>Email:</th>
+            <td>{{ usersData["email_address"] }}</td>
+          </tr>
+          <tr>
+            <th>Username:</th>
+            <td>{{ usersData["username"] }}</td>
+          </tr>
+        </table>  
+      </div>
+      <div class="flex-row">
+        <a href="/"><button type="button">Cancel</button></a>
+      
+        <form action method>
+          <button>Edit Details</button>
+        </form>
+        
+        <form action method>
+          <button>Change Password</button>
+        </form>
+        
+        <button id="delete-account-button">Delete Account</button>
+      </div>
+    </div>
+    <div>
+      <h1>High score</h1>
+      <table id="high-score-table">
+      </table>
+    </div>
+  </div>
+
+
+
 </div>
 
 {% endblock %}

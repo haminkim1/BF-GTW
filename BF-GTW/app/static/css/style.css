@@ -90,6 +90,31 @@ footer {
     min-height: 100vh;
     position: absolute;
 }
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+}
+
+.flex-start {
+    align-items: start;
+}
+
 /* layout and global styling */
 
 /* home styling */
@@ -100,7 +125,11 @@ footer {
 }
 /* home styling */
 
+/* profile styling */
 
+
+
+/* profile styling */
 
 /* games.html styling */
 #container {
@@ -162,18 +191,6 @@ footer {
     width: 100%;
     min-height: 100vh;
     position: absolute;
-}
-
-.flex-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.flex-row {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
 }
 
 #text-align-center {
