@@ -1,0 +1,41 @@
+#profile-page {
+    width: 50%;
+    margin: auto;
+}
+
+table.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    background-color: #1d1d1d;
+    color: white;
+    font-size: 16px;
+}
+
+table.profile-table th,
+table.profile-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #444444;
+}
+
+table.profile-table th {
+  background-color: #333333;
+  font-weight: bold;
+}
+
+table.profile-table tr:hover {
+  background-color: #333333;
+}
+
+h1 {
+    text-align: center;
+}
+
+#details-container {
+    width: 100%;
+}
+
+#score-tables  {
+    width: 100%;
+}

@@ -111,8 +111,20 @@ footer {
     flex: 1;
 }
 
-.flex-start {
+.align-items-start {
     align-items: start;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.text-align-start {
+    text-align: start;
+}
+
+.text-align-end {
+    text-align: end;
 }
 
 /* layout and global styling */
@@ -124,12 +136,6 @@ footer {
     text-align: left;
 }
 /* home styling */
-
-/* profile styling */
-
-
-
-/* profile styling */
 
 /* games.html styling */
 #container {

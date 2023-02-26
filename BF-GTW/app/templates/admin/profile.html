@@ -2,6 +2,8 @@
 
 {% block custom_scripts %}
     <script src="/static/js/profile.js"></script>
+    <link href="/static/css/profile.css" rel="stylesheet">
+
 {% endblock %}
 
 {% block title %}
@@ -10,47 +12,22 @@
 
 {% block main %}
 <!-- Copying template from account.handlebars from COMPSCI719 final project -->
-<div class="white flex-container">
-  <div id="games-history-div flex-child">
-    <h1>Games History</h1>
-    <table id="games-history-table">
-      <tr>
-        <th>Date</th>
-        <th>Mode</th>
-        <th>BF Game</th>
-        <th>Score</th>
-        <th>Total Weapon</th>
-      </tr>
-    {% for game in games %}
-      <tr>
-        <td>{{ game["game_date"] }}</td>
-        <td>{{ game["mode"] }}</td>
-        <td>{{ game["BF_game"] }}</td>
-        <td>{{ game["score"] }}</td>
-        <td>{{ game["total_weapons"] }}</td>
-      </tr>
-    {% endfor %}
-    </table>
-  </div>
-
-  <div class="flex-column flex-child flex-start">
-    <div>
+<div id="profile-page" class="white flex-column">
+  <div id="details-container" class="flex-column">
       <h1>My Details</h1>  
-      <div>
-        <table id="profile-table">
+      <div class="">
+        <table id="profile-table" class="">
           <tr>
-            <th>Email:</th>
-            <td>{{ usersData["email_address"] }}</td>
+            <th class="text-align-end">Email:</th>
+            <td class="text-align-start">{{ usersData["email_address"] }}</td>
           </tr>
           <tr>
-            <th>Username:</th>
-            <td>{{ usersData["username"] }}</td>
+            <th class="text-align-end">Username:</th>
+            <td class="text-align-start">{{ usersData["username"] }}</td>
           </tr>
         </table>  
       </div>
-      <div class="flex-row">
-        <a href="/"><button type="button">Cancel</button></a>
-      
+      <div class="flex-row">      
         <form action method>
           <button>Edit Details</button>
         </form>
@@ -61,12 +38,37 @@
         
         <button id="delete-account-button">Delete Account</button>
       </div>
-    </div>
+  </div>
+
+  <div id="score-tables">
     <div>
       <h1>High score</h1>
-      <table id="high-score-table">
+      <table id="high-score-table" class="profile-table">
       </table>
     </div>
+  
+    <div id="games-history-div" class="">
+      <h1>Games History</h1>
+      <table id="games-history-table" class="profile-table">
+        <tr>
+          <th>Date</th>
+          <th>Mode</th>
+          <th>BF Game</th>
+          <th>Score</th>
+          <th>Total Weapon</th>
+        </tr>
+      {% for game in games %}
+        <tr>
+          <td>{{ game["game_date"] }}</td>
+          <td>{{ game["mode"] }}</td>
+          <td>{{ game["BF_game"] }}</td>
+          <td>{{ game["score"] }}</td>
+          <td>{{ game["total_weapons"] }}</td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+  
   </div>
 
 
