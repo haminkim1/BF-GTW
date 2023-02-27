@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 
+{% block custom_scripts %}
+    <link href="/static/css/game_over.css" rel="stylesheet">
+{% endblock %}
+
 {% block title %}
     Game Over
 {% endblock %}
@@ -20,17 +24,38 @@ The page should have:
         redirect to games.html
     Quit button
         redirect to index.html -->
+    <div id="game-over-page" class="white flex-column">
+        {% if data["current_score"] == data["total_weapons"] %}
+            <h1>Congratulations! You won!</h1>
+        {% else %}
+            <h1>Unlucky, You lost!</h1>
+        {% endif %} 
+        <div class="game-over-table mb-5 mt-5">
+            <table class="game-over-table">
+                <tr>
+                    <th>Username</th>
+                    <th>{{ data["username"] }}</th>
+                </tr>
+                <tr>
+                    <th>Mode</th>
+                    <th>{{ data["mode"] }}</th>
+                </tr>
+                <tr>
+                    <th>Game</th>
+                    <th>{{ data["BF_game"] }}</th>
+                </tr>
+                <tr>
+                    <th>Score</th>
+                    <th>{{ data["current_score"] }}/{{ data["total_weapons"] }}</th>
+                </tr>
+            </table>
+        </div>
+        <div class="flex-row">
+            <button onclick="window.location.href='/games'" class="btn btn-secondary btn-sm border-dark">Play Again</button>
+            <button onclick="window.location.href='/'" class="btn btn-secondary btn-sm border-dark">Quit</button>    
+        </div>
+    </div>
+        
 
-    {% if data["current_score"] == data["total_weapons"] %}
-        <h1>WINNER</h1>
-    {% else %}
-        <h1>LOSER</h1>
-    {% endif %} 
-    <p>Username: {{ data["username"] }}</p>
-    <p>Mode: {{ data["mode"] }}</p>
-    <p>Game: {{ data["BF_game"] }}</p>
-    <p>Score: {{ data["current_score"] }}/{{ data["total_weapons"] }}</p>
-    <button onclick="window.location.href='/games'">Play Again</button>
-    <button onclick="window.location.href='/'">Quit</button>
 
 {% endblock %}
