@@ -6,10 +6,6 @@
 
 {% block main %}
 
-{% if 'toastMessage' in request.cookies %}
-    <p class="my-toast-message">{{request.cookies.get('toastMessage') }}</p>
-{% endif %}
-
 {% if username %}
     <h1 class="white flex-column">{{ username }}</h1>
 {% endif %}
