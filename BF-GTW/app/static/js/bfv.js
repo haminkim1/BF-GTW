@@ -29,7 +29,7 @@ window.addEventListener("load", function () {
 
 
     function closeModal() {
-        document.getElementById('myModal').style.display = 'none';
+        document.getElementById('difficulty-modal').style.display = 'none';
         let backdrop = document.querySelector('.modal-backdrop');
         if (backdrop) {
           backdrop.parentNode.removeChild(backdrop);
