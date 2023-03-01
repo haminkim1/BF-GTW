@@ -15,10 +15,7 @@ window.addEventListener("load", function () {
     const autoCompleteList = document.querySelector(".auto-complete-list");
     const input = document.querySelector('#bfvInput');
 
-    const modalCloseBtn = document.querySelector("#modal_close_btn");
-    modalCloseBtn.addEventListener("click", function() {
-        closeModal();
-    });
+    selectAllModalCloseBtn();
 
     // Fetching weapon names via API as user types the input box and display the names 
     // matching with the text typed in the input box as a list below the input box 
@@ -28,8 +25,21 @@ window.addEventListener("load", function () {
     activateHintFeature();
 
 
+    function selectAllModalCloseBtn() {
+        const modalCloseBtn = document.querySelectorAll(".close");
+        for (let i = 0; i < modalCloseBtn.length; i++) {
+            modalCloseBtn[i].addEventListener("click", function() {
+                closeModal();
+            });
+          }
+
+    }
+
+    // For some reason, the Bootstrap modal close button is bugged. 
+    // Without this function, the close button of the modal doesn't remove the modal from the page. 
     function closeModal() {
         document.getElementById('difficulty-modal').style.display = 'none';
+        document.getElementById('quit-modal').style.display = 'none';
         let backdrop = document.querySelector('.modal-backdrop');
         if (backdrop) {
           backdrop.parentNode.removeChild(backdrop);
