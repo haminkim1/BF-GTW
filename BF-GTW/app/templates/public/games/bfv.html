@@ -18,7 +18,7 @@
     
         <div>
             <button id="start-btn" class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#myModal">Start</button>
-            <button class="btn btn-secondary btn-sm border-dark">Quit</button>
+            <button id="bfv-quit-btn" class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#quitModal">Quit</button>
         </div>
         <div class="flex-column pt-3">
                 <button type="submit" id="hintBtn" class="btn btn-secondary btn-sm border-dark mb-2 hints" value="{{ hints }}">Hints: <span id="hint-value">{{ data["hints"] }}</span></button>
@@ -34,8 +34,8 @@
         </div>
     
         <div>
-            <button id="start-btn" class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#difficulty-modal">Start</button>
-            <button id="quit-btn" class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#quit-modal">Quit</button>
+            <button id="start-btn" class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#myModal">Start</button>
+            <button id="bfv-quit-btn" class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#quitModal">Quit</button>
         </div>
         <div class="flex-column pt-3">
                 <button type="submit" id="hintBtn" class="btn btn-secondary btn-sm border-dark mb-2" value="{{ hints }}">Hints:</button>
@@ -72,8 +72,8 @@
 
 
   
-  <!-- Difficulty Modal -->
-<div class="modal" id="difficulty-modal">
+  <!-- Modal -->
+<div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
         <!-- Modal header -->
@@ -117,25 +117,22 @@
     </div>
 </div>
 
-<!-- Quit Modal -->
-<div class="modal" id="quit-modal">
+<div class="modal" id="quitModal">
     <div class="modal-dialog">
         <div class="modal-content">
-        <!-- Modal header -->
-        <div class="modal-header">
-            <h4 class="modal-title">Are you sure you want to quit the game? Game will not be recorded.</h4>
-            <button id="modal_close_btn" type="button" class="close">&times;</button>
-        </div>
-        <form id="bfv_mode_form" method="post">
-            <div class="modal-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="mode" id="easy" value="easy">
-                </div>
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure you want to quit? The game won't be recorded.</h4>
+                <button id="modal_close_btn" type="button" class="close">&times;</button>
             </div>
-        </form>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <button id="quit-modal-quit-btn" class="btn btn-secondary btn-sm border-dark">Quit</button>
+                <button id="quit-modal-cancel-btn" class="btn btn-secondary btn-sm border-dark">Cancel</button>
+            </div>
         </div>
     </div>
 </div>
 
-{% endblock %}
 
+{% endblock %}
