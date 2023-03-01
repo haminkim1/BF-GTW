@@ -21,12 +21,6 @@ window.addEventListener("load", function () {
     quitModalQuitBtn.addEventListener("click", function() {
         window.location.href = "/"
     })
-    
-    const quitModalCancelBtn = document.getElementById("quit-modal-cancel-btn");
-    quitModalCancelBtn.addEventListener("click", function() {
-        closeModal();
-    })
-
 
     // Fetching weapon names via API as user types the input box and display the names 
     // matching with the text typed in the input box as a list below the input box 
@@ -37,13 +31,12 @@ window.addEventListener("load", function () {
 
 
     function selectModalCloseBtns() {
-        const modalCloseBtn = document.querySelectorAll("#modal_close_btn");
+        const modalCloseBtn = document.querySelectorAll(".close");
         for (let i = 0; i < modalCloseBtn.length; i++) {
             modalCloseBtn[i].addEventListener("click", function() {
                 closeModal();
             });
         }
-
     }
 
 
