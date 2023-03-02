@@ -31,6 +31,17 @@ CREATE TABLE IF NOT EXISTS game_log (
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
+CREATE TABLE IF NOT EXISTS game_log_without_account (
+    game_id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+    user_id integer NOT NULL,
+    mode varchar(10),
+    BF_game varchar(10),
+    score integer,
+    total_weapons integer,
+    game_date DATETIME DEFAULT (DATETIME('now')),
+    FOREIGN KEY (user_id) REFERENCES play_without_account_users (id)
+);
+
 CREATE TABLE IF NOT EXISTS BF_games (
     BF_id integer NOT NULL PRIMARY KEY,
     full_name varchar(32),

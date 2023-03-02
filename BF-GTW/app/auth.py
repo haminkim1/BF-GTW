@@ -53,6 +53,7 @@ def register():
 
                 rows = db.execute("SELECT * FROM users WHERE username = ?", username)
                 session["user_id"] = rows[0]["id"]
+                session["username"] = rows[0]["username"]
 
                 # Redirect user to home page
                 username = request.form.get("username")
@@ -84,6 +85,7 @@ def login():
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
+        session["username"] = rows[0]["username"]
 
         # Sending toastmessage to homepage indicating user they have successfully logged in. 
         username = request.form.get("username")
@@ -104,6 +106,7 @@ def no_account_login():
 
         rows = db.execute("SELECT * FROM play_without_account_users WHERE username = ?", username)
         session["user_id"] = rows[0]["id"]
+        session["play_without_an_account_username"] = rows[0]["username"]
         
         # Creates random username and redirects user to games.html page. 
         images = scrapeImages()
