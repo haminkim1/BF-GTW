@@ -38,7 +38,7 @@ def data_for_next_round(i, round, previousWeaponName):
 
 
 def display_game_over_data():
-    # rows = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])
+    # searches for both user table and play without account user table
     rows = db.execute("""SELECT username FROM users 
     WHERE id = ? 
     UNION 
@@ -101,8 +101,11 @@ def return_hint_data():
 
 
 def save_game_data():
+    # Save game to game_log table if user created an account and logged in. 
     if "username" in session:
         db.execute("INSERT INTO game_log (user_id, mode, BF_game, score, total_weapons) VALUES (?, ?, ?, ?, ?)", session["user_id"], session["mode"], session["BF_game"], session["current_score"], session["total_weapons"])
+    # Save game to game_log_without_account table if user played a game without creating an account
+    # by clicking on the play without an account button.
     else:
         db.execute("INSERT INTO game_log_without_account (user_id, mode, BF_game, score, total_weapons) VALUES (?, ?, ?, ?, ?)", session["user_id"], session["mode"], session["BF_game"], session["current_score"], session["total_weapons"])
 

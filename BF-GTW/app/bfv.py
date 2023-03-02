@@ -67,29 +67,16 @@ def list_bfv_weapons():
     # Get query parameter of key called "name"
     name = request.args.get("name")
 
+    # Searching for names of weapons filtered by what the user typed
+    # on the input box client side. 
     if name:
         weaponNames = []
-        # Think about using while loops instead. 
-        # Still need an alphabetically sorted list. 
-        # Even if app is not optimal due to moving the name API into a separate route,
-        # don't delete the while loop comments yet as I can still potentially increase
-        # more efficiency using while loop. 
-        # I just need to somehow bring an alphabetically sorted weapons list. 
-        # While weapons[i]["weapon_name"] != name or i < len(list)
-            # i++
-        # if == name, then [i:] to a new list. 
         for i in range(len(weapons)):
             if weapons[i]['weapon_name'].casefold().startswith(name.casefold()):
                 weaponNames.append(weapons[i]['weapon_name'])
-        
-        # While new_list[i:] == name
-            # append. 
-            # i++
-        # If != name, then exit while loop. 
                 
         # Sorting the list alphabetically
         weaponNames = sorted(weaponNames)
-
     else:
         weaponNames = []
     return jsonify(weaponNames)
