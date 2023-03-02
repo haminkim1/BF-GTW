@@ -15,6 +15,12 @@ from modules.toast_message import send_toastMessage
 
 
 # DON'T DELETE THIS FOR NOW, related to no_account_login route
+# 02/03/23: There's a possibility where if this web app is launched, users can only
+# play without an account if nltk is downloaded which is not good as users are going
+# to be unknowingly downloading nltk when they click the play without an account button. 
+# If that were to be the case, one option is to store adjective and nouns in a db and 
+# generate a random account name through a db or even a dictionary, list, etc
+# whichever is best. 
 # nltk.download('wordnet')
 
 @app.route("/register", methods=["GET", "POST"])
@@ -89,7 +95,6 @@ def login():
 
 @app.route("/play_without_account", methods=["POST"])
 def no_account_login():
-
     try:
         username = random_username()
         while db.execute("SELECT * FROM users WHERE username = ?", username) or db.execute("SELECT * FROM play_without_account_users WHERE username = ?", username):
@@ -102,9 +107,9 @@ def no_account_login():
         
         # Creates random username and redirects user to games.html page. 
         images = scrapeImages()
+
         return render_template("/public/games/games.html", images=images)
     except:
-        # Sending toastmessage to homepage indicating user they have successfully logged in. 
         return apology("Failed to play without account, please try again")
 
 

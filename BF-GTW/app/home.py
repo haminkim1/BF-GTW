@@ -7,7 +7,13 @@ from modules.apology import apology
 @app.route("/")
 def home():
     if session:
-        rows = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])
+        rows = db.execute("""SELECT username FROM users 
+        WHERE id = ? 
+        UNION 
+        SELECT username 
+        FROM play_without_account_users 
+        WHERE id = ?""", session["user_id"], session["user_id"])
+
         username = rows[0]["username"]
         return render_template("public/index.html", username=username)
     else:
