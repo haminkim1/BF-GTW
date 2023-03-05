@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block custom_scripts %}
+    <script src="/static/js/edit-account.js"></script>
+{% endblock %}
+
+{% block title %}
+    Edit Details
+{% endblock %}
+
+{% block main %}
+
+  <form action="/edit-account" method="post">
+    <section class="gradient-custom">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card bg-dark text-white" style="border-radius: 1rem;">
+              <div class="card-body p-5 text-center">
+
+                <div class="mb-md-5 mt-md-4 pb-5">
+
+                  <h2 class="fw-bold mb-2 text-uppercase flex-column">Edit Account Details</h2>
+
+                  <div class="form-outline form-white mb-4">
+                    <input type="email" id="email-address" class="form-control form-control-lg" name="email-address" value="{{ email_address }}" />
+                    <label class="form-label" for="email-address">Email Address</label>
+                  </div>
+
+                  <div class="form-outline form-white mb-4">
+                    <input type="text" id="username" class="form-control form-control-lg" name="username" value="{{ username }}" />
+                    <label class="form-label" for="username">Username</label>
+                  </div>
+
+                  <button id="edit-account-btn" class="btn btn-outline-light btn-lg px-5" type="submit">Edit Account</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+  
+{% endblock %}
