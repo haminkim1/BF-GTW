@@ -38,6 +38,7 @@ def register():
             return apology("Username already exists", 403)
 
         else:
+            email_address = request.form.get("email")
             username = request.form.get("username")
             password = request.form.get("password")
             confirmation = request.form.get("confirmation")
@@ -49,11 +50,12 @@ def register():
             # If all the checks pass, register username and hash password into users table. Redirect to home page logged in.
             else:
                 password = generate_password_hash(password, method='pbkdf2:sha256', salt_length=8)
-                db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", username, password)
+                db.execute("INSERT INTO users (email_address, username, hash) VALUES(?, ?, ?)", email_address, username, password)
 
                 rows = db.execute("SELECT * FROM users WHERE username = ?", username)
                 session["user_id"] = rows[0]["id"]
                 session["username"] = rows[0]["username"]
+                session["email_address"] = rows[0]["email_address"]
 
                 # Redirect user to home page
                 username = request.form.get("username")
@@ -86,6 +88,7 @@ def login():
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
         session["username"] = rows[0]["username"]
+        session["email_address"] = rows[0]["email_address"]
 
         # Sending toastmessage to homepage indicating user they have successfully logged in. 
         username = request.form.get("username")

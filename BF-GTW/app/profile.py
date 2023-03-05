@@ -84,36 +84,34 @@ def edit_details():
         return render_template("admin/edit-account.html", email_address=email_address, username=username)
     
 
-@app.route("/edit-account/email_address")
+@app.route("/edit-account/check_email_exist")
 @login_required
-def find_current_email_address():
-    rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
-    current_email_address = rows[0]["email_address"]
-    current_username = rows[0]["username"]
-
-    new_email_address = request.form.get("email-address")
-    new_username = request.form.get("username")
-
-    email_address = request.args.get("email-address")
-    username = request.args.get("username")
+def check_email_address_exist():
+    current_email_address = session["email_address"]
+    email_address = request.args.get("email_address")
 
     if email_address:
-        rows = db.execute("SELECT email_address FROM users WHERE email_address = ?", new_email_address)
-        # if row is empty or rows["email_address"] == current_email_address:
-            # continue
-        # else
-            # disable edit account
-
-        if len(rows) == 1 and rows[0]["email_address"] != current_email_address:
-            return jsonify(rows[0]["email_address"])
+        rows = db.execute("SELECT email_address FROM users WHERE email_address = ?", email_address)
+        if not rows or current_email_address == email_address:
+            email_exists = False
+        else:
+            email_exists = True
+        return jsonify(emailExists=email_exists)
     
-    if username:
-        rows = db.execute("SELECT username FROM users WHERE username = ?", new_username)
-        # if row is empty or rows["username"] == current_username:
-            # continue
-        # else
-            # disable edit account
 
+@app.route("/edit-account/check_username_exist")
+@login_required
+def check_username_exist():
+    current_username = session["username"]
+    username = request.args.get("username")
+
+    if username:
+        rows = db.execute("SELECT username FROM users WHERE username = ?", username)
+        if not rows or current_username == username:
+            username_exists = False
+        else:
+            username_exists = True
+        return jsonify(usernameExists=username_exists)
 
 
 @app.route("/change-password", methods=["GET", "POST"])
