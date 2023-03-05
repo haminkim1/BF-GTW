@@ -1,38 +1,58 @@
 window.addEventListener("load", function () {
 
     const emailAddressInput = document.querySelector("#email-address");
-    // const currentEmailAddress = emailAddressInput.value;
-
     const usernameInput = document.querySelector("#username");
-    // const currentUsername = usernameInput.value;
+    const editAccountBtn = document.querySelector("#edit-account-btn");
 
-    const emailExistStatus = ifCurrentEmailAddressExists();
-    const usernameExistStatus = ifCurrentUsernameExists();
+    let emailExists = false;
+    let usernameExists = false;
+    ifEmailAndUsernameExist();
 
-    if (emailExistStatus == true || usernameExistStatus == true) {
-        // disable submission
-    }
-    else {
-        // enable submission
-    }
-
-    function ifCurrentEmailAddressExists() {
-        emailAddressInput.addEventListener("input", async function() {
+    
+    function ifEmailAndUsernameExist() {
+        const debouncedEmailAddressAPI = debounce(async function() {
             let response = await fetch("/edit-account/check_email_exist?email_address=" + emailAddressInput.value);
-            let emailExists = await response.json();
-            console.log(emailExists)
-            return emailExists;
-        })
+            let status = await response.json();
+            emailExists = status.emailExists;
+            updateSubmitButton();
+        }, 500);
+
+        const debouncedUsernameAPI = debounce(async function() {
+            let response = await fetch("/edit-account/check_username_exist?username=" + usernameInput.value);
+            let status = await response.json();
+            usernameExists = status.usernameExists;
+            updateSubmitButton();
+        }, 500);
+
+        emailAddressInput.addEventListener("input", debouncedEmailAddressAPI);  
+        usernameInput.addEventListener("input", debouncedUsernameAPI);
     }
 
-    function ifCurrentUsernameExists() {
-        usernameInput.addEventListener("input", async function() {
-            let response = await fetch("/edit-account/check_username_exist?username=" + usernameInput.value);
-            let username = await response.json();
-            console.log(username)
-            return username;
-        })
-    }
+
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+  }
+    
+
+  function updateSubmitButton() {
+      console.log(emailExists)
+      console.log(usernameExists)
+      if (emailExists || usernameExists) {
+        // disable submission
+        editAccountBtn.disabled = true;
+      } else {
+        // enable submission
+        editAccountBtn.disabled = false;
+      }
+  }
 })
 
 
