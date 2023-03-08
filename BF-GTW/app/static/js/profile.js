@@ -16,15 +16,16 @@ window.addEventListener("load", function () {
 
 
     function populateHighScoreTable (data, modes) {
-        console.log(data)
         let table = document.getElementById("high-score-table");
         // Adding difficulty mode row headings. 
         table.innerHTML = `
-        <tr id="high-score-table-columns">
-            <th></th>
-        </th>
+        <thead>
+            <tr id="high-score-table-columns">
+                <th></th>
+            </th>
+        </thead>
         `
-        columnHeadings = document.getElementById("high-score-table-columns");
+        let columnHeadings = document.getElementById("high-score-table-columns");
         for (let i in modes) {
             let difficulty = modes[i].first_letter_cap
             columnHeadings.innerHTML += `
@@ -32,48 +33,58 @@ window.addEventListener("load", function () {
             `
         }
 
-        // Adding row of user's highscore in each difficulty mode for each BF game. 
+        table.innerHTML += `
+        <tbody id="high-score-body">
+        </tbody>
+        `
+        let highScoreTableBody = document.getElementById("high-score-body");
+
+        // Populating row of user's highscore in each difficulty mode for each BF game. 
         for (let i in data) {
-            table.innerHTML += `
-            <tr id="${data[i].BF_game}-rows">
-                <th id="${data[i].BF_game}-heading" rowspan="2">${data[i].BF_game}</th>
-            </tr>
-            `
+            setHighScoreTableRows(highScoreTableBody, data[i].BF_game)
+            // Populating score and date of each difficulty mode for each BF game. 
             rows = document.getElementById(`${data[i].BF_game}-rows`);
             for (let j in modes) {
                 let difficulty = modes[j].mode
-                rows.innerHTML += `
-                <td id="${data[i].BF_game}-${difficulty}"></td>
-                `
-                if (data[i].modes[difficulty] !== null) {
-                    document.getElementById(`${data[i].BF_game}-${difficulty}`).innerText = `${data[i].modes[difficulty]}`;
-                }
-                // table.innerHTML += `
-                // <tr id="date-row">
-                // </tr>
-                // `
-                // let dateRow = document.getElementById(`${data[i].BF_game}-date-row`);
-                // console.log(data[i].BF_game);
-                // dateRow.innerHTML += `
-                // <td id=${data[i].BF_game}-${difficulty}-date"></td>
-                // `
+                populateHighScoreData(data[i].BF_game, difficulty, data[i].modes[difficulty]);
+                populateHighScoreDates(data[i].BF_game, difficulty, data[i].date[difficulty]);      
             }     
-
-            // if (data[i].date !== null) {
-            //     document.getElementById(`${data[i].BF_game}-${difficulty}-date`).innerText = `${data[i].date}`;
-            // }    
-//             <table>
-//   <tr>
-//     <th rowspan="2">Row Heading</th>
-//     <td>Cell 1</td>
-//     <td>Cell 2</td>
-//   </tr>
-//   <tr>
-//     <td>Cell 3</td>
-//     <td>Cell 4</td>
-//   </tr>
-// </table>
         };
+    }
+
+
+    function setHighScoreTableRows(tableBody, BF_game) {
+        tableBody.innerHTML += `
+        <tr id="${BF_game}-rows">
+            <th id="${BF_game}-heading" class="row-heading" rowspan="2">${BF_game}</th>
+        </tr>
+        `
+        tableBody.innerHTML += `
+        <tr id="${BF_game}-date-row">
+        </tr>
+        `
+    }
+
+
+    function populateHighScoreData(BF_game, difficulty, score) {
+        rows = document.getElementById(`${BF_game}-rows`);
+            rows.innerHTML += `
+            <td id="${BF_game}-${difficulty}" class="score-cells"></td>
+            `
+            if (score !== null) {
+                document.getElementById(`${BF_game}-${difficulty}`).innerText = `${score}`;
+            }
+    }
+
+
+    function populateHighScoreDates(BF_game, difficulty, date) {
+        let dateRow = document.getElementById(`${BF_game}-date-row`);
+        dateRow.innerHTML += `
+        <td id="${BF_game}-${difficulty}-date" class="date-cells"></td>
+        `
+        if (date !== null) {
+            document.getElementById(`${BF_game}-${difficulty}-date`).innerText = `${date}`;
+        }
     }
 })
 

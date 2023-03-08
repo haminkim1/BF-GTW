@@ -16,7 +16,7 @@ table.profile-table th,
 table.profile-table td {
   padding: 10px;
   text-align: center;
-  border-bottom: 1px solid #444444;
+  border-right: 1px solid #444444;
 }
 
 table.profile-table th {
@@ -38,6 +38,23 @@ h1 {
 
 #score-tables  {
     width: 100%;
+}
+
+.row-heading {
+    min-height: 10%;
+    line-height: 10%;
+}
+
+.score-cells {
+    min-height: 5%;
+    line-height: 10%;
+    border-top: 1px solid #444444;
+}
+
+.date-cells {
+    min-height: 5%;
+    line-height: 10%;
+    border-top: none;
 }
 
 @media screen and (max-width: 1000px) {

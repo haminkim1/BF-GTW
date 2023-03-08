@@ -32,7 +32,7 @@ def load_highscore():
             "date": {}
         }
         for mode in modes:
-            score = db.execute("""SELECT MAX(score) AS highest_score, game_date
+            score = db.execute("""SELECT MAX(score) AS highest_score, DATE(game_date) AS game_date
                 FROM game_log 
                 WHERE user_id = ? AND BF_game = ? AND mode = ?"""
                 , session["user_id"], BF_game["short_name"], mode["mode"])  
