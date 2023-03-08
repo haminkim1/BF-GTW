@@ -28,15 +28,17 @@ def load_highscore():
     for BF_game in BF_games:
         scores = {
             "BF_game": BF_game["short_name"],
-            "modes":{}
+            "modes":{},
+            "date": {}
         }
         for mode in modes:
-            score = db.execute("""SELECT MAX(score) AS highest_score 
+            score = db.execute("""SELECT MAX(score) AS highest_score, game_date
                 FROM game_log 
                 WHERE user_id = ? AND BF_game = ? AND mode = ?"""
                 , session["user_id"], BF_game["short_name"], mode["mode"])  
             difficulty = mode["mode"]
             scores["modes"][difficulty] = score[0]["highest_score"]
+            scores["date"][difficulty] = score[0]["game_date"]
 
         highScores.append(scores)  
         # highScore data structure:

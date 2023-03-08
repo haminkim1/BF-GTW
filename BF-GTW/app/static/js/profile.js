@@ -16,6 +16,7 @@ window.addEventListener("load", function () {
 
 
     function populateHighScoreTable (data, modes) {
+        console.log(data)
         let table = document.getElementById("high-score-table");
         // Adding difficulty mode row headings. 
         table.innerHTML = `
@@ -35,7 +36,7 @@ window.addEventListener("load", function () {
         for (let i in data) {
             table.innerHTML += `
             <tr id="${data[i].BF_game}-rows">
-                <th id="${data[i].BF_game}-heading">${data[i].BF_game}</th>
+                <th id="${data[i].BF_game}-heading" rowspan="2">${data[i].BF_game}</th>
             </tr>
             `
             rows = document.getElementById(`${data[i].BF_game}-rows`);
@@ -47,7 +48,31 @@ window.addEventListener("load", function () {
                 if (data[i].modes[difficulty] !== null) {
                     document.getElementById(`${data[i].BF_game}-${difficulty}`).innerText = `${data[i].modes[difficulty]}`;
                 }
-            }            
+                // table.innerHTML += `
+                // <tr id="date-row">
+                // </tr>
+                // `
+                // let dateRow = document.getElementById(`${data[i].BF_game}-date-row`);
+                // console.log(data[i].BF_game);
+                // dateRow.innerHTML += `
+                // <td id=${data[i].BF_game}-${difficulty}-date"></td>
+                // `
+            }     
+
+            // if (data[i].date !== null) {
+            //     document.getElementById(`${data[i].BF_game}-${difficulty}-date`).innerText = `${data[i].date}`;
+            // }    
+//             <table>
+//   <tr>
+//     <th rowspan="2">Row Heading</th>
+//     <td>Cell 1</td>
+//     <td>Cell 2</td>
+//   </tr>
+//   <tr>
+//     <td>Cell 3</td>
+//     <td>Cell 4</td>
+//   </tr>
+// </table>
         };
     }
 })
