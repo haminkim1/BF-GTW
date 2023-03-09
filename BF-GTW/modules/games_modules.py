@@ -109,3 +109,9 @@ def save_game_data():
     else:
         db.execute("INSERT INTO game_log_without_account (user_id, mode, BF_game, score, total_weapons) VALUES (?, ?, ?, ?, ?)", session["user_id"], session["mode"], session["BF_game"], session["current_score"], session["total_weapons"])
 
+
+def delete_game_logs(id):
+    db.execute("""
+    DELETE FROM game_log
+    WHERE user_id = ?
+    """, id)
