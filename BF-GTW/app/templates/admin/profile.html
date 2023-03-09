@@ -29,13 +29,8 @@
       </div>
       <div class="flex-row">      
         <button class="btn btn-secondary btn-sm border-dark" onclick="window.location.href='/edit-account'">Edit Account</button>
-
-        
-        <form action method>
-          <button class="btn btn-secondary btn-sm border-dark">Change Password</button>
-        </form>
-        
-        <button id="delete-account-button" class="btn btn-secondary btn-sm border-dark">Delete Account</button>
+        <button class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#changePassword">Change Password</button>
+        <button id="delete-account-button" class="btn btn-secondary btn-sm border-dark" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete Account</button>
       </div>
   </div>
 
@@ -70,7 +65,43 @@
   
   </div>
 
+  <div class="modal" id="changePassword">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h4 class="modal-title black">Enter current password, new password and repeat new password.</h4>
+                <button id="modal_close_btn" type="button" class="close">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <form id="change-password-form" action="change-password" method="post">
+              <div class="modal-body">
+                <button type="submit" id="change-password-button-modal" class="btn btn-secondary btn-sm border-dark">Change password</button>
+                <button type="button" id="change-password-cancel-btn-modal" class="btn btn-secondary btn-sm border-dark close">Cancel</button>
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>
 
+  <div class="modal" id="deleteAccountModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h4 class="modal-title black">Are you sure you want to delete your account? All your game logs will be deleted.</h4>
+                <button id="modal_close_btn" type="button" class="close">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <form id="delete-account-form" action="delete-account" method="post">
+              <div class="modal-body">
+                <button type="submit" id="delete-account-button-modal" class="btn btn-secondary btn-sm border-dark">Delete Account</button>
+                <button type="button" id="quit-modal-cancel-btn-modal" class="btn btn-secondary btn-sm border-dark close">Cancel</button>
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>
 
 </div>
 

@@ -1,6 +1,6 @@
 window.addEventListener("load", function () {
-    getHighScoreData()
-
+    getHighScoreData();
+    selectModalCloseBtns();
 
     async function getHighScoreData() {
         try {
@@ -84,6 +84,29 @@ window.addEventListener("load", function () {
         `
         if (date !== null) {
             document.getElementById(`${BF_game}-${difficulty}-date`).innerText = `${date}`;
+        }
+    }
+
+
+    // When user clicks "delete account" on the account page, another button will be visible
+	// to confirm deletion of account. 
+    function selectModalCloseBtns() {
+        const modalCloseBtn = document.querySelectorAll(".close");
+        for (let i = 0; i < modalCloseBtn.length; i++) {
+            modalCloseBtn[i].addEventListener("click", function() {
+                closeModal();
+            });
+        }
+    }
+
+
+    function closeModal() {
+        document.getElementById('deleteAccountModal').style.display = 'none';
+        document.getElementById('changePassword').style.display = 'none';
+        // document.getElementById('quitModal').style.display = 'none';
+        let backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+          backdrop.parentNode.removeChild(backdrop);
         }
     }
 })

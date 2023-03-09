@@ -1,8 +1,10 @@
-from flask import jsonify, render_template, request, session
+from flask import jsonify, redirect, render_template, request, session
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import app
 from app.db.db_config import db
-from modules.auth_modules import login_required
+from modules.auth_modules import change_user_password, delete_user, login_required
+from modules.games_modules import delete_game_logs
 
 
 @app.route("/profile")
@@ -116,11 +118,20 @@ def check_username_exist():
         return jsonify(usernameExists=username_exists)
 
 
-@app.route("/change-password", methods=["GET", "POST"])
+@app.route("/change-password", methods=["POST"])
 @login_required
 def change_password():
+    password = generate_password_hash(password, method='pbkdf2:sha256', salt_length=8)
+    change_user_password(session["user_id"], password)
+    return render_template("admin/change-password.html")
+    
 
-    if request.method == "POST":
-        return render_template("public/index.html")
-    else:
-        return render_template("admin/change-password.html")
+@app.route("/delete-account", methods=["POST"])
+@login_required
+def delete_account():
+
+    delete_game_logs(session["user_id"])
+    delete_user(session["user_id"])
+    session.clear()
+
+    return redirect("/")
