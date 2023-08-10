@@ -1,6 +1,8 @@
 # Scrape images from ea.com
 from bs4 import BeautifulSoup as soup  # HTML data structure
 from urllib.request import urlopen as uReq, Request  # Web client
+import ssl
+import certifi
 
 from random import randrange
 
@@ -35,7 +37,8 @@ def soupBF4URL(link):
 
 
 def soupURL(page_url):
-    uClient = uReq(page_url)
+    context = ssl.create_default_context(cafile=certifi.where())
+    uClient = uReq(page_url, context=context)
     page_soup = soup(uClient.read(), "html.parser")
     uClient.close()
     return page_soup
