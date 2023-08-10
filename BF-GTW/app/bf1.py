@@ -52,4 +52,4 @@ def bf1_route():
 
 
 
-    return render_template("public/games/bf1.html", weapons=weapons)
+    return render_template("public/games/bf1.html")
