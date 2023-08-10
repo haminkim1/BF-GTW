@@ -18,8 +18,8 @@ def bf1_route():
     # Was just testing to see if /bfv?name= link would work in this route. 
     # It will work because getting API from that link is related to bfv.js frontend. 
     # weapons = getBFVWeapons()
-    weapons = get_easy_mode_weapons()
-    print(weapons)
+    # weapons = get_easy_mode_weapons()
+    # print(weapons)
 
 
 
