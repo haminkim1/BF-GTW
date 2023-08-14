@@ -95,11 +95,11 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - Users can play without creating an account which will generate a random username. 
 
 ### Register Page
-[![Register page][register-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/register.PNG)
+[![Register page][register-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/register.png)
 - Passwords are hashed and salted using the Werkzeug library. 
 
 ### Login Page
-[![Login page][login-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/login.PNG)
+[![Login page][login-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/login.png)
 - Username and hashed passwords are checked from the database to make sure the login details are accurate.
 
 ### Games Page
@@ -110,7 +110,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ### BFV Page
 [![Screenshot of BFV main game page][main_game_page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/main_game_page.png)
 - Users can choose difficulty of the game. 
-- [![Difficulty page][difficulty-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/difficulty.PNG)
+- [![Difficulty page][difficulty-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/difficulty.png)
 
 ### Game Win Page
 [![Game Win page][game_win-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/game_win.png)
@@ -170,15 +170,15 @@ Project Link: [https://github.com/haminkim1/BF-GTW](https://github.com/haminkim1
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ha-min-kim-ab0037126
 
-[difficulty-screenshot]: images/difficulty.PNG
+[difficulty-screenshot]: images/difficulty.png
 [game_over-screenshot]: images/game_over.png
 [games_page-screenshot]: images/games_page.png
 [game_win-screenshot]: images/game_win.png
 [home-page-screenshot]: images/home.png
-[login-screenshot]: images/login.PNG
+[login-screenshot]: images/login.png
 [main_game_page-screenshot]: images/main_game_page.png
 [profile-screenshot]: images/profile.png
-[register-screenshot]: images/register.PNG
+[register-screenshot]: images/register.png
 
 [Flask.py]: https://img.shields.io/badge/Flask-000000.svg?style=for-the-badge&logo=flask
 [Flask-url]: https://flask.palletsprojects.com/
