@@ -44,7 +44,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Screenshot of BFV main game page][product-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/main_game_page.png)
+[![Screenshot of BFV main game page][main-page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/main_game_page.png)
 ### Video Demo
 - Youtube URL
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -88,6 +88,9 @@ Use this space to show useful examples of how a project can be used. Additional 
 - I can use this to show key features. 
 
 _For more examples, please refer to the [Documentation](https://example.com)_
+
+### Home page
+[![Home page][home-page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/home.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -134,10 +137,13 @@ Project Link: [https://github.com/haminkim1/BF-GTW](https://github.com/haminkim1
 [license-url]: https://github.com/haminkim1/BF-GTW/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ha-min-kim-ab0037126
-[product-screenshot]: BF-GTW/images/main_game_page.png
-[Flask.py]: https://img.shields.io/badge/Flask-000000.svg?logo=flask
+
+[main-page-screenshot]: BF-GTW/images/main_game_page.png
+[home-page-screenshot]: BF-GTW/images/home.png
+
+[Flask.py]: https://img.shields.io/badge/Flask-000000.svg?style=for-the-badge&logo=flask
 [Flask-url]: https://flask.palletsprojects.com/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
-[SQLite.org]: https://img.shields.io/badge/SQLite-003B57.svg?logo=sqlite
+[SQLite.org]: https://img.shields.io/badge/SQLite-003B57.svg?style=for-the-badge&logo=sqlite
 [SQLite-url]: https://www.sqlite.org/index.html
