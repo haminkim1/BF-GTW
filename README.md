@@ -53,7 +53,7 @@
 
 * [![Flask][Flask.py]][Flask-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* SQLite
+* [![SQLite][SQLite.org]][SQLite-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -133,7 +133,9 @@ Project Link: [https://github.com/haminkim1/BF-GTW](https://github.com/haminkim1
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ha-min-kim-ab0037126
 [product-screenshot]: images/screenshot.png
-[Flask.py]: https://img.shields.io/badge/Python-Flask-blue?logo=python&logoColor=white
+[Flask.py]: https://img.shields.io/badge/Flask-000000.svg?logo=flask
 [Flask-url]: https://flask.palletsprojects.com/
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
+[SQLite.org]: https://img.shields.io/badge/SQLite-003B57.svg?logo=sqlite
+[SQLite-url]: https://www.sqlite.org/index.html
