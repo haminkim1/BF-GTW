@@ -170,15 +170,15 @@ Project Link: [https://github.com/haminkim1/BF-GTW](https://github.com/haminkim1
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ha-min-kim-ab0037126
 
-[difficulty-screenshot]: BF-GTW/images/difficulty.PNG
-[game_over-screenshot]: BF-GTW/images/game_over.png
-[games_page-screenshot]: BF-GTW/images/games_page.png
-[game_win-screenshot]: BF-GTW/images/game_win.png
-[home-page-screenshot]: BF-GTW/images/home.png
-[login-screenshot]: BF-GTW/images/login.PNG
-[main_game_page-screenshot]: BF-GTW/images/main_game_page.png
-[profile-screenshot]: BF-GTW/images/profile.png
-[register-screenshot]: BF-GTW/images/register.PNG
+[difficulty-screenshot]: images/difficulty.PNG
+[game_over-screenshot]: images/game_over.png
+[games_page-screenshot]: images/games_page.png
+[game_win-screenshot]: images/game_win.png
+[home-page-screenshot]: images/home.png
+[login-screenshot]: images/login.PNG
+[main_game_page-screenshot]: images/main_game_page.png
+[profile-screenshot]: images/profile.png
+[register-screenshot]: images/register.PNG
 
 [Flask.py]: https://img.shields.io/badge/Flask-000000.svg?style=for-the-badge&logo=flask
 [Flask-url]: https://flask.palletsprojects.com/
