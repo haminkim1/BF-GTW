@@ -93,10 +93,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 [![Home page][home-page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/home.png)
 
 ### Register Page
-[![Register page][register-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/register.png)
+[![Register page][register-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/register.PNG)
 
 ### Login Page
-[![Login page][login-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/login.png)
+[![Login page][login-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/login.PNG)
 
 ### Games Page
 [![Games page][games_page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/games_page.png)
@@ -104,7 +104,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ### BFV Page
 [![Screenshot of BFV main game page][main_game_page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/main_game_page.png)
 - Users can choose difficulty of the game. 
-- [![Difficulty page][difficulty-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/difficulty.png)
+- [![Difficulty page][difficulty-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/difficulty.PNG)
 
 ### Game Win Page
 [![Game Win page][game_win-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/game_win.png)
@@ -162,15 +162,15 @@ Project Link: [https://github.com/haminkim1/BF-GTW](https://github.com/haminkim1
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ha-min-kim-ab0037126
 
-[difficulty-screenshot]: BF-GTW/images/difficulty.png
+[difficulty-screenshot]: BF-GTW/images/difficulty.PNG
 [game_over-screenshot]: BF-GTW/images/game_over.png
 [games_page-screenshot]: BF-GTW/images/games_page.png
 [game_win-screenshot]: BF-GTW/images/game_win.png
 [home-page-screenshot]: BF-GTW/images/home.png
-[login-screenshot]: BF-GTW/images/login.png
+[login-screenshot]: BF-GTW/images/login.PNG
 [main_game_page-screenshot]: BF-GTW/images/main_game_page.png
 [profile-screenshot]: BF-GTW/images/profile.png
-[register-screenshot]: BF-GTW/images/register.png
+[register-screenshot]: BF-GTW/images/register.PNG
 
 [Flask.py]: https://img.shields.io/badge/Flask-000000.svg?style=for-the-badge&logo=flask
 [Flask-url]: https://flask.palletsprojects.com/
