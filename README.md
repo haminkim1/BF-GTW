@@ -110,7 +110,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ### BFV Page
 [![Screenshot of BFV main game page][main_game_page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/main_game_page.png)
 - Users can choose difficulty of the game. 
-- [![Difficulty page][difficulty-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/difficulty.png)
+- [![Difficulty page][difficulty-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/difficulty.PNG)
 
 ### Game Win Page
 [![Game Win page][game_win-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/game_win.png)
@@ -170,7 +170,7 @@ Project Link: [https://github.com/haminkim1/BF-GTW](https://github.com/haminkim1
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ha-min-kim-ab0037126
 
-[difficulty-screenshot]: images/difficulty.png
+[difficulty-screenshot]: images/difficulty.PNG
 [game_over-screenshot]: images/game_over.png
 [games_page-screenshot]: images/games_page.png
 [game_win-screenshot]: images/game_win.png
