@@ -44,7 +44,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Screenshot of BFV main game page][product-screenshot]](https://example.com)
+[![Screenshot of BFV main game page][product-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/BF-GTW/images/main_game_page.png)
+### Video Demo
+- Youtube URL
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -132,7 +134,7 @@ Project Link: [https://github.com/haminkim1/BF-GTW](https://github.com/haminkim1
 [license-url]: https://github.com/haminkim1/BF-GTW/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ha-min-kim-ab0037126
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: BF-GTW/images/main_game_page.png
 [Flask.py]: https://img.shields.io/badge/Flask-000000.svg?logo=flask
 [Flask-url]: https://flask.palletsprojects.com/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white
