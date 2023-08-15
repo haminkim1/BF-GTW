@@ -46,7 +46,8 @@
 
 [![Screenshot of BFV main game page][main_game_page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/main_game_page.png)
 ### Video Demo
-- Youtube URL
+- Youtube URL (gameplay only)
+- Youtube URL (high level overview for CS50)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -84,15 +85,10 @@
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-- I can use this to show key features. 
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
 ### Home Page
 [![Home page][home-page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/home.png)
-- Users register and login to play games.
-- Users can play without creating an account which will generate a random username. 
+- Users register and login to play games. User details are stored in the database. 
+- Users can play without creating an account which will generate a random username. The username gets stored in another database to prevent generating the same username.  
 
 ### Register Page
 [![Register page][register-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/register.png)
@@ -111,6 +107,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 [![Screenshot of BFV main game page][main_game_page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/main_game_page.png)
 - Users can choose difficulty of the game. 
 - [![Difficulty page][difficulty-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/difficulty.PNG)
+- Weapons are randomly shuffled after starting the game. At each round, the weapon is removed from the randomly sorted list.<br><br>
+- Users can press hint if they are unsure of the name of the weapon. The weapon type and first letter of the weapon will be displayed. 
+- (image of hint)
 
 ### Game Win Page
 [![Game Win page][game_win-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/game_win.png)
@@ -123,6 +122,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ### Profile Page
 [![Profile page][profile-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/profile.png)
 - The page shows their user details, highest score of each game mode and difficulty and a table logging past games they have played. 
+- Games log from the table will be selected and tabulated based on username. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
