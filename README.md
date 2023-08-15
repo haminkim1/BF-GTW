@@ -109,7 +109,7 @@
 - [![Difficulty page][difficulty-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/difficulty.PNG)
 - Weapons are randomly shuffled after starting the game. At each round, the weapon is removed from the randomly sorted list.<br><br>
 - Users can press hint if they are unsure of the name of the weapon. The weapon type and first letter of the weapon will be displayed. 
-- (image of hint)
+- [![Hint page][hint-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/hint.PNG)
 
 ### Game Win Page
 [![Game Win page][game_win-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/game_win.png)
@@ -175,6 +175,7 @@ Project Link: [https://github.com/haminkim1/BF-GTW](https://github.com/haminkim1
 [games_page-screenshot]: images/games_page.png
 [game_win-screenshot]: images/game_win.png
 [home-page-screenshot]: images/home.png
+[hint-screenshot]: images/hint.png
 [login-screenshot]: images/login.png
 [main_game_page-screenshot]: images/main_game_page.png
 [profile-screenshot]: images/profile.png
