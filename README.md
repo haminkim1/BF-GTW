@@ -46,7 +46,7 @@
 
 [![Screenshot of BFV main game page][main_game_page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/main_game_page.png)
 ### Video Demo
-- Youtube URL (gameplay only)
+- [Gameplay demo](https://www.youtube.com/watch?v=sUq7l6Odlag)
 - Youtube URL (high level overview for CS50)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -125,21 +125,6 @@
 - Games log from the table will be selected and tabulated based on username. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-
-
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
