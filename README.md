@@ -20,22 +20,29 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#video-demo">Built With</a></li>
+        <li><a href="#video-demo">Video Demo</a></li>
+        <li><a href="#technologies-used">Technologies Used</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#launching">Launching</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contrigmailbuting">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+      <ul>
+        <li><a href="#home-page">Home Page</a></li>
+        <li><a href="#register-page">Register Page</a></li>
+        <li><a href="#login-page">Login Page</a></li>
+        <li><a href="#games-page">Games Page</a></li>
+        <li><a href="#bfv-page">BFV Page</a></li>
+        <li><a href="#game-win-page">Game Win Page</a></li>
+        <li><a href="#game-over-page">Game Over Page</a></li>
+        <li><a href="#profile-page">Profile Page</a></li>
+      </ul>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
