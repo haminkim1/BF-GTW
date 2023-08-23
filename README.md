@@ -54,7 +54,7 @@
 [![Screenshot of BFV main game page][main_game_page-screenshot]](https://github.com/haminkim1/BF-GTW/blob/main/images/main_game_page.png)
 ### Video Demo
 - [Gameplay demo](https://www.youtube.com/watch?v=sUq7l6Odlag)
-- Youtube URL (high level overview for CS50)
+- [Full demo](https://youtu.be/ZNtEsywWk4Q)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
